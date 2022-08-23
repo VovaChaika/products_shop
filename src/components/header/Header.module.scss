@@ -1,0 +1,47 @@
+.header_grid{
+  display: grid;
+  grid-template-areas:
+          "categories logo currency cart";
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: white;
+  padding-left: 100px;
+  padding-right: 100px;
+
+
+
+  .categories{
+    grid-area: categories;
+    margin-right: 400px;
+    .category{
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-right: 32px;
+    }
+    .category:hover{
+      color: #5ECE7B;
+      border-bottom: 2px solid #5ECE7B;
+    }
+  }
+  .logo{
+    grid-area: logo;
+    margin-right: 430px;
+    width: 28px;
+    height: 32px;
+  }
+  .currency{
+    grid-area: currency;
+    margin-right: 35px;
+
+  }
+  .cart{
+    grid-area: cart;
+  }
+  .currDispl{
+    position: absolute;
+  }
+  .cartDispl{
+    position: absolute;
+  }
+}
+

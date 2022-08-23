@@ -1,0 +1,49 @@
+.product{
+  display: grid;
+  border-bottom: 2px solid #E5E5E5;
+  border-top: 2px solid #E5E5E5;
+  grid-template-areas:
+          "brand img"
+          "name img"
+          "price img"
+          "attributes img";
+  grid-template-columns: 10fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  img{
+    width: 200px;
+    height: 288px;
+    grid-area: img;
+  }
+  .brand{
+    grid-area: brand;
+    color: #1D1F22;
+    font-size: 30px;
+    align-content: start;
+  }
+  .name{
+    grid-area: name;
+    font-size: 30px;
+  }
+  .price{
+    grid-area: price;
+    font-size: 24px;
+    font-style: oblique;
+  }
+  .attributes{
+    grid-area: attributes;
+    font-size: 24px;
+    button{
+      min-width: 32px;
+      min-height: 32px;
+      margin-right: 2px;
+      border: none;
+    }
+    button:hover{
+      border: 1px solid #5ECE7B;
+    }
+    .active{
+      border: 1px solid #5ECE7B;
+    }
+
+  }
+}

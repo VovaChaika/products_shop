@@ -1,0 +1,13 @@
+.item{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 40px;
+  img{
+    height: 330px;
+    width: 350px;
+  }
+}
+h2{
+  text-transform: uppercase;
+
+}

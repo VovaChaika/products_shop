@@ -1,0 +1,61 @@
+.display {
+  display: grid;
+  grid-template-areas:
+            "imgs img brand"
+            "imgs img name"
+            "imgs img attributes"
+            "imgs img price"
+            "imgs img button"
+            "imgs img description";
+  grid-template-columns:0.5fr 2fr 1fr;
+
+  .mainImg {
+    grid-area: img;
+    width: 600px;
+    height: 500px;
+  }
+
+  .commonImg {
+    width: 80px;
+    height: 80px;
+  }
+  .brand{
+    grid-area: brand;
+    font-size: 30px;
+    font-weight: 600;
+  }
+  .name{
+    grid-area: name;
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .priceUSD{
+    grid-area: price;
+  }
+  .attribute{
+    grid-area: attributes;
+    button{
+      min-height: 32px;
+      min-width: 32px;
+      border: none;
+      margin-right: 10px;
+      box-shadow: 1px 8px 15px rgba(0.2, 0.2, 0.2, 0.2);
+    }
+    button:hover{
+      border: 1px solid #5ECE7B;
+    }
+    .active{
+      border: 1px solid #5ECE7B;
+    }
+  }
+  .button {
+    grid-area: button;
+  }
+  .description{
+    grid-area: description;
+    max-height: 300px;
+
+  }
+
+}
+

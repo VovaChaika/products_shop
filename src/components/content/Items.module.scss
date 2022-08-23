@@ -1,0 +1,24 @@
+.item{
+  margin-bottom: 100px;
+  max-height: 370px;
+}
+.outOfOrder {
+  filter: brightness(0.65);
+  text-transform: uppercase;
+}
+.outOfOrderSpan {
+  position: relative;
+  text-transform: uppercase;
+  left: 120px;
+  bottom: 150px;
+  color: white;
+}
+
+.img {
+  text-decoration: none;
+  border: none;
+  background: none;
+  position: relative;
+  left: 275px;
+  bottom: 90px;
+}
