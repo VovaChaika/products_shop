@@ -5,54 +5,26 @@ const Item = (props) => {
     let a = window.location.pathname
     let b = a.split('/item/')
     let mainPage = 0;
-    let countPrice = 0
-    let currPrice = [];
     let myIndex=0
-    function SetPrice() {
-        if (countPrice === 0) {
-            countPrice++
-            if (props.stateCurr.currency === "USD") {
-                return <div>{currPrice[0]} {props.stateCurr.currency}</div>
-            } else if (props.stateCurr.currency === "GBP") {
-                return <div>{currPrice[1]} {props.stateCurr.currency}</div>
-            } else if (props.stateCurr.currency === "AUD") {
-                return <div>{currPrice[2]} {props.stateCurr.currency}</div>
-            } else if (props.stateCurr.currency === "JPY") {
-                return <div>{currPrice[3]} {props.stateCurr.currency}</div>
-            } else if (props.stateCurr.currency === "RUB") {
-                return <div>{currPrice[4]} {props.stateCurr.currency}</div>
-            } else {
-                return <div>no value price</div>
-            }
-        }
-    }
 
     return (
-        <div>
-            {
-                props.usualArr.map((product) => {
-                        if (product.id === b[1]) {
-                            currPrice.push(product.priceUSD)
-                            currPrice.push(product.priceGBP)
-                            currPrice.push(product.priceAUD)
-                            currPrice.push(product.priceJPY)
-                            currPrice.push(product.priceRUB)
-                            return <div className={styles.display}>
-                                <div className={styles.brand}>{product.brand}</div>
-                                <div className={styles.name}>{product.name}</div>
 
-                                <div className={styles.priceUSD}>{
-                                    SetPrice()
+                             <div className={styles.display}>
+                                <div className={styles.brand}>{props.currProduct.brand}</div>
+                                <div className={styles.name}>{props.currProduct.name}</div>
 
-                                }</div>
+                                <div className={styles.priceUSD}>
+                                    {props.prices?.currency?.symbol ? props.prices?.currency?.symbol : props.prices[1]}
+                                    {props.prices?.amount ? props.prices?.amount : props.prices[0]}
+                                </div>
 
                                 <div className={styles.description} style={{overflowX: 'hidden'}}
-                                     dangerouslySetInnerHTML={{__html: product.description}}
+                                     dangerouslySetInnerHTML={{__html: props.currProduct.description}}
                                 />
 
 
                                 <div className={styles.attribute}>
-                                    {product.attribute?.map((attribute) => {
+                                    {props.currProduct?.attributes.map((attribute) => {
                                         return (
                                             <div>{attribute.name}:
                                                 <div></div>
@@ -83,6 +55,7 @@ const Item = (props) => {
                                                             className={result.includes(items.value) && result.includes(myIndex) && result.includes(attribute.name) ? styles.active : ''}
                                                                 onClick={() => {
                                                                 props.addChosenValues(attribute.name, items.value, newIndex)
+                                                                    console.log(newIndex)
                                                             }
                                                             }
 
@@ -97,7 +70,7 @@ const Item = (props) => {
 
 
                                 {
-                                    product.img.map((currImg) => {
+                                    props.currProduct.gallery.map((currImg) => {
                                         if (mainPage === 0) {
                                             mainPage = 1
                                             return <img className={styles.mainImg} src={currImg}/>
@@ -107,7 +80,10 @@ const Item = (props) => {
                                     })
                                 }
                                 <button className={styles.button} onClick={() => {
-                                    props.addFullProduct(product, Object.assign(product, {count:1}), Object.assign(product, {chosenValues:props.stateCart.chosenValues}))
+                                    props.addFullProduct(props.currProduct,
+                                        Object.assign(props.currProduct, {count:1}),
+                                        Object.assign(props.currProduct, {chosenValues:props.stateCart.chosenValues}),
+                                        Object.assign(props.currProduct, {identifier:props.stateCart.identifiers}))
                                     props.clearValues()
                                     console.log("CHOSEN VALUES")
                                     console.log(props.stateCart.chosenValues)
@@ -116,15 +92,9 @@ const Item = (props) => {
                                     console.log(props.stateCart.product)
                                     console.log("END")
                                 }
-                                }>Pres me
+                                }>ADD TO CART
                                 </button>
                             </div>
-                        }
-                    }
-                )
-            }
-
-        </div>
     );
 };
 

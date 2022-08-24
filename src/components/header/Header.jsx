@@ -1,41 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styles from "./Header.module.scss"
-import {gql, useQuery} from '@apollo/client';
 import {images} from "../../constants"
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import CartOverlayContainer from "../cart/cart_overlay/CartOverlayContainer";
 import CurrSwitchContainer from "./currency_switcher/CurrSwitchContainer";
-
-
-const GET_LOCATIONS = gql`
-query Query {
-  categories {
-    name
-  }
-}
-`;
 
 const Header = (props) => {
     const [isVisibleCurrSwitch, setIsVisibleCurrSwitch] = React.useState(false)
     const [isVisibleCart, setIsVisibleCart] = React.useState(false)
-
-    function DisplayLocations() {
-        const {loading, error, data} = useQuery(GET_LOCATIONS);
-
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error :(</p>;
-
-        return data.categories.map(({name}) => (
-
-            <NavLink className={styles.category} onClick={
-                () => {
-                    props.switchPath(name)
-                    console.log(props.state.path)
-                }
-            } to={`/content/${name}`}>{name}</NavLink>
-
-        ));
-    }
 
     function changeVisibility() {
         if (isVisibleCurrSwitch === true || isVisibleCart === true) {
@@ -51,7 +23,18 @@ const Header = (props) => {
                 <span onMouseMove={() => {
                     changeVisibility()
                 }}>
-                     <span className={styles.categories}><DisplayLocations/></span>
+                     <span className={styles.categories}>
+                         {
+                             props.locations.map((location) => {
+                                    return <NavLink className={styles.category} onClick={
+                                         () => {
+                                             props.switchPath(location.name)
+                                         }
+                                     } to={`/content/${location.name}`}>{location.name}</NavLink>
+                                 }
+                             )
+                         }
+                     </span>
 
                 <img className={styles.logo} src={images.logo} alt=""/>
 

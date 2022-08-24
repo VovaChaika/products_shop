@@ -2,7 +2,11 @@ import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 
-import {addChosenValuesCreator, addFullProductCreator, clearValuesCreator} from "../redux/cart_reducer";
+import {
+    addChosenValuesCreator,
+    addFullProductCreator,
+    clearValuesCreator,
+} from "../redux/cart_reducer";
 import Item from "./Item";
 
 
@@ -12,8 +16,28 @@ class ItemContainer extends React.Component {
    }
 
     render() {
+        let a = window.location.pathname
+        let b = a.split('/item/')
+        let currProduct
+        this.props.state.usualArr.map((product)=>{
+            if (product.id === b[1]){currProduct=product}
+        })
+        let prices
+        this.props.stateCurr.currencyArr.map((price)=>{
+            if (price.id === b[1]){prices=price}
+        })
+        if (prices===undefined){
+            prices = this.props.startPrice(currProduct.id)
+            console.log(prices)
+        }
+        if (currProduct===undefined){
+            //DO SMTH WHEN UNDEF, FOR EXAMPLE NAVIGATE TO /
+        }
         return <>
             <Item
+                currProduct={currProduct}
+                prices={prices}
+
                  stateCurr={this.props.stateCurr}
                  stateCart={this.props.stateCart}
                  addFullProduct={this.props.addFullProduct}
@@ -21,6 +45,7 @@ class ItemContainer extends React.Component {
                  chosenValues={this.props.chosenValues}
                  clearValues={this.props.clearValues}
                  usualArr={this.props.usualArr}
+                 state={this.props.state}
             />
         </>
     }
@@ -32,6 +57,7 @@ let mapStateToProps = (state) => {
         stateCurr: state.currency,
         stateCart: state.cart,
         chosenValues: state.cart.chosenValues,
+        state: state.products
     }
 }
 let mapDispatchToProps = (dispatch) => {

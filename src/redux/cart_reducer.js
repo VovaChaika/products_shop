@@ -5,11 +5,15 @@ const ADD_PRODUCT = "ADD_PRODUCT"
 const ADD_FULL_PRODUCT = "ADD_FULL_PRODUCT"
 const ADD_CHOSEN_VALUES = "ADD_CHOSEN_VALUES"
 const CLEAR_VALUES = "CLEAR_VALUES"
+const CHANGE_COUNT_BY_ID = "CHANGE_COUNT_BY_ID"
 
 let initialState = {
     productAdded: [],
     product:[],
     chosenValues:[],
+    identifiers:0,
+    productsCount:0,
+    priceCount:0
 
 }
 
@@ -28,10 +32,11 @@ export const cart_reducer = (state = initialState, action) => {
                 {productAdded: [...state.productAdded, state.productAdded[whichId - 1].count++]}
             )
             else return {productAdded: [...state.productAdded, {idProduct: action.id, count: 1}]}
+
         case ADD_FULL_PRODUCT:
             let doChangeProd = 0
             const saveCount = action.product.count
-
+            state.productsCount=state.productsCount+1
             state.product?.map((prod)=>{
                 action.product.count = prod.count
                 const result = deepEqual(prod, action.product)
@@ -43,7 +48,7 @@ export const cart_reducer = (state = initialState, action) => {
             })
             if (doChangeProd === 0){
                 action.product.count = saveCount
-                return {...state, product:[...state?.product, action.product]}
+                return {...state, product:[...state?.product, action.product], identifiers: state.identifiers+1}
             }
         case CLEAR_VALUES:
             return {...state, chosenValues: []}
@@ -64,6 +69,21 @@ export const cart_reducer = (state = initialState, action) => {
             if (doChange===0){
                 return {...state, chosenValues: [...state?.chosenValues, {name:action?.name, value:action?.value, index: action.index }]}
             }
+        case CHANGE_COUNT_BY_ID:
+            console.log(action.identifier)
+            let saveProductPlace = 0
+            state.product?.map((product)=>{
+                if (product.identifier === action.identifier){
+                    action.increase === true ? product.count = product.count+1 : product.count = product.count-1
+                    if (product.count <= 0){
+                        let check = state.product?.splice(saveProductPlace)
+                        state.productsCount = state.productsCount-1
+                    }
+                }
+                saveProductPlace++
+            })
+
+
     }
     return {...state}
 }
@@ -82,6 +102,10 @@ export const addChosenValuesCreator = (name, value, index) => {
 
 export const clearValuesCreator = () => {
     return{type: CLEAR_VALUES}
+}
+
+export const increaseCountCreator = (identifier, increase) => {
+    return{type: CHANGE_COUNT_BY_ID, identifier, increase}
 }
 
 function deepEqual(object1, object2) {
@@ -116,7 +140,6 @@ function compareAttributes(array1, array2) {
         }
     }
     if (count===array1.length){
-        alert("!!!")
         return true
     }
     else return false

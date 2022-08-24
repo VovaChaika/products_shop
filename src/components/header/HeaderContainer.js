@@ -14,7 +14,7 @@ class HeaderContainer extends React.Component {
                     setVisible={this.props.setVisible}
                     isVisible={this.props.isVisible}
                     switchPath={this.props.switchPath}
-                    state={this.props.state}
+                    locations={this.props.state}
                     currencies={this.props.currencies}
             />
         </>
@@ -24,7 +24,7 @@ class HeaderContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         stateCurr: state.currency,
-        state: state.products
+        state: state.products.locations
     }
 }
 let mapDispatchToProps = (dispatch) => {

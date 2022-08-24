@@ -8,9 +8,9 @@ const CURRENCY_CHANGE = 'CURRENCY_CHANGE'
 const SET_CURRENCY_DATA = 'SET_CURRENCY_DATA'
 
 let initialState = {
-    currency: "USD",
+    currency: "$",
     currencyArr:[],
-    oneItemData: {}
+    oneItemData: {},
 }
 
 export const currency_reducer = (state = initialState, action) => {
@@ -36,15 +36,17 @@ export const currency_reducer = (state = initialState, action) => {
             let array = []
             action.newCurrency?.map((currItem)=>{
                  currItem?.map((searchOnePrice)=>{
-                     if (searchOnePrice.currency.label === state.currency){
+                     if (searchOnePrice.currency.label === action.currency){
+                         Object.assign(searchOnePrice, {id:  currItem.id})
                          array.push(searchOnePrice)
+
                      }
                 })
             })
             return {...state, currencyArr: [...array]}
+
         //save for one item data
         case SET_CURRENCY_DATA:
-            console.log(action.oneItemData)
             return {...state, oneItemData: action.oneItemData}
 
 
@@ -63,9 +65,10 @@ export const getCurrencyCreator = () => ({
 })
 
 //save only values with needed currency
-export const changeArrayCurrencyCreator = (newCurrency) => ({
+export const changeArrayCurrencyCreator = (newCurrency,currency) => ({
     type: CURRENCY_CHANGE,
-    newCurrency
+    newCurrency,
+    currency
 })
 export const setCurrencyItemCreator = (oneItemData) => ({
     type: SET_CURRENCY_DATA,

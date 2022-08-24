@@ -10,11 +10,11 @@ const Items = (props) => {
     let navigate = useNavigate();
 
     function changeCurrImage() {
-        if (isVisible && props.data.img?.[1] !== undefined) {
-            return props.data.img?.[1]
-        } else return props.data.img?.[0]
+        if (isVisible && props.data.gallery?.[1] !== undefined) {
+            return props.data.gallery?.[1]
+        } else return props.data.gallery?.[0]
     }
-console.log(props.priceValues)
+
     return (
         <>
             <div className={styles.item} onMouseLeave={() => {
@@ -44,7 +44,16 @@ console.log(props.priceValues)
                         {props.data.name}
                     </div>
                     {
-                        <div>{props.priceValues?.currency?.symbol} {props.priceValues?.amount}</div>
+                        <div>{
+                            props.priceValues?.currency?.symbol
+                            ? props.priceValues?.currency?.symbol
+                            : props.priceValues[1]
+                        }
+                            {
+                                props.priceValues?.amount
+                                ? props.priceValues?.amount
+                                : props.priceValues[0]
+                            }</div>
                     }
                 </div>
                 {isVisible && props.isVisibleButton &&

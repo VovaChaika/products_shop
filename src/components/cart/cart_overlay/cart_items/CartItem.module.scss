@@ -3,16 +3,19 @@
   border-bottom: 2px solid #E5E5E5;
   border-top: 2px solid #E5E5E5;
   grid-template-areas:
-          "brand img"
-          "name img"
-          "price img"
-          "attributes img";
+          "brand counter img"
+          "name counter img"
+          "price counter img"
+          "attributes counter img";
   grid-template-columns: 10fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   img{
     width: 200px;
     height: 288px;
     grid-area: img;
+  }
+  .counter{
+    grid-area: counter;
   }
   .brand{
     grid-area: brand;

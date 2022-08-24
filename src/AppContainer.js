@@ -9,13 +9,18 @@ import {
     addProductCreator,
     clearValuesCreator
 } from "./redux/cart_reducer";
-import { setUsualArrCreator} from "./redux/content_reducer";
-import {changeArrayCurrencyCreator, getCurrencyCreator} from "./redux/currency_reducer";
-
+import {getLocations, getProducts, setUsualArrCreator} from "./redux/content_reducer";
+import {getCurrencyCreator} from "./redux/currency_reducer";
 
 class AppContainer extends React.Component {
 
+    componentDidMount() {
+        this.props.getProducts()
+        this.props.getLocations()
+    }
+
     render() {
+        let usualArr = []
         return <>
             <App state={this.props.state}
                  stateCurr={this.props.stateCurr}
@@ -26,7 +31,7 @@ class AppContainer extends React.Component {
                  addChosenValues={this.props.addChosenValues}
                  clearValues={this.props.clearValues}
                  setUsualArr={this.props.setUsualArr}
-                 changeArrayCurrency={this.props.changeArrayCurrency}
+                 usualArr = {usualArr}
             />
         </>
     }
@@ -60,9 +65,14 @@ let mapDispatchToProps = (dispatch) => {
         setUsualArr: (data) => {
             dispatch(setUsualArrCreator(data))
         },
-        changeArrayCurrency: (newCurrency) => {
-            dispatch(changeArrayCurrencyCreator(newCurrency))
+        getProducts: () => {
+            dispatch(getProducts())
         },
+        getLocations: () => {
+            dispatch(getLocations())
+        },
+
+
 
     }
 }

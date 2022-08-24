@@ -18,7 +18,7 @@ class CurrSwitchContainer extends React.Component {
         return <>
             <CurrSwitch state={this.props.state}
                         currencies={this.props.currencies}
-
+                        stateProduct={this.props.stateProduct}
 
                         setVisible={this.props.setVisible}
                         setIsVisibleCurrSwitch={this.props.setIsVisibleCurrSwitch}
@@ -37,7 +37,8 @@ class CurrSwitchContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        state: state.currency
+        state: state.currency,
+        stateProduct: state.products,
     }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -45,8 +46,8 @@ let mapDispatchToProps = (dispatch) => {
         changeCurrency: (newCurrency) => {
             dispatch(changeCurrencyCreator(newCurrency))
         },
-        changeArrayCurrency: (newCurrency) => {
-            dispatch(changeArrayCurrencyCreator(newCurrency))
+        changeArrayCurrency: (currencyArr, name ) => {
+            dispatch(changeArrayCurrencyCreator(currencyArr, name))
         },
     }
 }

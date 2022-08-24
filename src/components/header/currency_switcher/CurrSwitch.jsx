@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styles from "./CurrSwitch.module.scss"
 
 const CurrSwitch = (props) => {
-
+    let arr = []
     return (
         <>
             {props.isVisibleCurrSwitch &&
@@ -10,22 +10,25 @@ const CurrSwitch = (props) => {
                     props.setIsVisibleCurrSwitch(false)
                 }
                 }>
+                    {props.stateProduct?.usualArr?.map((product) => {
+                        Object.assign(product.prices, {id: product.id})
+                        arr.push(product.prices)
+                    })
+                    }
                     {
-                        props.currencies?.[0].map((label) => {
+                        arr?.[0].map((label) => {
+                            console.log(arr)
                             return <button onClick={() => {
-                                props.changeCurrency(label.currency.label)
                                 //передаєм цілу хуйню, а треба рендерить ще на етапі appcontainer, бо не загрузить проект
-                                props.changeArrayCurrency(props.currencies)
-                            }}>{label.currency.symbol} {label.currency.label}
+                                props.changeArrayCurrency(arr, label.currency.label)
+                                props.changeCurrency(label.currency.symbol)
+                            }}>
+                                {label.currency.symbol} {label.currency.label}
                             </button>
-
                         })
                     }
                 </div>)
-
-
             }
-
             <button className={styles.button} onMouseMove={() => {
                 if (props.isVisibleCart === true) {
                     props.setIsVisibleCart(false)
@@ -35,7 +38,6 @@ const CurrSwitch = (props) => {
             }}>
                 {props.state.currency}
             </button>
-
         </>
     );
 };

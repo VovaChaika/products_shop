@@ -1,21 +1,25 @@
 import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import CartOverlay from "./CartOverlay";
 import {
     increaseCountCreator
-} from "../../../redux/cart_reducer";
+} from "../../../../redux/cart_reducer";
+import CartItem from "./CartItem";
 
 
-class CartOverlayContainer extends React.Component {
-    componentDidMount() {
-
-    }
-
+class CartItemContainer extends React.Component {
     render() {
+        let prices
+        this.props.state.product.map((searchCurr)=>{
+           searchCurr.prices.map((curr)=>{
+               if (curr.currency.symbol === this.props.stateCurr.currency){
+                   prices = curr
+               }
+           })
+        })
         return <>
-            <CartOverlay state={this.props.state}
-                     stateCurr={this.props.currency}
+            <CartItem state={this.props.state}
+                         stateCurr={this.props.currency}
                          isVisible={this.props.isVisible}
                          setVisible={this.props.setVisible}
                          isVisibleCart={this.props.isVisibleCart}
@@ -23,6 +27,8 @@ class CartOverlayContainer extends React.Component {
                          setIsVisibleCurrSwitch={this.props.setIsVisibleCurrSwitch}
                          isVisibleCurrSwitch={this.props.isVisibleCurrSwitch}
                          increaseCount={this.props.increaseCount}
+
+                      prices={prices}
             />
         </>
     }
@@ -33,6 +39,7 @@ class CartOverlayContainer extends React.Component {
 let mapStateToProps = (state) =>{
     return{
         state: state.cart,
+        stateCurr: state.currency
     }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -40,12 +47,10 @@ let mapDispatchToProps = (dispatch) => {
         increaseCount: (identifier, increase) => {
             dispatch(increaseCountCreator(identifier, increase))
         },
-
     }
 }
 
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps)
-)(CartOverlayContainer)
-
+)(CartItemContainer)
