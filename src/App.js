@@ -18,6 +18,7 @@ function App(props) {
                 startValues = []
                 startValues.push(product.prices?.[0].amount)
                 startValues.push(product.prices?.[0].currency.symbol)
+                startValues.push(product.prices?.[0].currency.label)
             }
         })
         return startValues

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from "./CartItem.module.scss"
 
 const CartItem = (props) => {
+    console.log(props.state.product?.[0])
     return (
         <>
             {
@@ -30,7 +31,7 @@ const CartItem = (props) => {
                         </div>
 
                         <div className={styles.attributes}>
-                            {product.attribute?.map((attribute) => {
+                            {product.attributes?.map((attribute) => {
                                 return (<div>{attribute.name}:{attribute.items.map((items) => {
                                     let result = []
                                     product.chosenValues?.map((values) => {
@@ -65,6 +66,9 @@ const CartItem = (props) => {
                     </div>
                 })
             }
+            <div>Total price: {props.state.priceCount[props.prices?.currency.label]?.toFixed(2) ?
+                props.state.priceCount[props.prices?.currency.label]?.toFixed(2) : '0'
+            } {props.prices?.currency.symbol}</div>
             <button onClick={() => {
                 alert("Your order:")
             }

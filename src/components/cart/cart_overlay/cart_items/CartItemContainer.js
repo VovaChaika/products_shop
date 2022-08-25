@@ -19,7 +19,7 @@ class CartItemContainer extends React.Component {
         })
         return <>
             <CartItem state={this.props.state}
-                         stateCurr={this.props.currency}
+                         stateCurr={this.props.stateCurr.priceCount}
                          isVisible={this.props.isVisible}
                          setVisible={this.props.setVisible}
                          isVisibleCart={this.props.isVisibleCart}

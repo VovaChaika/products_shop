@@ -9,11 +9,10 @@ let reducers = combineReducers({
     cart: cart_reducer,
     currency: currency_reducer
 })
-let store = createStore(reducers , applyMiddleware(thunkMiddleware),
-    )
-
-//(localStorage['redux_store']) ? JSON.parse(localStorage['redux_store']) :
-store.subscribe(()=>{
+let store = createStore(reducers , applyMiddleware(thunkMiddleware))
+    JSON.parse(localStorage['redux_store'])
+// (localStorage['redux_store']) ? JSON.parse(localStorage['redux_store']) :
+    store.subscribe(()=>{
     localStorage['redux_store'] = JSON.stringify(store.getState())
 })
 
