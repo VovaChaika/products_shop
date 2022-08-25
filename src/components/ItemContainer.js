@@ -16,33 +16,8 @@ class ItemContainer extends React.Component {
     }
 
     render() {
-        let a = window.location.pathname
-        // let b = a.split('/item/')
-        // let currProduct
-        // this.props.state.usualArr.map((product) => {
-        //     if (product.id === b[1]) {
-        //         currProduct = product
-        //     }
-        // })
-        // let prices
-        // this.props.stateCurr.currencyArr.map((price) => {
-        //     if (price.id === b[1]) {
-        //         prices = price
-        //     }
-        // })
-        // //if no render currSwitch
-        // if (prices === undefined) {
-        //     prices = this.props.startPrice(currProduct?.id)
-        //     console.log(prices)
-        // }
-        // if (currProduct === undefined) {
-        //     //DO SMTH WHEN UNDEF, FOR EXAMPLE NAVIGATE TO /
-        // }
-        return <>
+        return <div>
             <Item
-                // currProduct={currProduct}
-                // prices={prices}
-
                 startPrice={this.props.startPrice}
                 stateCurr={this.props.stateCurr}
                 stateCart={this.props.stateCart}
@@ -54,7 +29,7 @@ class ItemContainer extends React.Component {
                 state={this.props.state}
                 changeTotalCost={this.props.changeTotalCost}
             />
-        </>
+        </div>
     }
 
 }
@@ -78,8 +53,8 @@ let mapDispatchToProps = (dispatch) => {
         clearValues: () => {
             dispatch(clearValuesCreator())
         },
-        changeTotalCost: (price, symbol, plus) => {
-            dispatch(changeTotalCostCreator(price, symbol, plus))
+        changeTotalCost: (price, plus) => {
+            dispatch(changeTotalCostCreator(price, plus))
         },
 
     }

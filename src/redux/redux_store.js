@@ -1,19 +1,25 @@
 import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 import {content_reducer} from "./content_reducer";
-import thunkMiddleware from "redux-thunk"
 import {cart_reducer} from "./cart_reducer";
 import {currency_reducer} from "./currency_reducer";
+import thunkMiddleware from "redux-thunk"
 
+const persistConfig = {
+    key: 'root',
+    storage,
+    blacklist:['products']
+}
 let reducers = combineReducers({
     products: content_reducer,
     cart: cart_reducer,
     currency: currency_reducer
 })
-let store = createStore(reducers , applyMiddleware(thunkMiddleware))
-    JSON.parse(localStorage['redux_store'])
-// (localStorage['redux_store']) ? JSON.parse(localStorage['redux_store']) :
-    store.subscribe(()=>{
-    localStorage['redux_store'] = JSON.stringify(store.getState())
-})
 
+const persistedReducer = persistReducer(persistConfig, reducers)
+
+let store = createStore(persistedReducer , applyMiddleware(thunkMiddleware))
+
+export const persistor = persistStore(store)
 export default store

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./CartItem.module.scss"
 
 const CartItem = (props) => {
-    console.log(props.state.product?.[0])
+    let tax = props.state.priceCount[props.prices?.currency.label] * 0.21;
     return (
         <>
             {
@@ -66,9 +66,10 @@ const CartItem = (props) => {
                     </div>
                 })
             }
-            <div>Total price: {props.state.priceCount[props.prices?.currency.label]?.toFixed(2) ?
+            <div>Total price: {props.prices?.currency.symbol} {props.state.priceCount[props.prices?.currency.label]?.toFixed(2) ?
                 props.state.priceCount[props.prices?.currency.label]?.toFixed(2) : '0'
-            } {props.prices?.currency.symbol}</div>
+            }</div>
+            <div>Tax 21%: {props.prices?.currency.symbol} {tax.toFixed(2)}</div>
             <button onClick={() => {
                 alert("Your order:")
             }

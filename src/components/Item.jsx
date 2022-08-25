@@ -1,37 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from "./Item.module.scss";
 
 const Item = (props) => {
-    console.log( JSON.parse(localStorage['redux_store']))
     let a = window.location.pathname
     let b = a.split('/item/')
-    // let currProduct
-    // props.state.usualArr.map((product) => {
-    //     if (product.id === b[1]) {
-    //         currProduct = product
-    //     }
-    // })
+
     let prices
-    props.stateCurr.currencyArr.map((price) => {
+    props.stateCurr.currencyArr?.map((price) => {
         if (price.id === b[1]) {
             prices = price
         }
     })
-    //if no render currSwitch
+    let isHaveId = 0
+    let pricesArr
+    props.state.priceArr.map((pricesAll) => {
+        //here if comes an array
+            if (pricesAll?.id === b[1]) {
+                pricesArr = pricesAll
+                isHaveId = 1
+            }
+    })
+
 
 
     let mainPage = 0;
     let myIndex = 0
-    console.log(prices)
+    const [color, changeColor] = useState()
     return (
         props.state.usualArr.map((product) => {
             if (product.id === b[1]) {
                 if (prices === undefined) {
                     prices = props.startPrice(product?.id)
+                    //here is one value when initialized
+                    if (isHaveId === 0){
+                        pricesArr = prices
+                    }
+                    console.log(pricesArr)
                 }
                 let price = prices?.amount ? prices?.amount : prices[0]
                 let symbol = prices?.currency?.symbol ? prices?.currency?.symbol : prices[1]
-                let label = prices?.currency?.label ? prices?.currency?.label : prices[2]
 
                 return <div className={styles.display}>
                     <div className={styles.brand}>{product.brand}</div>
@@ -69,6 +76,7 @@ const Item = (props) => {
                                                         ? styles.active : ''}
                                                     style={{backgroundColor: items.value}}
                                                     onClick={() => {
+                                                        changeColor(items.value)
                                                         props.addChosenValues(attribute.name, items.value, newIndex)
                                                     }
                                                     }
@@ -76,11 +84,12 @@ const Item = (props) => {
                                             } else {
                                                 //other
                                                 const newIndex = myIndex
-                                                return <button
+                                                return <button key={items.value}
 
                                                     className={result.includes(items.value) && result.includes(myIndex) && result.includes(attribute.name)
                                                         ? styles.active : ''}
                                                     onClick={() => {
+                                                        changeColor(items.value)
                                                         props.addChosenValues(attribute.name, items.value, newIndex)
                                                     }
                                                     }
@@ -111,7 +120,7 @@ const Item = (props) => {
                             Object.assign(localProduct, {count: 1}),
                             Object.assign(localProduct, {chosenValues: props.stateCart.chosenValues}),
                             Object.assign(localProduct, {identifier: props.stateCart.identifiers}))
-                        props.changeTotalCost(price, label, true)
+                        props.changeTotalCost(pricesArr, true)
                         props.clearValues()
                     }
                     }>ADD TO CART

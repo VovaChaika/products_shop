@@ -95,22 +95,65 @@ export const cart_reducer = (state = initialState, action) => {
             break;
         //save price after product add
         case TOTAL_COST_CHANGE:
-            if (Object.hasOwn(state.priceCount, action.symbol) === false) {
-                alert("error: no such currency added, sorry")
-                return {...state}
-            }
-            if (state.priceCount[action.symbol] < action.price && action.price === false) {
-                alert("value less than 0")
-                return {...state, priceCount: {[action.symbol]: 0}}
-            }
-            if (action.plus === true) {
-                state.priceCount[action.symbol] = state.priceCount[action.symbol] + action.price
-            } else {
-                state.priceCount[action.symbol] = state.priceCount[action.symbol] - action.price
-            }
+            action.price?.map((currency)=>{
+                console.log(currency)
+                console.log(action?.price?.[0])
+                if (action.plus === false){
+                    switch (currency.currency?.label){
+                        case "USD":
+                            if (state.priceCount.USD<currency.amount){
+                                state.priceCount.USD = 0
+                                break
+                            }
+                            state.priceCount.USD -= currency.amount; break
+                        case "GBP":
+                            if (state.priceCount.GBP<currency.amount){
+                                state.priceCount.GBP = 0
+                                break
+                            }
+                            state.priceCount.GBP -= currency.amount; break
+                        case "JPY":
+                            if (state.priceCount.JPY<currency.amount){
+                                state.priceCount.JPY = 0
+                                break
+                            }
+                            state.priceCount.JPY -= currency.amount; break
+                        case "AUD":
+                            if (state.priceCount.AUD<currency.amount){
+                                state.priceCount.AUD = 0
+                                break
+                            }
+                            state.priceCount.AUD -= currency.amount; break
+                        case "RUB":
+                            if (state.priceCount.RUB<currency.amount){
+                                state.priceCount.RUB = 0
+                                break
+                            }
+                            state.priceCount.RUB -= currency.amount; break
+                        default :
+                            if (state.priceCount.USD<action.price?.[0]){
+                                state.priceCount.USD = 0
+                                break
+                            }
+                            state.priceCount.USD -=action.price?.[0]
+                    }
+                }
+                else switch (currency.currency?.label){
+                    case "USD":
+                        state.priceCount.USD += currency.amount; break
+                    case "GBP":
+                        state.priceCount.GBP += currency.amount; break
+                    case "JPY":
+                        state.priceCount.JPY += currency.amount; break
+                    case "AUD":
+                        state.priceCount.AUD += currency.amount; break
+                    case "RUB":
+                        state.priceCount.RUB += currency.amount; break
+                    default : state.priceCount.USD +=action.price?.[0]
+                }
+
+            })
             break
-
-
 
     }
     return state
@@ -135,10 +178,9 @@ export const clearValuesCreator = () => {
 export const increaseCountCreator = (identifier, increase) => {
     return {type: CHANGE_COUNT_BY_ID, identifier, increase}
 }
-export const changeTotalCostCreator = (price, symbol, plus) => ({
+export const changeTotalCostCreator = (price, plus) => ({
     type: TOTAL_COST_CHANGE,
     price,
-    symbol,
     plus
 })
 
