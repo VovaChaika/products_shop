@@ -4,7 +4,7 @@ import {compose} from "redux";
 
 import {
     changeArrayCurrencyCreator,
-    changeCurrencyCreator
+    changeCurrencyCreator, setLabel, setLabelCreator
 } from "../../../redux/currency_reducer";
 import CurrSwitch from "./CurrSwitch";
 
@@ -29,6 +29,7 @@ class CurrSwitchContainer extends React.Component {
 
                         changeArrayCurrency={this.props.changeArrayCurrency}
                         changeCurrency={this.props.changeCurrency}
+                        setLabel={this.props.setLabel}
             />
         </>
     }
@@ -48,6 +49,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         changeArrayCurrency: (currencyArr, name ) => {
             dispatch(changeArrayCurrencyCreator(currencyArr, name))
+        },
+        setLabel: (label) => {
+            dispatch(setLabelCreator(label))
         },
     }
 }

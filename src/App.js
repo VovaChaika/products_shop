@@ -14,7 +14,7 @@ function App(props) {
         props.state.usualArr.map((product) => {
             if (product?.id === productId) {
                 startValues = []
-                console.log(product.prices?.[0])
+                // console.log(product.prices?.[0])
                 startValues.push(product.prices?.[0].amount)
                 startValues.push(product.prices?.[0].currency.symbol)
                 startValues.push(product.prices?.[0].currency.label)

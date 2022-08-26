@@ -3,8 +3,6 @@ import styles from "./CartItem.module.scss"
 
 const CartItem = (props) => {
 
-    const [color, changeColor] = useState()
-
     let prices
     props.state.product.map((searchCurr)=>{
         searchCurr.prices.map((curr)=>{
@@ -13,11 +11,24 @@ const CartItem = (props) => {
             }
         })
     })
+    let isHaveId = 0
+    let pricesArr
+    console.log(prices)
     let tax = props.state.priceCount[prices?.currency.label] * 0.21;
     return (
         <>
             {
                 props.state.product?.map((product) => {
+                    console.log(product)
+                    console.log(props.stateProduct)
+                    props.stateProduct?.priceArr?.map((pricesAll) => {
+                        console.log(pricesAll)
+                        //here if comes an array
+                        if (pricesAll?.id === product.id) {
+                            pricesArr = pricesAll
+                            isHaveId = 1
+                        }
+                    })
                     return <div className={styles.product}>
                         <div className={styles.brand}>{product.brand}</div>
                         <div className={styles.name}>{product.name}</div>
@@ -28,7 +39,8 @@ const CartItem = (props) => {
                         <div className={styles.counter}>
                             <button onClick={() => {
                               props.increaseCount(product.identifier, true)
-                                changeColor(product.count)
+                                props.changeTotalCost(pricesArr, true)
+                                props.handleClick()
                             }
                             }>+
                             </button>
@@ -37,7 +49,8 @@ const CartItem = (props) => {
                             <div></div>
                             <button onClick={() => {
                                 props.increaseCount(product.identifier, false)
-                                changeColor(product.count)
+                                props.changeTotalCost(pricesArr, false)
+                                props.handleClick()
                             }
                             }>-
                             </button>

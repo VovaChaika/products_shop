@@ -1,13 +1,13 @@
 const CHANGE_CURRENCY = 'CHANGE_CURRENCY'
-const GET_CURRENCY = 'GET_CURRENCY'
 const ADD_CURRENCY = 'ADD_CURRENCY'
 const UPDATE_COST = 'UPDATE_COST'
 const CURRENCY_CHANGE = 'CURRENCY_CHANGE'
-const SET_CURRENCY_DATA = 'SET_CURRENCY_DATA'
+const SET_LABEL = 'SET_LABEL'
 
 
 let initialState = {
     currency: "$",
+    label: 'GBP',
     currencyArr: [],
     oneItemData: {},
 }
@@ -16,8 +16,6 @@ export const currency_reducer = (state = initialState, action) => {
     switch (action.type) {
         case CHANGE_CURRENCY:
             return {...state, currency: action.newCurrency}
-        case GET_CURRENCY:
-            return initialState.currency
         case ADD_CURRENCY:
             return {...state, currencyArr: [...action.currArr]}
         case UPDATE_COST:
@@ -33,21 +31,25 @@ export const currency_reducer = (state = initialState, action) => {
             return {...state}
         //save only values with needed currency
         case CURRENCY_CHANGE:
-            let array = []
-            action.newCurrency?.map((currItem) => {
-                currItem?.map((searchOnePrice) => {
-                    if (searchOnePrice.currency.label === action.currency) {
-                        Object.assign(searchOnePrice, {id: currItem.id})
-                        array.push(searchOnePrice)
-
-                    }
+            console.log(action.newCurrency)
+            console.log(action.currency)
+            if (action.newCurrency !== undefined && action.currency!==undefined){
+                let array = []
+                action.newCurrency?.map((currItem) => {
+                    currItem?.map((searchOnePrice) => {
+                        if (searchOnePrice.currency.label === action.currency) {
+                            Object.assign(searchOnePrice, {id: currItem.id})
+                            array.push(searchOnePrice)
+                        }
+                    })
                 })
-            })
-            return {...state, currencyArr: [...array]}
+                console.log(array)
+                return {...state, currencyArr: [...array]}
+            }
+            else return {...state}
 
-        //save for one item data
-        case SET_CURRENCY_DATA:
-            return {...state, oneItemData: action.oneItemData}
+        case SET_LABEL:
+            return {...state, label: action.label}
 
     }
     return state
@@ -59,8 +61,9 @@ export const changeCurrencyCreator = (newCurrency) => ({
     type: CHANGE_CURRENCY,
     newCurrency
 })
-export const getCurrencyCreator = () => ({
-    type: GET_CURRENCY
+export const setLabelCreator = (label) => ({
+    type: SET_LABEL,
+    label
 })
 
 //save only values with needed currency
@@ -69,9 +72,6 @@ export const changeArrayCurrencyCreator = (newCurrency, currency) => ({
     newCurrency,
     currency
 })
-export const setCurrencyItemCreator = (oneItemData) => ({
-    type: SET_CURRENCY_DATA,
-    oneItemData
-})
+
 
 

@@ -14,6 +14,13 @@ class ItemContainer extends React.Component {
     componentDidMount() {
         this.props.clearValues()
     }
+    state = {
+        mssg: ""
+    };
+
+    handleClick = () => {
+        this.setState({ mssg: "Hi there!" });
+    };
 
     render() {
         return <div>
@@ -29,6 +36,7 @@ class ItemContainer extends React.Component {
                 changeTotalCost={this.props.changeTotalCost}
 
                 startPrice={this.props.startPrice}
+                handleClick={this.handleClick}
             />
         </div>
     }

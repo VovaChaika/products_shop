@@ -7,15 +7,20 @@ import {getLocations, getProducts} from "./redux/content_reducer";
 class AppContainer extends React.Component {
 
     componentDidMount() {
+        console.log("hi")
         this.props.getProducts()
         this.props.getLocations()
     }
 
     render() {
-        return <>
-            <App state={this.props.state}
-            />
-        </>
+
+        if (this.props.state.isFetching===false){
+            console.log(this.props.state.usualArr)
+            return <>
+                <App state={this.props.state}
+                />
+            </>
+        }
     }
 
 }

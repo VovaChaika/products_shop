@@ -5,13 +5,14 @@ const GET_PRICES_ARR = 'GET_PRICES_ARR'
 const GET_LOCATIONS = 'GET_LOCATIONS'
 const SWITCH_PATH = 'SWITCH_PATH'
 const SET_START_PRICE = 'SET_START_PRICE'
-
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 let initialState = {
     usualArr: [],
     priceArr: [],
     locations: [],
     startPrice: {},
+    isFetching: true,
     path: ''
 }
 
@@ -32,6 +33,8 @@ export const content_reducer = (state = initialState, action) => {
                 }
             })
             break;
+        case TOGGLE_IS_FETCHING:
+            return {...state, isFetching: action.isFetching}
     }
     return state
 
@@ -63,6 +66,8 @@ export const setStartPriceCreator = (productId) => ({
     productId
 })
 
+export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching})
+
 
 //thunk
 export const getProducts = () => {
@@ -71,6 +76,9 @@ export const getProducts = () => {
             testAPI[i].GetProductsAPI?.then(res => res.json()).then(data => {
                 dispatch(setUsualArrCreator(data.data.product))
                 dispatch(setPricesCreator(data.data.product.prices))
+                if (i===testAPI.length-1){
+                    dispatch(toggleIsFetching(false))
+                }
             })
         }
     }

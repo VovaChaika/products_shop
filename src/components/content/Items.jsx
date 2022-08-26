@@ -21,7 +21,6 @@ const Items = (props) => {
 
     return (
         <>
-            { console.log(props.state.startPrice)}
             <div className={styles.item}
                  onMouseLeave={() => {
                      setIsVisible(false)
@@ -47,13 +46,9 @@ const Items = (props) => {
 
                     <div>{
                         props.priceValues?.currency?.symbol
-                            ? props.priceValues?.currency?.symbol
-                            : props.priceValues[1]
                     }
                         {
                             props.priceValues?.amount
-                                ? props.priceValues?.amount
-                                : props.priceValues[0]
                         }
                     </div>
 

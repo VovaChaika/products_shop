@@ -11,13 +11,12 @@ const Item = (props) => {
             prices = price
         }
     })
-    let isHaveId = 0
+
     let pricesArr
     props.state.priceArr.map((pricesAll) => {
         //here if comes an array
             if (pricesAll?.id === b[1]) {
                 pricesArr = pricesAll
-                isHaveId = 1
             }
     })
 
@@ -25,19 +24,11 @@ const Item = (props) => {
 
     let mainPage = 0;
     let myIndex = 0
-    const [color, changeColor] = useState()
     return (
         props.state.usualArr.map((product) => {
             if (product.id === b[1]) {
-                if (prices === undefined) {
-                    prices = props.startPrice(product?.id)
-                    //here is one value when initialized
-                    if (isHaveId === 0){
-                        pricesArr = prices
-                    }
-                }
-                let price = prices?.amount ? prices?.amount : prices[0]
-                let symbol = prices?.currency?.symbol ? prices?.currency?.symbol : prices[1]
+                let price = prices?.amount
+                let symbol = prices?.currency?.symbol
 
                 return <div className={styles.display}>
                     <div className={styles.brand}>{product.brand}</div>
@@ -79,7 +70,7 @@ const Item = (props) => {
                                                         ? styles.active : ''}
                                                     style={{backgroundColor: items.value}}
                                                     onClick={() => {
-                                                        changeColor(items.value)
+                                                        props.handleClick()
                                                         props.addChosenValues(attribute.name, items.value, newIndex)
                                                     }
                                                     }
@@ -93,7 +84,7 @@ const Item = (props) => {
                                                     && chosenArr.name === attribute.name
                                                         ? styles.active : ''}
                                                     onClick={() => {
-                                                        changeColor(items.value)
+                                                        props.handleClick()
                                                         props.addChosenValues(attribute.name, items.value, newIndex)
                                                         console.log(props.stateCart.chosenValues)
                                                     }
@@ -118,7 +109,7 @@ const Item = (props) => {
                             }
                         })
                     }
-
+                    {console.log(pricesArr)}
                     <button className={styles.button} disabled={!product.inStock} onClick={() => {
                         let localProduct = structuredClone(product)
                         props.addFullProduct(localProduct,

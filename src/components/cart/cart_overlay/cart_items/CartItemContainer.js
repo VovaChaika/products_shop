@@ -2,12 +2,21 @@ import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {
-    increaseCountCreator
+    decreaseProdCountCreator,
+    increaseCountCreator,
+    changeTotalCostCreator
 } from "../../../../redux/cart_reducer";
 import CartItem from "./CartItem";
 
 
 class CartItemContainer extends React.Component {
+    state = {
+        mssg: ""
+    };
+
+    handleClick = () => {
+        this.setState({ mssg: "Hi there!" });
+    };
     render() {
         let prices
         this.props.state.product.map((searchCurr)=>{
@@ -19,6 +28,7 @@ class CartItemContainer extends React.Component {
         })
         return <>
             <CartItem state={this.props.state}
+                      stateProduct={this.props.stateProduct}
                          stateCurr={this.props.stateCurr}
                          isVisible={this.props.isVisible}
                          setVisible={this.props.setVisible}
@@ -27,6 +37,9 @@ class CartItemContainer extends React.Component {
                          setIsVisibleCurrSwitch={this.props.setIsVisibleCurrSwitch}
                          isVisibleCurrSwitch={this.props.isVisibleCurrSwitch}
                          increaseCount={this.props.increaseCount}
+                      handleClick={this.handleClick}
+                      decreaseProdCount={this.props.decreaseProdCount}
+                      changeTotalCost={this.props.changeTotalCost}
 
                       prices={prices}
             />
@@ -39,7 +52,8 @@ class CartItemContainer extends React.Component {
 let mapStateToProps = (state) =>{
     return{
         state: state.cart,
-        stateCurr: state.currency
+        stateCurr: state.currency,
+        stateProduct: state.products
     }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -47,6 +61,12 @@ let mapDispatchToProps = (dispatch) => {
         increaseCount: (identifier, increase) => {
             dispatch(increaseCountCreator(identifier, increase))
         },
+        decreaseProdCount: ()=>{
+            dispatch(decreaseProdCountCreator())
+        },
+        changeTotalCost: (price, plus)=>{
+            dispatch(changeTotalCostCreator(price, plus))
+        }
     }
 }
 

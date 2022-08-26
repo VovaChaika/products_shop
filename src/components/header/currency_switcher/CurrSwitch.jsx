@@ -19,9 +19,10 @@ const CurrSwitch = (props) => {
                         arr?.[0].map((label) => {
                             console.log(arr)
                             return <button onClick={() => {
-                                //передаєм цілу хуйню, а треба рендерить ще на етапі appcontainer, бо не загрузить проект
+                                //передаєм цілу хуйню
                                 props.changeArrayCurrency(arr, label.currency.label)
                                 props.changeCurrency(label.currency.symbol)
+                                props.setLabel(label.currency.label)
                             }}>
                                 {label.currency.symbol} {label.currency.label}
                             </button>

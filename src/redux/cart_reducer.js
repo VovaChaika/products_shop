@@ -3,6 +3,7 @@ const ADD_CHOSEN_VALUES = "ADD_CHOSEN_VALUES"
 const CLEAR_VALUES = "CLEAR_VALUES"
 const CHANGE_COUNT_BY_ID = "CHANGE_COUNT_BY_ID"
 const TOTAL_COST_CHANGE = 'TOTAL_COST_CHANGE'
+const DECREASE_PROD_COUNT = 'DECREASE_PROD_COUNT'
 
 let initialState = {
     productAdded: [],
@@ -70,23 +71,13 @@ export const cart_reducer = (state = initialState, action) => {
             state.product?.map((product) => {
                 if (product.identifier === action.identifier) {
                     if (action.increase === true){
+                        state.productsCount = state.productsCount + 2
                         return {...state, product:[...state.product, state.product[saveProductPlace].count +=1]}
                     }
                     else if (action.increase === false){
-                        console.log(product.count)
                         if (product.count === 1) {
-                            let arrNew = []
-                            state.product.map((prod, index)=>{
-                                if (index-1 !== saveProductPlace){
-                                    arrNew.push(prod)
-                                }
-                            })
-                            console.log(arrNew)
-                            state.productsCount = state.productsCount-1
-                            console.log(state.productsCount)
-                            return {...state,  product: [...arrNew]}
-                            // console.log(newArr)
-                            // return {...state, product: [...newArr], productsCount: state.productsCount-1}
+                           state.product.splice(saveProductPlace, 1)
+
 
                         }
                         else {
@@ -101,6 +92,7 @@ export const cart_reducer = (state = initialState, action) => {
                 }
                 saveProductPlace++
             })
+            return {...state, productsCount: state.productsCount-1}
 
         //save price after product add
         case TOTAL_COST_CHANGE:
@@ -182,6 +174,9 @@ export const clearValuesCreator = () => {
 
 export const increaseCountCreator = (identifier, increase) => {
     return {type: CHANGE_COUNT_BY_ID, identifier, increase}
+}
+export const decreaseProdCountCreator = () => {
+    return {type: DECREASE_PROD_COUNT}
 }
 export const changeTotalCostCreator = (price, plus) => ({
     type: TOTAL_COST_CHANGE,
