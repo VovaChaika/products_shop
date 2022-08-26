@@ -2,16 +2,12 @@ import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import Content from "./Content";
-import {addProductCreator} from "../../redux/cart_reducer";
-import {changeArrayCurrencyCreator, getCurrencyCreator, setCurrencyItemCreator} from "../../redux/currency_reducer";
-import {setUsualArrCreator} from "../../redux/content_reducer";
-
+import {setStartPriceCreator} from "../../redux/content_reducer";
 
 class ContentContainer extends React.Component {
 
     render() {
-        let filteredArr = this.props.state.usualArr.filter((product) => {
-
+        let filteredProducts = this.props.state.usualArr.filter((product) => {
                 if (this.props.state.path !== "") {
                     if (this.props.state.path === "all") {
                         return product
@@ -20,16 +16,13 @@ class ContentContainer extends React.Component {
             }
         )
         return <>
+            <Content filteredProducts={filteredProducts}
 
-            <Content state={this.props.state}
+                     state={this.props.state}
                      stateCurr={this.props.stateCurr}
-                     addProduct={this.props.addProduct}
-                     getCurrency={this.props.getCurrency}
-                     usualArr={filteredArr}
-                     setCurrencyItem={this.props.setCurrencyItem}
-                     currencies={this.props.currencies}
-                     changeArrayCurrency={this.props.changeArrayCurrency}
+
                      startPrice={this.props.startPrice}
+                     setStartPrice={this.props.setStartPrice}
             />
         </>
     }
@@ -45,22 +38,9 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        addProduct: (id) => {
-            dispatch(addProductCreator(id))
+        setStartPrice: (productId) => {
+            dispatch(setStartPriceCreator(productId))
         },
-        getCurrency: () => {
-            dispatch(getCurrencyCreator())
-        },
-        setUsualArr: (data) => {
-            dispatch(setUsualArrCreator(data))
-        },
-        setCurrencyItem: (oneItemData) => {
-            dispatch(setCurrencyItemCreator(oneItemData))
-        },
-        changeArrayCurrency: (currencyArr, name) => {
-            dispatch(changeArrayCurrencyCreator(currencyArr, name))
-        },
-
     }
 }
 

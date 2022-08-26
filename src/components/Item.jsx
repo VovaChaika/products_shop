@@ -35,7 +35,6 @@ const Item = (props) => {
                     if (isHaveId === 0){
                         pricesArr = prices
                     }
-                    console.log(pricesArr)
                 }
                 let price = prices?.amount ? prices?.amount : prices[0]
                 let symbol = prices?.currency?.symbol ? prices?.currency?.symbol : prices[1]
@@ -62,17 +61,21 @@ const Item = (props) => {
                                     {
                                         attribute.items.map((items) => {
                                             myIndex = myIndex + 1
-                                            let result = [];
-                                            props.stateCart.chosenValues?.map((value) => {
-                                                result.push(attribute.name)
-                                                result.push(value.value)
-                                                result.push(value.index)
+                                            const newIndex = myIndex
+                                            let chosenArr = {}
+                                            props.stateCart.chosenValues.map((value)=>{
+                                                if (value.name === attribute.name
+                                                    && value.index === newIndex
+                                                    && value.value === items.value){
+                                                    chosenArr = value
+                                                }
                                             })
                                             //color to show color not string
                                             if (attribute.name === "Color") {
-                                                const newIndex = myIndex
                                                 return <button
-                                                    className={result.includes(items.value) && result.includes(myIndex) && result.includes(attribute.name)
+                                                    className={chosenArr.value === items.value
+                                                    && chosenArr.index === myIndex
+                                                    && chosenArr.name === attribute.name
                                                         ? styles.active : ''}
                                                     style={{backgroundColor: items.value}}
                                                     onClick={() => {
@@ -83,14 +86,16 @@ const Item = (props) => {
                                                 ></button>
                                             } else {
                                                 //other
-                                                const newIndex = myIndex
                                                 return <button key={items.value}
 
-                                                    className={result.includes(items.value) && result.includes(myIndex) && result.includes(attribute.name)
+                                                    className={chosenArr.value === items.value
+                                                    && chosenArr.index === myIndex
+                                                    && chosenArr.name === attribute.name
                                                         ? styles.active : ''}
                                                     onClick={() => {
                                                         changeColor(items.value)
                                                         props.addChosenValues(attribute.name, items.value, newIndex)
+                                                        console.log(props.stateCart.chosenValues)
                                                     }
                                                     }
 
@@ -114,7 +119,7 @@ const Item = (props) => {
                         })
                     }
 
-                    <button className={styles.button} onClick={() => {
+                    <button className={styles.button} disabled={!product.inStock} onClick={() => {
                         let localProduct = structuredClone(product)
                         props.addFullProduct(localProduct,
                             Object.assign(localProduct, {count: 1}),
@@ -133,3 +138,24 @@ const Item = (props) => {
 };
 
 export default Item;
+
+
+// if (value.name === attribute.name && value.index === myIndex && value.value === items.value) {
+//     return <button
+//         className={styles.active}
+//         onClick={() => {
+//             changeColor(items.value)
+//             props.addChosenValues(attribute.name, items.value, newIndex)
+//         }
+//         }
+//     >{items.value}</button>
+// }
+// return <button
+//     onClick={() => {
+//         changeColor(items.value)
+//         props.addChosenValues(attribute.name, items.value, newIndex)
+//         console.log(props.stateCart.chosenValues)
+//     }
+//     }
+//
+// >{items.value}</button>

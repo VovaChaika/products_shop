@@ -1,4 +1,3 @@
-const ADD_PRODUCT = "ADD_PRODUCT"
 const ADD_FULL_PRODUCT = "ADD_FULL_PRODUCT"
 const ADD_CHOSEN_VALUES = "ADD_CHOSEN_VALUES"
 const CLEAR_VALUES = "CLEAR_VALUES"
@@ -39,19 +38,6 @@ export const cart_reducer = (state = initialState, action) => {
                 return {...state, product: [...state.product, action.product], identifiers: state.identifiers + 1}
             }
             break;
-        case ADD_PRODUCT:
-            let ifCount = false
-            let whichId = 0
-            state.productAdded.map((product) => {
-                whichId++
-                if (product.idProduct === action.id) {
-                    ifCount = true
-                }
-            })
-            if (ifCount) return (
-                {productAdded: [...state.productAdded, state.productAdded[whichId - 1].count++]}
-            )
-            else return {productAdded: [...state.productAdded, {idProduct: action.id, count: 1}]}
 
         case CLEAR_VALUES:
             return {...state, chosenValues: []}
@@ -80,19 +66,42 @@ export const cart_reducer = (state = initialState, action) => {
             }
             break
         case CHANGE_COUNT_BY_ID:
-            console.log(action.identifier)
             let saveProductPlace = 0
             state.product?.map((product) => {
                 if (product.identifier === action.identifier) {
-                    action.increase === true ? product.count = product.count + 1 : product.count = product.count - 1
-                    if (product.count <= 0) {
-                        let check = state.product?.splice(saveProductPlace)
-                        state.productsCount = state.productsCount - 1
+                    if (action.increase === true){
+                        return {...state, product:[...state.product, state.product[saveProductPlace].count +=1]}
                     }
+                    else if (action.increase === false){
+                        console.log(product.count)
+                        if (product.count === 1) {
+                            let arrNew = []
+                            state.product.map((prod, index)=>{
+                                if (index-1 !== saveProductPlace){
+                                    arrNew.push(prod)
+                                }
+                            })
+                            console.log(arrNew)
+                            state.productsCount = state.productsCount-1
+                            console.log(state.productsCount)
+                            return {...state,  product: [...arrNew]}
+                            // console.log(newArr)
+                            // return {...state, product: [...newArr], productsCount: state.productsCount-1}
+
+                        }
+                        else {
+                            return {...state, product:[...state.product, state.product[saveProductPlace].count -=1]}
+                        }
+
+                    }
+                    else {
+                        console.log("error: no such product or identifier")
+                        return {...state}}
+
                 }
                 saveProductPlace++
             })
-            break;
+
         //save price after product add
         case TOTAL_COST_CHANGE:
             action.price?.map((currency)=>{
@@ -157,10 +166,6 @@ export const cart_reducer = (state = initialState, action) => {
 
     }
     return state
-}
-
-export const addProductCreator = (id) => {
-    return {type: ADD_PRODUCT, id}
 }
 
 export const addFullProductCreator = (product) => {

@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from "./CartItem.module.scss"
 
 const CartItem = (props) => {
-    let tax = props.state.priceCount[props.prices?.currency.label] * 0.21;
+
+    const [color, changeColor] = useState()
+
+    let prices
+    props.state.product.map((searchCurr)=>{
+        searchCurr.prices.map((curr)=>{
+            if (curr.currency.symbol === props.stateCurr.currency){
+                prices = curr
+            }
+        })
+    })
+    let tax = props.state.priceCount[prices?.currency.label] * 0.21;
     return (
         <>
             {
@@ -11,12 +22,13 @@ const CartItem = (props) => {
                         <div className={styles.brand}>{product.brand}</div>
                         <div className={styles.name}>{product.name}</div>
 
-                        <div className={styles.price}>{props.prices.currency.symbol} {props.prices.amount}</div>
+                        <div className={styles.price}>{prices.currency.symbol} {prices.amount}</div>
 
 
                         <div className={styles.counter}>
                             <button onClick={() => {
                               props.increaseCount(product.identifier, true)
+                                changeColor(product.count)
                             }
                             }>+
                             </button>
@@ -25,6 +37,7 @@ const CartItem = (props) => {
                             <div></div>
                             <button onClick={() => {
                                 props.increaseCount(product.identifier, false)
+                                changeColor(product.count)
                             }
                             }>-
                             </button>
@@ -66,10 +79,10 @@ const CartItem = (props) => {
                     </div>
                 })
             }
-            <div>Total price: {props.prices?.currency.symbol} {props.state.priceCount[props.prices?.currency.label]?.toFixed(2) ?
-                props.state.priceCount[props.prices?.currency.label]?.toFixed(2) : '0'
+            <div>Total price: {prices?.currency.symbol} {props.state.priceCount[prices?.currency.label]?.toFixed(2) ?
+                props.state.priceCount[prices?.currency.label]?.toFixed(2) : '0'
             }</div>
-            <div>Tax 21%: {props.prices?.currency.symbol} {tax.toFixed(2)}</div>
+            <div>Tax 21%: {prices?.currency.symbol} {tax.toFixed(2)}</div>
             <button onClick={() => {
                 alert("Your order:")
             }

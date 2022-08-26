@@ -18,16 +18,17 @@ class ItemContainer extends React.Component {
     render() {
         return <div>
             <Item
-                startPrice={this.props.startPrice}
+                state={this.props.state}
                 stateCurr={this.props.stateCurr}
                 stateCart={this.props.stateCart}
+                chosenValues={this.props.chosenValues}
+
                 addFullProduct={this.props.addFullProduct}
                 addChosenValues={this.props.addChosenValues}
-                chosenValues={this.props.chosenValues}
                 clearValues={this.props.clearValues}
-                usualArr={this.props.usualArr}
-                state={this.props.state}
                 changeTotalCost={this.props.changeTotalCost}
+
+                startPrice={this.props.startPrice}
             />
         </div>
     }
