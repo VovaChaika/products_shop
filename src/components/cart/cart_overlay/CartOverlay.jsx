@@ -21,6 +21,7 @@ const CartOverlay = (props) => {
             >
 
                 <input type="image" src={images.cart}></input>
+                {props.state.productsCount === 0 ? '' : props.state.productsCount}
             </button>
             {props.isVisibleCart &&
 

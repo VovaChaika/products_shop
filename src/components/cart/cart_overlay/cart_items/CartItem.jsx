@@ -14,7 +14,8 @@ const CartItem = (props) => {
     let isHaveId = 0
     let pricesArr
     console.log(prices)
-    let tax = props.state.priceCount[prices?.currency.label] * 0.21;
+    let tax = props.state.priceCount[prices?.currency.label] * 0.21 ?
+        (props.state.priceCount[prices?.currency.label] * 0.21) : 0;
     return (
         <>
             {
@@ -96,12 +97,6 @@ const CartItem = (props) => {
                 props.state.priceCount[prices?.currency.label]?.toFixed(2) : '0'
             }</div>
             <div>Tax 21%: {prices?.currency.symbol} {tax.toFixed(2)}</div>
-            <button onClick={() => {
-                alert("Your order:")
-            }
-            }>
-                Submit
-            </button>
         </>
     );
 };

@@ -109,8 +109,11 @@ const Item = (props) => {
                             }
                         })
                     }
-                    {console.log(pricesArr)}
+                    {console.log(props.stateCart.chosenValues)}
                     <button className={styles.button} disabled={!product.inStock} onClick={() => {
+                        if (props.stateCart.chosenValues.length === 0){
+                            alert("where items")
+                        }
                         let localProduct = structuredClone(product)
                         props.addFullProduct(localProduct,
                             Object.assign(localProduct, {count: 1}),
