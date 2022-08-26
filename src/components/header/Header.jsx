@@ -6,13 +6,10 @@ import CartOverlayContainer from "../cart/cart_overlay/CartOverlayContainer";
 import CurrSwitchContainer from "./currency_switcher/CurrSwitchContainer";
 
 const Header = (props) => {
-    const [isVisibleCurrSwitch, setIsVisibleCurrSwitch] = React.useState(false)
-    const [isVisibleCart, setIsVisibleCart] = React.useState(false)
-
     function changeVisibility() {
-        if (isVisibleCurrSwitch === true || isVisibleCart === true) {
-            setIsVisibleCurrSwitch(false)
-            setIsVisibleCart(false)
+        if (props.isVisibleCurrSwitch === true || props.isVisibleCart === true) {
+            props.setIsVisibleCurrSwitch(false)
+            props.setIsVisibleCart(false)
             //isvisible props???
             props.setVisible(false)
         }
@@ -43,10 +40,12 @@ const Header = (props) => {
             <span className={styles.currency}><CurrSwitchContainer
                 setVisible={props.setVisible}
                 isVisible={props.isVisible}
-                isVisibleCurrSwitch={isVisibleCurrSwitch}
-                setIsVisibleCurrSwitch={setIsVisibleCurrSwitch}
-                isVisibleCart={isVisibleCart}
-                setIsVisibleCart={setIsVisibleCart}
+
+                isVisibleCurrSwitch={props.isVisibleCurrSwitch}
+                setIsVisibleCurrSwitch={props.setIsVisibleCurrSwitch}
+                isVisibleCart={props.isVisibleCart}
+                setIsVisibleCart={props.setIsVisibleCart}
+
                 currencies={props.currencies}
             /></span>
 
@@ -54,10 +53,11 @@ const Header = (props) => {
                 currency={props.stateCurr}
                 setVisible={props.setVisible}
                 isVisible={props.isVisible}
-                isVisibleCart={isVisibleCart}
-                setIsVisibleCart={setIsVisibleCart}
-                isVisibleCurrSwitch={isVisibleCurrSwitch}
-                setIsVisibleCurrSwitch={setIsVisibleCurrSwitch}
+
+                isVisibleCart={props.isVisibleCart}
+                setIsVisibleCart={props.setIsVisibleCart}
+                isVisibleCurrSwitch={props.isVisibleCurrSwitch}
+                setIsVisibleCurrSwitch={props.setIsVisibleCurrSwitch}
             /></span>
         </div>
     );

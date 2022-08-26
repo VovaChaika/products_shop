@@ -6,28 +6,22 @@ import {images} from "../../constants";
 
 
 const Items = (props) => {
-    const [isVisible, setIsVisible] = React.useState(false)
     function changeCurrImage() {
-        if (isVisible && props.product.gallery?.[1] !== undefined) {
+        if (props.isVisible && props.product.gallery?.[1] !== undefined) {
             return props.product.gallery?.[1]
         } else return props.product.gallery?.[0]
     }
-    // if (props.priceValues?.currency?.symbol===undefined){
-    //     // return  props.priceValues?.currency?.symbol
-    // }
-
-
 
 
     return (
         <>
             <div className={styles.item}
                  onMouseLeave={() => {
-                     setIsVisible(false)
+                     props.setIsVisible(false)
                  }}>
                 {props.state.startPrice.amount}
                 <NavLink className={styles.navLink} onMouseMove={() => {
-                    setIsVisible(true)
+                    props.setIsVisible(true)
                     if (props.isVisibleButton === false) {
                         props.setIsVisibleButton(true)
                     }
@@ -52,7 +46,7 @@ const Items = (props) => {
                         }
                     </div>
 
-                    {isVisible && props.isVisibleButton &&
+                    {props.isVisible && props.isVisibleButton &&
                         <input className={styles.img}
                                onClick={
                                    () => {

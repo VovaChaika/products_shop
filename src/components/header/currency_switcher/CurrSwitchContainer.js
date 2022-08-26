@@ -4,7 +4,7 @@ import {compose} from "redux";
 
 import {
     changeArrayCurrencyCreator,
-    changeCurrencyCreator, setLabel, setLabelCreator
+    changeCurrencyCreator, setLabelCreator
 } from "../../../redux/currency_reducer";
 import CurrSwitch from "./CurrSwitch";
 

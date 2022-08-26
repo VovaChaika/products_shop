@@ -1,11 +1,10 @@
 import styles from "./Content.module.scss"
 import "./Category.css"
-import Items from "./Items";
 import React from "react";
+import ItemsContainer from "./ItemsContainer";
 
 
 function Content(props) {
-    const [isVisibleButton, setIsVisibleButton] = React.useState(false)
     let priceCounter = -1
     let startValues = []
 
@@ -24,15 +23,15 @@ function Content(props) {
                              props.setStartPrice(product.id)
                         {console.log(props.stateCurr.currencyArr)}
                             return <span onMouseLeave={() => {
-                                setIsVisibleButton(false)
-                            }}><Items
+                                props.setIsVisibleButton(false)
+                            }}><ItemsContainer
                                 product={product}
                                 startPriceValue={startValues}
 
                                 state={props.state}
 
-                                isVisibleButton={isVisibleButton}
-                                setIsVisibleButton={setIsVisibleButton}
+                                isVisibleButton={props.isVisibleButton}
+                                setIsVisibleButton={props.setIsVisibleButton}
 
                                 setStartPrice={props.setStartPrice}
                                 priceValues={props.stateCurr.currencyArr?.[priceCounter]}

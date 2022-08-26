@@ -7,9 +7,14 @@ import {getLocations, getProducts} from "./redux/content_reducer";
 class AppContainer extends React.Component {
 
     componentDidMount() {
-        console.log("hi")
         this.props.getProducts()
         this.props.getLocations()
+    }
+    state = {
+        isVisible: false
+    };
+    setIsVisible = (isVisible) => {
+            this.setState({ isVisible: isVisible });
     }
 
     render() {
@@ -18,6 +23,8 @@ class AppContainer extends React.Component {
             console.log(this.props.state.usualArr)
             return <>
                 <App state={this.props.state}
+                     setIsVisible={this.setIsVisible}
+                     isVisible={this.state.isVisible}
                 />
             </>
         }
