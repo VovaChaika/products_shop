@@ -72,17 +72,33 @@ export const cart_reducer = (state = initialState, action) => {
             if (state.chosenValues.length === 0){
                 let allAttrArr = []
                 action.attributes.map((allAttributes)=>{
-                    allAttrArr.push()
+                    let chosenValue = {
+                        name: allAttributes?.name,
+                        value: allAttributes?.items[0].value,
+                    }
+                    allAttrArr.push(chosenValue)
                 })
+                state.chosenValues = allAttrArr
             }
-            action.attributes.map((allAttributes)=>{
-                console.log(allAttributes)
-                let noSuchAtt = state.chosenValues.filter((attr)=>{
-                    return attr.name !== allAttributes.name
+            else {
+                let allAttrArr = []
+                state.chosenValues.map((attr)=>{
+                    allAttrArr.push(attr)
                 })
-                console.log(noSuchAtt)
-            })
-
+                action.attributes.map((allAttributes)=>{
+                    console.log(allAttributes)
+                    state.chosenValues.map((attr)=>{
+                        if (attr.name !== allAttributes.name){
+                            let chosenValue = {
+                                name: allAttributes?.name,
+                                value: allAttributes?.items[0].value,
+                            }
+                            allAttrArr.push(chosenValue)
+                        }
+                    })
+                })
+                state.chosenValues = allAttrArr
+            }
             return {...state}
 
         case CHANGE_COUNT_BY_ID:

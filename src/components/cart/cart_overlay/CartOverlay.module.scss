@@ -3,6 +3,37 @@
   background: white;
   width: 30px;
   height: 30px;
+  img{
+    height: 20px;
+    width: 20px;
+  }
+  .circleImg{
+    position: relative;
+    top: -20px;
+    left: 15px;
+  }
+  .cartImg{
+    position: relative;
+    top: 10px;
+  }
+  .cartImgNone{
+    position: relative;
+    top: 6px;
+  }
+  .numberCount{
+    position: relative;
+    font-weight: bold;
+    top: -25px;
+    left: 1px;
+    color: white;
+  }
+  .numberCountMore{
+    position: relative;
+    font-weight: bold;
+    top: -40px;
+    left: 15px;
+    color: white;
+  }
 }
 .button:hover{
   color: #5ECE7B;
@@ -27,6 +58,7 @@
     text-decoration: none;
     text-transform: uppercase;
   }
+
 }
 .cart_items{
   background: white;
@@ -35,3 +67,5 @@
   overflow: auto;
 
 }
+
+

@@ -10,7 +10,6 @@ const Header = (props) => {
         if (props.isVisibleCurrSwitch === true || props.isVisibleCart === true) {
             props.setIsVisibleCurrSwitch(false)
             props.setIsVisibleCart(false)
-            //isvisible props???
             props.setVisible(false)
         }
     }

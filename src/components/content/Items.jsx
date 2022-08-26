@@ -50,7 +50,13 @@ const Items = (props) => {
                         <input className={styles.img}
                                onClick={
                                    () => {
-                                       alert("set here button with start values")
+                                       console.log(props.product.attributes)
+                                       props.setDefaultAttributes(props.product.attributes)
+                                       // props.addFullProduct(localProduct,
+                                       //     Object.assign(localProduct, {count: 1}),
+                                       //     Object.assign(localProduct, {chosenValues: props.stateCart.chosenValues}),
+                                       //     Object.assign(localProduct, {identifier: props.stateCart.identifiers}))
+                                       // props.changeTotalCost(pricesArr, true)
                                    }
                                } type="image" src={images.addIcon}></input>
                     }

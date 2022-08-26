@@ -19,9 +19,10 @@ const CartOverlay = (props) => {
             }}
 
             >
+                <img className={props.state.productsCount === 0 ? styles.cartImgNone : styles.cartImg} src={images.cart} alt=""/>
+                {props.state.productsCount === 0 ? '' : <img className={styles.circleImg} src={images.blackCircle} alt=""/>}
+                <span className={props.state.productsCount < 10 ? styles.numberCount : styles.numberCountMore}>{props.state.productsCount === 0 ? '' : props.state.productsCount}</span>
 
-                <input type="image" src={images.cart}></input>
-                {props.state.productsCount === 0 ? '' : props.state.productsCount}
             </button>
             {props.isVisibleCart &&
 

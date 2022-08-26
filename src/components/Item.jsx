@@ -127,7 +127,6 @@ const Item = (props) => {
                 </div>
             }
         })
-
     );
 };
 

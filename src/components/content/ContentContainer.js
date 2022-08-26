@@ -26,7 +26,6 @@ class ContentContainer extends React.Component {
                 Object.assign(product.prices, {id: product.id})
                 arr.push(product.prices)
             })
-        console.log(arr)
             this.handleCurrency(arr)
             let filteredProducts = this.props.state.usualArr.filter((product) => {
                     if (this.props.state.path !== "") {

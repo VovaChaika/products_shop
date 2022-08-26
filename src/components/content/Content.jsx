@@ -21,7 +21,6 @@ function Content(props) {
                             }
                             priceCounter++
                              props.setStartPrice(product.id)
-                        {console.log(props.stateCurr.currencyArr)}
                             return <span onMouseLeave={() => {
                                 props.setIsVisibleButton(false)
                             }}><ItemsContainer

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from "./CurrSwitch.module.scss"
+import {images} from "../../../constants";
 
 const CurrSwitch = (props) => {
     let arr = []
@@ -17,9 +18,7 @@ const CurrSwitch = (props) => {
                     }
                     {
                         arr?.[0].map((label) => {
-                            console.log(arr)
                             return <button onClick={() => {
-                                //передаєм цілу хуйню
                                 props.changeArrayCurrency(arr, label.currency.label)
                                 props.changeCurrency(label.currency.symbol)
                                 props.setLabel(label.currency.label)
@@ -37,7 +36,7 @@ const CurrSwitch = (props) => {
                 }
                 props.setIsVisibleCurrSwitch(true)
             }}>
-                {props.state.currency}
+                {props.state.currency}<img src={props.isVisibleCurrSwitch ? images.arrowUp : images.arrowDown} alt=""/>
             </button>
         </>
     );

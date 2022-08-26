@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {switchPathCreator} from "../../redux/content_reducer";
 import Items from "./Items";
+import {setDefaultAttributesCreator} from "../../redux/cart_reducer";
 
 
 class ItemsContainer extends React.Component {
@@ -29,6 +30,8 @@ class ItemsContainer extends React.Component {
 
                 setIsVisible={this.setIsVisible}
                 isVisible={this.state.isVisible}
+
+                setDefaultAttributes={this.props.setDefaultAttributes}
             />
         </>
     }
@@ -43,6 +46,9 @@ let mapDispatchToProps = (dispatch) => {
     return {
         switchPath: (newPath) => {
             dispatch(switchPathCreator(newPath))
+        },
+        setDefaultAttributes: (attributes) => {
+            dispatch(setDefaultAttributesCreator(attributes))
         },
     }
 }
