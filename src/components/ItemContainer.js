@@ -5,7 +5,7 @@ import {compose} from "redux";
 import {
     addChosenValuesCreator,
     addFullProductCreator, changeTotalCostCreator,
-    clearValuesCreator,
+    clearValuesCreator, setDefaultAttributesCreator,
 } from "../redux/cart_reducer";
 import Item from "./Item";
 
@@ -37,6 +37,7 @@ class ItemContainer extends React.Component {
 
                 startPrice={this.props.startPrice}
                 handleClick={this.handleClick}
+                setDefaultAttributes={this.props.setDefaultAttributes}
             />
         </div>
     }
@@ -64,6 +65,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         changeTotalCost: (price, plus) => {
             dispatch(changeTotalCostCreator(price, plus))
+        },
+        setDefaultAttributes: (attributes) => {
+            dispatch(setDefaultAttributesCreator(attributes))
         },
 
     }

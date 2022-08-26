@@ -11,7 +11,6 @@ const CartItem = (props) => {
             }
         })
     })
-    let isHaveId = 0
     let pricesArr
     console.log(prices)
     let tax = props.state.priceCount[prices?.currency.label] * 0.21 ?
@@ -22,19 +21,26 @@ const CartItem = (props) => {
                 props.state.product?.map((product) => {
                     console.log(product)
                     console.log(props.stateProduct)
+                    let prices
+                    props.stateCurr.currencyArr?.map((price) => {
+                        if (price.id === product.id) {
+                            prices = price
+                        }
+                    })
+                    let price = prices?.amount
+                    let symbol = prices?.currency?.symbol
+                    console.log(prices)
                     props.stateProduct?.priceArr?.map((pricesAll) => {
-                        console.log(pricesAll)
                         //here if comes an array
                         if (pricesAll?.id === product.id) {
                             pricesArr = pricesAll
-                            isHaveId = 1
                         }
                     })
                     return <div className={styles.product}>
                         <div className={styles.brand}>{product.brand}</div>
                         <div className={styles.name}>{product.name}</div>
 
-                        <div className={styles.price}>{prices.currency.symbol} {prices.amount}</div>
+                        <div className={styles.price}>{symbol} {price}</div>
 
 
                         <div className={styles.counter}>

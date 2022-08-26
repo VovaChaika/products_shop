@@ -4,6 +4,7 @@ const CLEAR_VALUES = "CLEAR_VALUES"
 const CHANGE_COUNT_BY_ID = "CHANGE_COUNT_BY_ID"
 const TOTAL_COST_CHANGE = 'TOTAL_COST_CHANGE'
 const DECREASE_PROD_COUNT = 'DECREASE_PROD_COUNT'
+const SET_DEFAULT_ATTRIBUTES= 'SET_DEFAULT_ATTRIBUTES'
 
 let initialState = {
     productAdded: [],
@@ -66,6 +67,24 @@ export const cart_reducer = (state = initialState, action) => {
                 }
             }
             break
+
+        case SET_DEFAULT_ATTRIBUTES:
+            if (state.chosenValues.length === 0){
+                let allAttrArr = []
+                action.attributes.map((allAttributes)=>{
+                    allAttrArr.push()
+                })
+            }
+            action.attributes.map((allAttributes)=>{
+                console.log(allAttributes)
+                let noSuchAtt = state.chosenValues.filter((attr)=>{
+                    return attr.name !== allAttributes.name
+                })
+                console.log(noSuchAtt)
+            })
+
+            return {...state}
+
         case CHANGE_COUNT_BY_ID:
             let saveProductPlace = 0
             state.product?.map((product) => {
@@ -166,6 +185,10 @@ export const addFullProductCreator = (product) => {
 
 export const addChosenValuesCreator = (name, value, index) => {
     return {type: ADD_CHOSEN_VALUES, name, value, index}
+}
+
+export const setDefaultAttributesCreator = (attributes) => {
+    return {type: SET_DEFAULT_ATTRIBUTES, attributes}
 }
 
 export const clearValuesCreator = () => {

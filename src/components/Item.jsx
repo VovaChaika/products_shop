@@ -109,10 +109,10 @@ const Item = (props) => {
                             }
                         })
                     }
-                    {console.log(props.stateCart.chosenValues)}
                     <button className={styles.button} disabled={!product.inStock} onClick={() => {
-                        if (props.stateCart.chosenValues.length === 0){
-                            alert("where items")
+                        if (props.stateCart.chosenValues.length !== product?.attributes.length){
+                            console.log("asfasf")
+                           props.setDefaultAttributes(product?.attributes)
                         }
                         let localProduct = structuredClone(product)
                         props.addFullProduct(localProduct,
@@ -134,22 +134,3 @@ const Item = (props) => {
 export default Item;
 
 
-// if (value.name === attribute.name && value.index === myIndex && value.value === items.value) {
-//     return <button
-//         className={styles.active}
-//         onClick={() => {
-//             changeColor(items.value)
-//             props.addChosenValues(attribute.name, items.value, newIndex)
-//         }
-//         }
-//     >{items.value}</button>
-// }
-// return <button
-//     onClick={() => {
-//         changeColor(items.value)
-//         props.addChosenValues(attribute.name, items.value, newIndex)
-//         console.log(props.stateCart.chosenValues)
-//     }
-//     }
-//
-// >{items.value}</button>
