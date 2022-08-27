@@ -5,6 +5,7 @@ const CHANGE_COUNT_BY_ID = "CHANGE_COUNT_BY_ID"
 const TOTAL_COST_CHANGE = 'TOTAL_COST_CHANGE'
 const DECREASE_PROD_COUNT = 'DECREASE_PROD_COUNT'
 const SET_DEFAULT_ATTRIBUTES= 'SET_DEFAULT_ATTRIBUTES'
+const DELETE_FROM_CART = 'DELETE_FROM_CART'
 
 let initialState = {
     productAdded: [],
@@ -190,6 +191,14 @@ export const cart_reducer = (state = initialState, action) => {
 
             })
             break
+        case DELETE_FROM_CART:
+            return {...state, productAdded: [],
+                product: [],
+                chosenValues: [],
+                identifiers: 0,
+                productsCount: 0,
+                //transfer product.prices and + to all price of all symbols
+                priceCount: {USD: 0, GBP: 0, JPY: 0, AUD: 0, RUB: 0}}
 
     }
     return state
@@ -209,6 +218,9 @@ export const setDefaultAttributesCreator = (attributes) => {
 
 export const clearValuesCreator = () => {
     return {type: CLEAR_VALUES}
+}
+export const deleteFromCartCreator = () => {
+    return {type: DELETE_FROM_CART}
 }
 
 export const increaseCountCreator = (identifier, increase) => {

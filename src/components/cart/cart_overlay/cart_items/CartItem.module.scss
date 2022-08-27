@@ -151,4 +151,24 @@
   .total{
     font-weight: 500;
   }
+  div{
+    padding-bottom: 10px;
+  }
+}
+.button {
+  grid-area: button;
+  text-transform: uppercase;
+  width: 280px;
+  height: 50px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+  background-color: #5ECE7B;
+  border: none;
+}
+.button:hover{
+  border: 2px solid white;
 }

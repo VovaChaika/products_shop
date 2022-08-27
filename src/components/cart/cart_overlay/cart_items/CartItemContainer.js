@@ -4,7 +4,7 @@ import {compose} from "redux";
 import {
     decreaseProdCountCreator,
     increaseCountCreator,
-    changeTotalCostCreator
+    changeTotalCostCreator, deleteFromCartCreator
 } from "../../../../redux/cart_reducer";
 import CartItem from "./CartItem";
 
@@ -86,6 +86,9 @@ class CartItemContainer extends React.Component {
                       imgIndex={this.state.imgIndex}
                       setIsChange={this.setIsChange}
                       prices={prices}
+                      deleteFromCart={this.props.deleteFromCart}
+
+                      isCartOverlay={this.props.isCartOverlay}
             />
         </>
     }
@@ -110,7 +113,11 @@ let mapDispatchToProps = (dispatch) => {
         },
         changeTotalCost: (price, plus)=>{
             dispatch(changeTotalCostCreator(price, plus))
-        }
+        },
+        deleteFromCart: ()=>{
+            dispatch(deleteFromCartCreator())
+        },
+
     }
 }
 

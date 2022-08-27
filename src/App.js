@@ -21,12 +21,11 @@ function App(props) {
     }
 
     return (
-        <div className={props.isVisible ? styles.AppDisable : ''}>
-
+        <div>
             <HeaderContainer setVisible={props.setIsVisible}
                              isVisible={props.isVisible}/>
 
-            <div className={styles.App}>
+            <div className={props.isVisible ? styles.AppDisable : styles.App}>
                 <Routes>
                     <Route path={"/"}
                            element={<ContentContainer

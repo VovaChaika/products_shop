@@ -2,9 +2,9 @@
   display: grid;
   grid-template-areas:
           "categories logo currency cart";
-  margin-top: 30px;
-  margin-bottom: 50px;
-  background-color: white;
+  grid-template-columns: 50% 40% 5% 5%;
+  padding-top: 20px;
+  height: 80px;
   padding-left: 100px;
   padding-right: 100px;
 
@@ -33,7 +33,7 @@
 
       border-bottom: 2px solid #5ECE7B;
       padding:0 16px;
-      padding-bottom: 30px;
+      padding-bottom: 42px;
     }
     .category:hover{
       color: #5ECE7B;
@@ -44,8 +44,6 @@
   .logo{
     grid-area: logo;
     position: relative;
-    top: 10px;
-    margin-right: 430px;
     width: 28px;
     height: 32px;
   }

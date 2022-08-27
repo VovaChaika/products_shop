@@ -64,31 +64,33 @@ const CartItem = (props) => {
 
                         <div className={styles.attributes}>
                             {product.attributes?.map((attribute) => {
-                                return (<div><div className={styles.attrHeader}>{attribute.name}:</div> {attribute.items.map((items) => {
-                                    let result = []
-                                    product.chosenValues?.map((values) => {
-                                        result.push({value: values.value, index: values.index, name: values.name})
+                                return (<div>
+                                    <div className={styles.attrHeader}>{attribute.name}:</div>
+                                    {attribute.items.map((items) => {
+                                        let result = []
+                                        product.chosenValues?.map((values) => {
+                                            result.push({value: values.value, index: values.index, name: values.name})
 
-                                    })
-                                    if (attribute.name === "Color") {
-                                        return <button
-                                            className={result.find(res => res.value === items.value) !== undefined ? styles.activeColor : styles.passiveColor}
-                                            style={{backgroundColor: items.value}}
-                                        ></button>
-                                    } else {
-                                        if (result.find(res => res.value === items.value && attribute.name === res.name) !== undefined) {
+                                        })
+                                        if (attribute.name === "Color") {
                                             return <button
-                                                className={styles.active}
-                                            >{items.value}</button>
+                                                className={result.find(res => res.value === items.value) !== undefined ? styles.activeColor : styles.passiveColor}
+                                                style={{backgroundColor: items.value}}
+                                            ></button>
                                         } else {
-                                            return <button
-                                                className={styles.passive}
-                                            >{items.value}</button>
+                                            if (result.find(res => res.value === items.value && attribute.name === res.name) !== undefined) {
+                                                return <button
+                                                    className={styles.active}
+                                                >{items.value}</button>
+                                            } else {
+                                                return <button
+                                                    className={styles.passive}
+                                                >{items.value}</button>
+                                            }
+
+
                                         }
-
-
-                                    }
-                                })}</div>)
+                                    })}</div>)
                             })
                             }
                         </div>
@@ -100,28 +102,41 @@ const CartItem = (props) => {
                             }
                         })}
 
-                        {product.gallery.length > 1 ? <button className={styles.buttonImg2} onClick={() => {
-                            props.setIsChange(false, product.gallery.length, product.id, product.gallery)
-                        }
-                        }><img src={images.arrowRight}/> </button> : ''}
-                        {product.gallery.length > 1 ? <button className={styles.buttonImg1} onClick={() => {
-                            props.setIsChange(true, product.gallery.length, product.id, product.gallery)
-                        }
-                        }> <img src={images.arrowLeft}/> </button> : ''}
+                        {product.gallery.length > 1 && !props.isCartOverlay ?
+                            <button className={styles.buttonImg2} onClick={() => {
+                                props.setIsChange(false, product.gallery.length, product.id, product.gallery)
+                            }
+                            }><img src={images.arrowRight}/></button> : ''}
+                        {product.gallery.length > 1 && !props.isCartOverlay ?
+                            <button className={styles.buttonImg1} onClick={() => {
+                                props.setIsChange(true, product.gallery.length, product.id, product.gallery)
+                            }
+                            }><img src={images.arrowLeft}/></button> : ''}
 
 
                     </div>
                 })
             }
-            <div className={styles.cartCounts}>
-                <div>Tax 21%: <span>{prices?.currency.symbol} {tax.toFixed(2)}</span></div>
-                <div>Quantity: <span>{props.state.productsCount}</span></div>
-                <div className={styles.total}>Total: <span>
+                <div className={styles.cartCounts}>
+                    {!props.isCartOverlay &&
+                        <div>Tax 21%: <span>{prices?.currency.symbol} {tax.toFixed(2)}</span></div>
+                    }
+                    {!props.isCartOverlay &&
+                        <div>Quantity: <span>{props.state.productsCount}</span></div>
+                    }
+                    <div className={styles.total}>Total: <span>
                     {prices?.currency.symbol} {props.state.priceCount[prices?.currency.label]?.toFixed(2) ?
-                    props.state.priceCount[prices?.currency.label]?.toFixed(2) : '0'
-                }
+                        props.state.priceCount[prices?.currency.label]?.toFixed(2) : '0'
+                    }
                 </span></div>
-            </div>
+                </div>
+            {!props.isCartOverlay &&
+                <button className={styles.button} onClick={() => {
+                    alert("Ordered!")
+                    props.deleteFromCart()
+                }
+                }>Order</button>
+            }
 
 
         </>

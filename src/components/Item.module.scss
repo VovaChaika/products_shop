@@ -96,6 +96,10 @@
     background-color: #5ECE7B;
     border: none;
   }
+  .button:disabled{
+    background-color: grey;
+    opacity: 0.22;
+  }
   .button:hover{
     border: 2px solid white;
   }

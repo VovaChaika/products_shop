@@ -9,7 +9,7 @@ class HeaderContainer extends React.Component {
     state = {
         isVisibleCurrSwitch: false,
         isVisibleCart: false,
-        headerUrl: 'all'
+        headerUrl: "all"
     };
     setIsVisibleCurrSwitch = (isVisible) => {
         this.setState({ isVisibleCurrSwitch: isVisible });

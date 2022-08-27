@@ -43,9 +43,9 @@ const Header = (props) => {
                          }
                      </span>
 
-                <img className={styles.logo} src={images.logo} alt=""/>
 
                 </span>
+            <img className={styles.logo} src={images.logo} alt=""/>
 
             <span className={styles.currency}><CurrSwitchContainer
                 setVisible={props.setVisible}

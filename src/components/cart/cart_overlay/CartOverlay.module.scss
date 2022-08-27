@@ -3,6 +3,7 @@
   background: white;
   width: 30px;
   height: 30px;
+  padding-bottom: 10px;
   img{
     height: 20px;
     width: 20px;
@@ -35,35 +36,60 @@
     color: white;
   }
 }
-.button:hover{
-  color: #5ECE7B;
-  margin-bottom: 5px;
-  border-bottom: 2px solid #5ECE7B;
-}
 .position{
-  position: absolute;
+  position: fixed;
   display: block;
   z-index: 999999;
   right: 100px;
   text-decoration: none;
   background: white;
   padding: 15px;
-  button{
-    border: none;
-    background: white;
-    width: 60px;
-    height: 35px;
-    box-shadow: 1px 8px 15px rgba(0.1, 0.1, 0.1, 0.1);
-  }
-  .navbar{
-    text-decoration: none;
-    text-transform: uppercase;
-  }
 
+  .button {
+    width: 140px;
+    height: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    background-color: #5ECE7B;
+    border: none;
+    .navbar{
+      display: block;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: white;
+    }
+  }
+  .bag{
+    width: 140px;
+    height: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+
+    .navbar{
+      display: block;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: black;
+    }
+  }
+  .button:hover{
+    border: 2px solid white;
+  }
+  .bag:hover{
+    background-color: black;
+    .navbar{
+      color: white;
+    }
+  }
 }
 .cart_items{
   background: white;
-  max-width: 300px;
+  max-width: 405px;
   max-height: 600px;
   overflow: auto;
 

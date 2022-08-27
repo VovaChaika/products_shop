@@ -35,14 +35,14 @@ const CartOverlay = (props) => {
                         <span>{props.state.productsCount} item</span> :
                         <span>{props.state.productsCount} items</span>}</div>
                     <div className={styles.cart_items}>
-                        <CartItemContainer/>
+                        <CartItemContainer isCartOverlay={true}/>
                     </div>
-                    <button>
+                    <button className={styles.bag}>
                         <NavLink to={'/cart'} className={styles.navbar}>
                             view bag
                         </NavLink>
                     </button>
-                    <button>
+                    <button className={styles.button}>
                         <NavLink to={'/cart'} className={styles.navbar}>
                             check out
                         </NavLink>

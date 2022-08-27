@@ -11,6 +11,7 @@ const Items = (props) => {
             return props.product.gallery?.[1]
         } else return props.product.gallery?.[0]
     }
+
     let pricesArr
 
     return (
@@ -50,21 +51,22 @@ const Items = (props) => {
                     <input className={styles.img}
                            onClick={
                                () => {
-                                   props.state.priceArr.map((pricesAll) => {
-                                       //here if comes an array
-                                       if (pricesAll?.id === props.product.id) {
-                                           pricesArr = pricesAll
-                                       }
-                                   })
-                                   console.log(props.product.attributes)
-                                   props.setDefaultAttributes(props.product.attributes)
-                                   let localProduct = structuredClone(props.product)
-                                   props.addFullProduct(localProduct,
-                                       Object.assign(localProduct, {count: 1}),
-                                       Object.assign(localProduct, {chosenValues: props.stateCart.chosenValues}),
-                                       Object.assign(localProduct, {identifier: props.stateCart.identifiers}))
-                                   props.changeTotalCost(pricesArr, true)
-                                   props.clearValues()
+                                   if (props.product.inStock) {
+                                       props.state.priceArr.map((pricesAll) => {
+                                           //here if comes an array
+                                           if (pricesAll?.id === props.product.id) {
+                                               pricesArr = pricesAll
+                                           }
+                                       })
+                                       props.setDefaultAttributes(props.product.attributes)
+                                       let localProduct = structuredClone(props.product)
+                                       props.addFullProduct(localProduct,
+                                           Object.assign(localProduct, {count: 1}),
+                                           Object.assign(localProduct, {chosenValues: props.stateCart.chosenValues}),
+                                           Object.assign(localProduct, {identifier: props.stateCart.identifiers}))
+                                       props.changeTotalCost(pricesArr, true)
+                                       props.clearValues()
+                                   }
                                }
                            } type="image" src={images.addIcon}></input>
                 }
