@@ -79,6 +79,7 @@ export const cart_reducer = (state = initialState, action) => {
                     allAttrArr.push(chosenValue)
                 })
                 state.chosenValues = allAttrArr
+                console.log(allAttrArr)
             }
             else {
                 let allAttrArr = []

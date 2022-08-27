@@ -3,7 +3,12 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {switchPathCreator} from "../../redux/content_reducer";
 import Items from "./Items";
-import {setDefaultAttributesCreator} from "../../redux/cart_reducer";
+import {
+    addFullProductCreator,
+    changeTotalCostCreator,
+    clearValuesCreator,
+    setDefaultAttributesCreator
+} from "../../redux/cart_reducer";
 
 
 class ItemsContainer extends React.Component {
@@ -21,6 +26,7 @@ class ItemsContainer extends React.Component {
                 startPriceValue={this.props.startPriceValue}
 
                 state={this.props.state}
+                stateCart={this.props.stateCart}
 
                 isVisibleButton={this.props.isVisibleButton}
                 setIsVisibleButton={this.props.setIsVisibleButton}
@@ -32,6 +38,9 @@ class ItemsContainer extends React.Component {
                 isVisible={this.state.isVisible}
 
                 setDefaultAttributes={this.props.setDefaultAttributes}
+                clearValues={this.props.clearValues}
+                addFullProduct={this.props.addFullProduct}
+                changeTotalCost={this.props.changeTotalCost}
             />
         </>
     }
@@ -40,6 +49,7 @@ class ItemsContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         state: state.products,
+        stateCart: state.cart,
     }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -49,6 +59,15 @@ let mapDispatchToProps = (dispatch) => {
         },
         setDefaultAttributes: (attributes) => {
             dispatch(setDefaultAttributesCreator(attributes))
+        },
+        clearValues: () => {
+            dispatch(clearValuesCreator())
+        },
+        addFullProduct: (product) => {
+            dispatch(addFullProductCreator(product))
+        },
+        changeTotalCost: (price, plus) => {
+            dispatch(changeTotalCostCreator(price, plus))
         },
     }
 }

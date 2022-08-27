@@ -11,11 +11,49 @@ import CartItem from "./CartItem";
 
 class CartItemContainer extends React.Component {
     state = {
-        mssg: ""
+        mssg: "",
+        isChange: 0,
+        doChange: [],
+        imgIndex: 0,
+        imgSrc:[],
+        productId:'huarache-x-stussy-le',
     };
 
     handleClick = () => {
         this.setState({ mssg: "Hi there!" });
+    };
+    setIsChange = ( increase, length, product, imgSrc) => {
+            if(increase===true){
+                if (this.state.imgIndex !== length-1){
+                    this.setState({ imgIndex: this.state.imgIndex+1 });
+                }
+                else {
+                    this.setState({ imgIndex: 0 });
+                }
+            }
+            else if (increase===false){
+                if (this.state.imgIndex === 0){
+                    this.setState({ imgIndex: length-1 });
+                }
+                else {
+                    this.setState({ imgIndex: this.state.imgIndex-1 });
+                }
+
+            }
+            else {
+                this.setState({ imgIndex: 0 });
+            }
+            this.setState({doChange:[...this.state.doChange, product]});
+        let shouldAdd = 0
+        this.state.imgSrc.map((searchId, index)=>{
+            if (searchId.id === product){
+                shouldAdd = 1
+                this.state.imgSrc[index].src = imgSrc[this.state.imgIndex]
+            }
+        })
+        if (shouldAdd === 0){
+            this.setState({imgSrc:[...this.state.imgSrc, {src:imgSrc[this.state.imgIndex], id: product}]})
+        }
     };
     render() {
         let prices
@@ -41,6 +79,12 @@ class CartItemContainer extends React.Component {
                       decreaseProdCount={this.props.decreaseProdCount}
                       changeTotalCost={this.props.changeTotalCost}
 
+                      imgSrc={this.state.imgSrc}
+                      productId={this.state.productId}
+                      doChange={this.state.doChange}
+                      isChange={this.state.isChange}
+                      imgIndex={this.state.imgIndex}
+                      setIsChange={this.setIsChange}
                       prices={prices}
             />
         </>

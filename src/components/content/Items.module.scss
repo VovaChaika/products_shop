@@ -1,11 +1,18 @@
-.item{
+.item {
   margin-bottom: 100px;
   max-height: 370px;
 }
+
+.border {
+  display: inline-block;
+  box-shadow: 1px 8px 15px rgba(0.2, 0.2, 0.2, 0.2);
+}
+
 .outOfOrder {
   filter: brightness(0.65);
   text-transform: uppercase;
 }
+
 .outOfOrderSpan {
   position: relative;
   text-transform: uppercase;
@@ -13,19 +20,25 @@
   bottom: 150px;
   color: white;
 }
-.navLink{
+
+.navLink {
   position: relative;
   top: 60px;
   text-decoration: none;
   border: none;
   color: black;
+  img{
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
+
 .img {
   text-decoration: none;
   z-index: 555;
   border: none;
   background: none;
   position: relative;
-  left: 275px;
-  bottom: 90px;
+  left: 295px;
+  bottom: 20px;
 }

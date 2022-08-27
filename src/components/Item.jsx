@@ -111,7 +111,6 @@ const Item = (props) => {
                     }
                     <button className={styles.button} disabled={!product.inStock} onClick={() => {
                         if (props.stateCart.chosenValues.length !== product?.attributes.length){
-                            console.log("asfasf")
                            props.setDefaultAttributes(product?.attributes)
                         }
                         let localProduct = structuredClone(product)

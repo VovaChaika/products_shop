@@ -31,8 +31,6 @@ export const currency_reducer = (state = initialState, action) => {
             return {...state}
         //save only values with needed currency
         case CURRENCY_CHANGE:
-            console.log(action.newCurrency)
-            console.log(action.currency)
             if (action.newCurrency !== undefined && action.currency!==undefined){
                 let array = []
                 action.newCurrency?.map((currItem) => {

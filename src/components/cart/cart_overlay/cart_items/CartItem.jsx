@@ -2,7 +2,6 @@ import React from 'react';
 import styles from "./CartItem.module.scss"
 
 const CartItem = (props) => {
-
     let prices
     props.state.product.map((searchCurr)=>{
         searchCurr.prices.map((curr)=>{
@@ -12,16 +11,16 @@ const CartItem = (props) => {
         })
     })
     let pricesArr
-    console.log(prices)
     let tax = props.state.priceCount[prices?.currency.label] * 0.21 ?
         (props.state.priceCount[prices?.currency.label] * 0.21) : 0;
+
+
     return (
         <>
             {
                 props.state.product?.map((product) => {
-                    console.log(product)
-                    console.log(props.stateProduct)
                     let prices
+
                     props.stateCurr.currencyArr?.map((price) => {
                         if (price.id === product.id) {
                             prices = price
@@ -29,7 +28,6 @@ const CartItem = (props) => {
                     })
                     let price = prices?.amount
                     let symbol = prices?.currency?.symbol
-                    console.log(prices)
                     props.stateProduct?.priceArr?.map((pricesAll) => {
                         //here if comes an array
                         if (pricesAll?.id === product.id) {
@@ -93,7 +91,22 @@ const CartItem = (props) => {
                             })
                             }
                         </div>
-                        <img src={product.gallery?.[0]}/>
+                        {!props.doChange.includes(product.id) ? props.setIsChange(true, product.gallery.length, product.id, product.gallery): ''}
+
+                        {props.imgSrc.map((img, index)=>{
+                            if (img.id === product.id){
+                                return <img src={props.imgSrc[index].src}/>
+                            }
+                        })}
+
+                        {product.gallery.length > 1 ? <button onClick={()=>{
+                           props.setIsChange(false, product.gallery.length, product.id, product.gallery)
+                        }
+                        }> > </button> : ''}
+                        {product.gallery.length > 1 ? <button onClick={()=>{
+                            props.setIsChange(true, product.gallery.length, product.id, product.gallery)
+                        }
+                        }> > </button> : ''}
 
 
                     </div>

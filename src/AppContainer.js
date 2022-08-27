@@ -20,7 +20,6 @@ class AppContainer extends React.Component {
     render() {
 
         if (this.props.state.isFetching===false){
-            console.log(this.props.state.usualArr)
             return <>
                 <App state={this.props.state}
                      setIsVisible={this.setIsVisible}
