@@ -36,12 +36,12 @@ class CartItemContainer extends React.Component {
                     this.setState({ imgIndex: length-1 });
                 }
                 else {
-                    this.setState({ imgIndex: this.state.imgIndex-1 });
+                    this.setState({imgIndex: this.state.imgIndex-1});
                 }
 
             }
             else {
-                this.setState({ imgIndex: 0 });
+                this.setState({imgIndex: this.state.imgIndex});
             }
             this.setState({doChange:[...this.state.doChange, product]});
         let shouldAdd = 0

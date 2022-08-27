@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from "./CartItem.module.scss"
+import {images} from "../../../../constants";
 
 const CartItem = (props) => {
     let prices
-    props.state.product.map((searchCurr)=>{
-        searchCurr.prices.map((curr)=>{
-            if (curr.currency.symbol === props.stateCurr.currency){
+    props.state.product.map((searchCurr) => {
+        searchCurr.prices.map((curr) => {
+            if (curr.currency.symbol === props.stateCurr.currency) {
                 prices = curr
             }
         })
@@ -42,17 +43,17 @@ const CartItem = (props) => {
 
 
                         <div className={styles.counter}>
-                            <button onClick={() => {
-                              props.increaseCount(product.identifier, true)
+                            <button className={styles.buttonCount} onClick={() => {
+                                props.increaseCount(product.identifier, true)
                                 props.changeTotalCost(pricesArr, true)
                                 props.handleClick()
                             }
                             }>+
                             </button>
-                            <div></div>
-                            {product.count}
-                            <div></div>
-                            <button onClick={() => {
+
+                            <div className={styles.countText}>{product.count}</div>
+
+                            <button className={styles.buttonCount} onClick={() => {
                                 props.increaseCount(product.identifier, false)
                                 props.changeTotalCost(pricesArr, false)
                                 props.handleClick()
@@ -63,7 +64,7 @@ const CartItem = (props) => {
 
                         <div className={styles.attributes}>
                             {product.attributes?.map((attribute) => {
-                                return (<div>{attribute.name}:{attribute.items.map((items) => {
+                                return (<div><div className={styles.attrHeader}>{attribute.name}:</div> {attribute.items.map((items) => {
                                     let result = []
                                     product.chosenValues?.map((values) => {
                                         result.push({value: values.value, index: values.index, name: values.name})
@@ -71,7 +72,7 @@ const CartItem = (props) => {
                                     })
                                     if (attribute.name === "Color") {
                                         return <button
-                                            className={result.find(res => res.value === items.value) !== undefined ? styles.active : ''}
+                                            className={result.find(res => res.value === items.value) !== undefined ? styles.activeColor : styles.passiveColor}
                                             style={{backgroundColor: items.value}}
                                         ></button>
                                     } else {
@@ -81,7 +82,7 @@ const CartItem = (props) => {
                                             >{items.value}</button>
                                         } else {
                                             return <button
-                                                className={''}
+                                                className={styles.passive}
                                             >{items.value}</button>
                                         }
 
@@ -91,31 +92,38 @@ const CartItem = (props) => {
                             })
                             }
                         </div>
-                        {!props.doChange.includes(product.id) ? props.setIsChange(true, product.gallery.length, product.id, product.gallery): ''}
+                        {!props.doChange.includes(product.id) ? props.setIsChange(1, product.gallery.length, product.id, product.gallery) : ''}
 
-                        {props.imgSrc.map((img, index)=>{
-                            if (img.id === product.id){
-                                return <img src={props.imgSrc[index].src}/>
+                        {props.imgSrc.map((img, index) => {
+                            if (img.id === product.id) {
+                                return <img className={styles.img} src={props.imgSrc[index].src}/>
                             }
                         })}
 
-                        {product.gallery.length > 1 ? <button onClick={()=>{
-                           props.setIsChange(false, product.gallery.length, product.id, product.gallery)
+                        {product.gallery.length > 1 ? <button className={styles.buttonImg2} onClick={() => {
+                            props.setIsChange(false, product.gallery.length, product.id, product.gallery)
                         }
-                        }> > </button> : ''}
-                        {product.gallery.length > 1 ? <button onClick={()=>{
+                        }><img src={images.arrowRight}/> </button> : ''}
+                        {product.gallery.length > 1 ? <button className={styles.buttonImg1} onClick={() => {
                             props.setIsChange(true, product.gallery.length, product.id, product.gallery)
                         }
-                        }> > </button> : ''}
+                        }> <img src={images.arrowLeft}/> </button> : ''}
 
 
                     </div>
                 })
             }
-            <div>Total price: {prices?.currency.symbol} {props.state.priceCount[prices?.currency.label]?.toFixed(2) ?
-                props.state.priceCount[prices?.currency.label]?.toFixed(2) : '0'
-            }</div>
-            <div>Tax 21%: {prices?.currency.symbol} {tax.toFixed(2)}</div>
+            <div className={styles.cartCounts}>
+                <div>Tax 21%: <span>{prices?.currency.symbol} {tax.toFixed(2)}</span></div>
+                <div>Quantity: <span>{props.state.productsCount}</span></div>
+                <div className={styles.total}>Total: <span>
+                    {prices?.currency.symbol} {props.state.priceCount[prices?.currency.label]?.toFixed(2) ?
+                    props.state.priceCount[prices?.currency.label]?.toFixed(2) : '0'
+                }
+                </span></div>
+            </div>
+
+
         </>
     );
 };

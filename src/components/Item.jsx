@@ -35,8 +35,8 @@ const Item = (props) => {
                     <div className={styles.name}>{product.name}</div>
 
                     <div className={styles.priceUSD}>
-                        {symbol}
-                        {price}
+                        <div>Price:</div>
+                        <span>{symbol} {price}</span>
                     </div>
 
                     <div className={styles.description} style={{overflowX: 'hidden'}}
@@ -47,8 +47,7 @@ const Item = (props) => {
                     <div className={styles.attribute}>
                         {product?.attributes.map((attribute) => {
                             return (
-                                <div>{attribute.name}:
-                                    <div></div>
+                                <div><div className={styles.attrHeader}>{attribute.name}:</div>
                                     {
                                         attribute.items.map((items) => {
                                             myIndex = myIndex + 1
@@ -67,7 +66,7 @@ const Item = (props) => {
                                                     className={chosenArr.value === items.value
                                                     && chosenArr.index === myIndex
                                                     && chosenArr.name === attribute.name
-                                                        ? styles.active : ''}
+                                                        ? styles.activeColor : styles.passiveColor}
                                                     style={{backgroundColor: items.value}}
                                                     onClick={() => {
                                                         props.handleClick()
@@ -82,7 +81,7 @@ const Item = (props) => {
                                                     className={chosenArr.value === items.value
                                                     && chosenArr.index === myIndex
                                                     && chosenArr.name === attribute.name
-                                                        ? styles.active : ''}
+                                                        ? styles.active : styles.passive}
                                                     onClick={() => {
                                                         props.handleClick()
                                                         props.addChosenValues(attribute.name, items.value, newIndex)

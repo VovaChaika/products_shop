@@ -3,7 +3,7 @@
   grid-template-areas:
           "categories logo currency cart";
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   background-color: white;
   padding-left: 100px;
   padding-right: 100px;
@@ -14,13 +14,30 @@
     grid-area: categories;
     margin-right: 400px;
     .category{
+      position: relative;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
       text-decoration: none;
       color: black;
       text-transform: uppercase;
       margin-right: 32px;
+
+    }
+    .activeUrl{
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-right: 32px;
+      color: #5ECE7B;
+
+      border-bottom: 2px solid #5ECE7B;
+      padding:0 16px;
+      padding-bottom: 30px;
     }
     .category:hover{
       color: #5ECE7B;
+      font-weight: 600;
       border-bottom: 2px solid #5ECE7B;
     }
   }
@@ -35,7 +52,6 @@
   .currency{
     grid-area: currency;
     margin-right: 35px;
-
   }
   .cart{
     grid-area: cart;

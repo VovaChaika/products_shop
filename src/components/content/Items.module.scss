@@ -1,6 +1,17 @@
 .item {
+  font-family: 'Raleway', sans-serif;
   margin-bottom: 100px;
   max-height: 370px;
+}
+.prodName{
+  font-weight: 400;
+  font-size: 18px;
+  margin-left: 20px;
+}
+.price{
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 20px;
 }
 
 .border {
@@ -9,8 +20,9 @@
 }
 
 .outOfOrder {
-  filter: brightness(0.65);
-  text-transform: uppercase;
+  filter: opacity(0.5);
+  margin-bottom: 100px;
+  max-height: 370px;
 }
 
 .outOfOrderSpan {
@@ -18,7 +30,8 @@
   text-transform: uppercase;
   left: 120px;
   bottom: 150px;
-  color: white;
+  font-weight: 400;
+  color: #8D8F9A;
 }
 
 .navLink {

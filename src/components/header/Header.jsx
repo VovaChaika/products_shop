@@ -6,6 +6,9 @@ import CartOverlayContainer from "../cart/cart_overlay/CartOverlayContainer";
 import CurrSwitchContainer from "./currency_switcher/CurrSwitchContainer";
 
 const Header = (props) => {
+    let a = window.location.pathname
+    let b = a.split('/content/')
+
     function changeVisibility() {
         if (props.isVisibleCurrSwitch === true || props.isVisibleCart === true) {
             props.setIsVisibleCurrSwitch(false)
@@ -21,12 +24,20 @@ const Header = (props) => {
                 }}>
                      <span className={styles.categories}>
                          {
+
                              props.locations.map((location) => {
-                                    return <NavLink className={styles.category} onClick={
-                                         () => {
-                                             props.switchPath(location.name)
+                                     return <NavLink
+                                         className={location.name === props.headerUrl ? styles.activeUrl : styles.category}
+                                         onClick={
+                                             () => {
+                                                 props.switchPath(location.name)
+
+                                             }
                                          }
-                                     } to={`/content/${location.name}`}>{location.name}</NavLink>
+                                         onMouseLeave={() => {
+                                             props.splitHeaderUrl(window.location.pathname.split('/content/'))
+                                         }
+                                         } to={`/content/${location.name}`}>{location.name}</NavLink>
                                  }
                              )
                          }

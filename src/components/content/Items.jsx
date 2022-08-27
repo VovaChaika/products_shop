@@ -15,7 +15,7 @@ const Items = (props) => {
 
     return (
         <div className={props.isVisible && props.isVisibleButton ? styles.border : ''}>
-            <div className={styles.item}
+            <div className={!props.product.inStock ? styles.outOfOrder : styles.item}
                  onMouseLeave={() => {
                      props.setIsVisible(false)
                  }}>
@@ -28,17 +28,17 @@ const Items = (props) => {
                 }} to={`/item/${props.product.id}`}>
 
 
-                    <img src={changeCurrImage()} className={!props.product.inStock ? styles.outOfOrder : ''}/>
+                    <img src={changeCurrImage()}/>
 
                     {!props.product.inStock &&
                         <div className={styles.outOfOrderSpan}>out of stock</div>
                     }
 
-                    <div>
-                        {props.product.name}
+                    <div className={styles.prodName}>
+                        {props.product.name} {props.product.brand}
                     </div>
 
-                    <div>{
+                    <div className={styles.price}>{
                         props.priceValues?.currency?.symbol
                     }
                         {

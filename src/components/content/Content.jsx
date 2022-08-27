@@ -11,7 +11,7 @@ function Content(props) {
 
     return (
         <div>
-            <h2>{props.state.path ? props.state.path : "ALL"}</h2>
+            <div className={styles.header}>{props.state.path ? props.state.path : "ALL"}</div>
             <div className={styles.item}>
                 {
                     props.filteredProducts.map((product) => {

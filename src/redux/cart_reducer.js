@@ -24,7 +24,6 @@ export const cart_reducer = (state = initialState, action) => {
             state.productsCount = state.productsCount + 1
 
             state.product?.map((prod) => {
-
                 action.product.count = prod.count
                 let result = deepEqual(prod, action.product)
                 let result2 = compareAttributes(prod.chosenValues, action.product.chosenValues)
@@ -249,6 +248,9 @@ function isObject(object) {
 }
 
 function compareAttributes(array1, array2) {
+    if (array1.length !== array2.length){
+        return false
+    }
     let count = 0
     for (let i = 0; i < array1.length; i++) {
         for (let j = 0; j < array2.length; j++) {
