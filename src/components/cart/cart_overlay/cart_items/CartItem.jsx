@@ -35,7 +35,7 @@ const CartItem = (props) => {
                             pricesArr = pricesAll
                         }
                     })
-                    return <div className={styles.product}>
+                    return <div className={!props.isCartOverlay ? styles.product : styles.productOverlay}>
                         <div className={styles.brand}>{product.brand}</div>
                         <div className={styles.name}>{product.name}</div>
 
@@ -117,7 +117,7 @@ const CartItem = (props) => {
                     </div>
                 })
             }
-                <div className={styles.cartCounts}>
+                <div className={!props.isCartOverlay ? styles.cartCounts : styles.cartCountsOverlay}>
                     {!props.isCartOverlay &&
                         <div>Tax 21%: <span>{prices?.currency.symbol} {tax.toFixed(2)}</span></div>
                     }

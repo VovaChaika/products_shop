@@ -31,9 +31,9 @@ const CartOverlay = (props) => {
                     props.setVisible(false)
                 }
                 }>
-                    <div>My Bag, {props.state.productsCount === 1 ?
-                        <span>{props.state.productsCount} item</span> :
-                        <span>{props.state.productsCount} items</span>}</div>
+                    <div><span className={styles.attrHeader}>My Bag,</span> {props.state.productsCount === 1 ?
+                        <span className={styles.spanHeader}>{props.state.productsCount} item</span> :
+                        <span className={styles.spanHeader}>{props.state.productsCount} items</span>}</div>
                     <div className={styles.cart_items}>
                         <CartItemContainer isCartOverlay={true}/>
                     </div>

@@ -3,7 +3,6 @@
   background: white;
   width: 30px;
   height: 30px;
-  padding-bottom: 10px;
   img{
     height: 20px;
     width: 20px;
@@ -69,6 +68,7 @@
     background-color: white;
     color: black;
     border: 1px solid black;
+    margin-right: 12px;
 
     .navbar{
       display: block;
@@ -86,6 +86,16 @@
       color: white;
     }
   }
+}
+.attrHeader{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+.spanHeader{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
 }
 .cart_items{
   background: white;

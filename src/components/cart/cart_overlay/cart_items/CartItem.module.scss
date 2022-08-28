@@ -155,6 +155,21 @@
     padding-bottom: 10px;
   }
 }
+.cartCountsOverlay{
+  margin-top: 30px;
+  font-weight: 400;
+  font-size: 16px;
+  span{
+    font-weight: 700;
+  }
+  .total{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+  }
+  div{
+    padding-bottom: 10px;
+  }
+}
 .button {
   grid-area: button;
   text-transform: uppercase;
@@ -171,4 +186,163 @@
 }
 .button:hover{
   border: 2px solid white;
+}
+.productOverlay{
+  display: grid;
+  font-family: 'Raleway', sans-serif;
+  grid-template-areas:
+          "brand counter img"
+          "name counter img"
+          "price counter img"
+          "attributes counter img";
+  grid-template-columns: 10fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  max-height: 280px;
+  max-width: 325px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  .img{
+    position: relative;
+    margin: auto;
+    width: 120px;
+    height: 190px;
+    grid-area: img;
+  }
+  .attrHeader{
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+  .buttonImg1{
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.73);
+    border: none;
+    left: 260px;
+    bottom: 85px;
+    img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 5px;
+      height: 11px;
+    }
+  }
+  .buttonImg1:hover{
+    background: black;
+  }
+  .buttonImg2{
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.73);
+    border: none;
+    left: 1180px;
+    bottom: 85px;
+    img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 5px;
+      height: 11px;
+    }
+  }
+  .buttonImg2:hover{
+    background: black;
+  }
+
+  .counter{
+    grid-area: counter;
+    .buttonCount{
+      border: 1px solid black;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      width: 24px;
+      height: 24px;
+      background: none;
+    }
+    .countText{
+      display: block;
+      font-size: 16px;
+      margin-bottom: 75px;
+      margin-top: 75px;
+    }
+  }
+  .brand{
+    grid-area: brand;
+    font-size: 16px;
+    font-weight: 300;
+    align-content: start;
+  }
+  .name{
+    grid-area: name;
+    font-size: 16px;
+    font-weight: 300;
+  }
+  .price{
+    grid-area: price;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    font-style: oblique;
+  }
+  .attributes{
+    grid-area: attributes;
+    font-size: 24px;
+
+    button{
+      min-height: 16px;
+      min-width: 16px;
+      border: none;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      box-shadow: 1px 8px 15px rgba(0.2, 0.2, 0.2, 0.2);
+    }
+    .active{
+      display: inline-block;
+      min-width: 24px;
+      height: 24px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      background-color: black;
+      color: white;
+    }
+    .activeColor{
+      margin-right: 8px;
+      border: 2px solid #5ECE7B;
+    }
+    .passiveColor{
+      margin-right: 8px;
+    }
+    .passive{
+      display: inline-block;
+      min-width: 24px;
+      height: 24px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      box-shadow: none;
+      border: 1px solid black;
+      background-color: white;
+    }
+
+  }
+  .cartCounts{
+    margin-top: 30px;
+    font-weight: 400;
+    font-size: 40px;
+    span{
+      font-weight: 300;
+    }
+    .total{
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+    }
+    div{
+      padding-bottom: 10px;
+    }
+  }
 }
