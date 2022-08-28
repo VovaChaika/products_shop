@@ -6,7 +6,7 @@ import {
     addChosenValuesCreator,
     addFullProductCreator, changeTotalCostCreator,
     clearValuesCreator, setDefaultAttributesCreator,
-} from "../redux/cart_reducer";
+} from "../../redux/cart_reducer";
 import Item from "./Item";
 
 
@@ -28,14 +28,12 @@ class ItemContainer extends React.Component {
                 state={this.props.state}
                 stateCurr={this.props.stateCurr}
                 stateCart={this.props.stateCart}
-                chosenValues={this.props.chosenValues}
 
                 addFullProduct={this.props.addFullProduct}
                 addChosenValues={this.props.addChosenValues}
                 clearValues={this.props.clearValues}
                 changeTotalCost={this.props.changeTotalCost}
 
-                startPrice={this.props.startPrice}
                 handleClick={this.handleClick}
                 setDefaultAttributes={this.props.setDefaultAttributes}
             />
@@ -48,7 +46,6 @@ let mapStateToProps = (state) => {
     return {
         stateCurr: state.currency,
         stateCart: state.cart,
-        chosenValues: state.cart.chosenValues,
         state: state.products
     }
 }

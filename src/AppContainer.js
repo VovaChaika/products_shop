@@ -11,10 +11,18 @@ class AppContainer extends React.Component {
         this.props.getLocations()
     }
     state = {
-        isVisible: false
+        isVisible: false,
+        isVisibleCurrSwitch: false,
+        isVisibleCart: false,
     };
     setIsVisible = (isVisible) => {
             this.setState({ isVisible: isVisible });
+    }
+    setIsVisibleCurrSwitch = (isVisible) => {
+        this.setState({ isVisibleCurrSwitch: isVisible });
+    }
+    setIsVisibleCart = (isVisible) => {
+        this.setState({ isVisibleCart: isVisible });
     }
 
     render() {
@@ -22,8 +30,15 @@ class AppContainer extends React.Component {
         if (this.props.state.isFetching===false){
             return <>
                 <App state={this.props.state}
+
                      setIsVisible={this.setIsVisible}
                      isVisible={this.state.isVisible}
+
+                     isVisibleCurrSwitch={this.state.isVisibleCurrSwitch}
+                     setIsVisibleCurrSwitch={this.setIsVisibleCurrSwitch}
+
+                     isVisibleCart={this.state.isVisibleCart}
+                     setIsVisibleCart={this.setIsVisibleCart}
                 />
             </>
         }

@@ -1,7 +1,6 @@
 import styles from "./Content.module.scss"
-import "./Category.css"
 import React from "react";
-import ItemsContainer from "./ItemsContainer";
+import ContentItemsContainer from "./content_items/ContentItemsContainer";
 
 
 function Content(props) {
@@ -16,14 +15,10 @@ function Content(props) {
                 {
                     props.filteredProducts.map((product) => {
                             startValues = []
-                            if (!props.stateCurr.currencyArr[priceCounter]) {
-                                startValues = props.startPrice(product.id)
-                            }
                             priceCounter++
-                             props.setStartPrice(product.id)
                             return <span onMouseLeave={() => {
                                 props.setIsVisibleButton(false)
-                            }}><ItemsContainer
+                            }}><ContentItemsContainer
                                 product={product}
                                 startPriceValue={startValues}
 
@@ -32,7 +27,6 @@ function Content(props) {
                                 isVisibleButton={props.isVisibleButton}
                                 setIsVisibleButton={props.setIsVisibleButton}
 
-                                setStartPrice={props.setStartPrice}
                                 priceValues={props.stateCurr.currencyArr?.[priceCounter]}
                             /></span>
                         }

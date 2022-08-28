@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./CurrSwitch.module.scss"
-import {images} from "../../../constants";
+import {images} from "../../constants";
 
 const CurrSwitch = (props) => {
     let arr = []
@@ -18,13 +18,13 @@ const CurrSwitch = (props) => {
                     }
                     {
                         arr?.[0].map((label) => {
-                            return <button onClick={() => {
+                            return <div><button onClick={() => {
                                 props.changeArrayCurrency(arr, label.currency.label)
                                 props.changeCurrency(label.currency.symbol)
                                 props.setLabel(label.currency.label)
                             }}>
                                 {label.currency.symbol} {label.currency.label}
-                            </button>
+                            </button></div>
                         })
                     }
                 </div>)

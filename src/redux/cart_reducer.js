@@ -3,17 +3,14 @@ const ADD_CHOSEN_VALUES = "ADD_CHOSEN_VALUES"
 const CLEAR_VALUES = "CLEAR_VALUES"
 const CHANGE_COUNT_BY_ID = "CHANGE_COUNT_BY_ID"
 const TOTAL_COST_CHANGE = 'TOTAL_COST_CHANGE'
-const DECREASE_PROD_COUNT = 'DECREASE_PROD_COUNT'
 const SET_DEFAULT_ATTRIBUTES= 'SET_DEFAULT_ATTRIBUTES'
 const DELETE_FROM_CART = 'DELETE_FROM_CART'
 
 let initialState = {
-    productAdded: [],
     product: [],
     chosenValues: [],
     identifiers: 0,
     productsCount: 0,
-    //transfer product.prices and + to all price of all symbols
     priceCount: {USD: 0, GBP: 0, JPY: 0, AUD: 0, RUB: 0},
 }
 
@@ -40,7 +37,6 @@ export const cart_reducer = (state = initialState, action) => {
                 return {...state, product: [...state.product, action.product], identifiers: state.identifiers + 1}
             }
             break;
-
         case CLEAR_VALUES:
             return {...state, chosenValues: []}
         case ADD_CHOSEN_VALUES:
@@ -67,7 +63,6 @@ export const cart_reducer = (state = initialState, action) => {
                 }
             }
             break
-
         case SET_DEFAULT_ATTRIBUTES:
             if (state.chosenValues.length === 0){
                 let allAttrArr = []
@@ -101,7 +96,6 @@ export const cart_reducer = (state = initialState, action) => {
                 state.chosenValues = allAttrArr
             }
             return {...state}
-
         case CHANGE_COUNT_BY_ID:
             let saveProductPlace = 0
             state.product?.map((product) => {
@@ -133,8 +127,8 @@ export const cart_reducer = (state = initialState, action) => {
         //save price after product add
         case TOTAL_COST_CHANGE:
             action.price?.map((currency)=>{
-                console.log(currency)
-                console.log(action?.price?.[0])
+                console.log(currency
+                )
                 if (action.plus === false){
                     switch (currency.currency?.label){
                         case "USD":
@@ -192,12 +186,11 @@ export const cart_reducer = (state = initialState, action) => {
             })
             break
         case DELETE_FROM_CART:
-            return {...state, productAdded: [],
+            return {...state,
                 product: [],
                 chosenValues: [],
                 identifiers: 0,
                 productsCount: 0,
-                //transfer product.prices and + to all price of all symbols
                 priceCount: {USD: 0, GBP: 0, JPY: 0, AUD: 0, RUB: 0}}
 
     }
@@ -225,9 +218,6 @@ export const deleteFromCartCreator = () => {
 
 export const increaseCountCreator = (identifier, increase) => {
     return {type: CHANGE_COUNT_BY_ID, identifier, increase}
-}
-export const decreaseProdCountCreator = () => {
-    return {type: DECREASE_PROD_COUNT}
 }
 export const changeTotalCostCreator = (price, plus) => ({
     type: TOTAL_COST_CHANGE,
@@ -275,6 +265,4 @@ function compareAttributes(array1, array2) {
         return true
     } else return false
 }
-
-//thunk
 

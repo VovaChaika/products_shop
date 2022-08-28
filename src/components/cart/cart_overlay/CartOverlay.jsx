@@ -1,15 +1,13 @@
 import React from 'react';
 import styles from './CartOverlay.module.scss'
-import CartItem from "./cart_items/CartItem";
 import {NavLink} from "react-router-dom";
 import {images} from "../../../constants";
-import CartItemContainer from "./cart_items/CartItemContainer";
+import CartItemContainer from "../cart_items/CartItemContainer";
 
 const CartOverlay = (props) => {
 
     return (
         <>
-
             <button className={styles.button} onMouseMove={() => {
                 if (props.isVisibleCurrSwitch === true) {
                     props.setIsVisibleCurrSwitch(false)
@@ -19,9 +17,12 @@ const CartOverlay = (props) => {
             }}
 
             >
-                <img className={props.state.productsCount === 0 ? styles.cartImgNone : styles.cartImg} src={images.cart} alt=""/>
-                {props.state.productsCount === 0 ? '' : <img className={styles.circleImg} src={images.blackCircle} alt=""/>}
-                <span className={props.state.productsCount < 10 ? styles.numberCount : styles.numberCountMore}>{props.state.productsCount === 0 ? '' : props.state.productsCount}</span>
+                <img className={props.state.productsCount === 0 ? styles.cartImgNone : styles.cartImg} src={images.cart}
+                     alt=""/>
+                {props.state.productsCount === 0 ? '' :
+                    <img className={styles.circleImg} src={images.blackCircle} alt=""/>}
+                <span
+                    className={styles.numberCount}>{props.state.productsCount === 0 ? '' : props.state.productsCount}</span>
 
             </button>
             {props.isVisibleCart &&
@@ -38,11 +39,19 @@ const CartOverlay = (props) => {
                         <CartItemContainer isCartOverlay={true}/>
                     </div>
                     <button className={styles.bag}>
-                        <NavLink to={'/cart'} className={styles.navbar}>
+                        <NavLink to={'/cart'} className={styles.navbar} onClick={() => {
+                            props.setIsVisibleCart(false)
+                            props.setVisible(false)
+                        }
+                        }>
                             view bag
                         </NavLink>
                     </button>
-                    <button className={styles.button}>
+                    <button className={styles.button} onClick={() => {
+                        props.setIsVisibleCart(false)
+                        props.setVisible(false)
+                    }
+                    }>
                         <NavLink to={'/cart'} className={styles.navbar}>
                             check out
                         </NavLink>

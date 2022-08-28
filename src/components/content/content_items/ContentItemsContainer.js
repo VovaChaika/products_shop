@@ -1,17 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {switchPathCreator} from "../../redux/content_reducer";
-import Items from "./Items";
+import ContentItems from "./ContentItems";
 import {
     addFullProductCreator,
     changeTotalCostCreator,
     clearValuesCreator,
     setDefaultAttributesCreator
-} from "../../redux/cart_reducer";
+} from "../../../redux/cart_reducer";
 
 
-class ItemsContainer extends React.Component {
+class ContentItemsContainer extends React.Component {
     state = {
         isVisible: false,
     };
@@ -21,9 +20,8 @@ class ItemsContainer extends React.Component {
 
     render() {
         return <>
-            <Items
+            <ContentItems
                 product={this.props.product}
-                startPriceValue={this.props.startPriceValue}
 
                 state={this.props.state}
                 stateCart={this.props.stateCart}
@@ -31,7 +29,6 @@ class ItemsContainer extends React.Component {
                 isVisibleButton={this.props.isVisibleButton}
                 setIsVisibleButton={this.props.setIsVisibleButton}
 
-                setStartPrice={this.props.setStartPrice}
                 priceValues={this.props.priceValues}
 
                 setIsVisible={this.setIsVisible}
@@ -54,9 +51,6 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        switchPath: (newPath) => {
-            dispatch(switchPathCreator(newPath))
-        },
         setDefaultAttributes: (attributes) => {
             dispatch(setDefaultAttributesCreator(attributes))
         },
@@ -74,4 +68,4 @@ let mapDispatchToProps = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps)
-)(ItemsContainer)
+)(ContentItemsContainer)

@@ -1,47 +1,42 @@
 import React from "react";
 import styles from './App.module.scss';
 import {Route, Routes} from "react-router-dom";
-import CartContainer from "./components/cart/CartContainer";
-import ItemContainer from "./components/ItemContainer";
+import ItemContainer from "./components/single_product/ItemContainer";
 import ContentContainer from "./components/content/ContentContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
+import Cart from "./components/cart/Cart";
 
 function App(props) {
-    function startPrice(productId) {
-        let startValues
-        props.state.usualArr.map((product) => {
-            if (product?.id === productId) {
-                startValues = []
-                startValues.push(product.prices?.[0].amount)
-                startValues.push(product.prices?.[0].currency.symbol)
-                startValues.push(product.prices?.[0].currency.label)
-            }
-        })
-        return startValues
-    }
 
     return (
         <div>
             <HeaderContainer setVisible={props.setIsVisible}
-                             isVisible={props.isVisible}/>
+                             isVisible={props.isVisible}
 
-            <div className={props.isVisible ? styles.AppDisable : styles.App}>
+                             isVisibleCurrSwitch={props.isVisibleCurrSwitch}
+                             setIsVisibleCurrSwitch={props.setIsVisibleCurrSwitch}
+
+                             isVisibleCart={props.isVisibleCart}
+                             setIsVisibleCart={props.setIsVisibleCart}
+            />
+
+            <div className={props.isVisible ? styles.AppDisable : styles.App} onClick={()=>{
+                if (props.isVisibleCurrSwitch === true || props.isVisibleCart === true) {
+                    props.setIsVisibleCurrSwitch(false)
+                    props.setIsVisibleCart(false)
+                    props.setIsVisible(false)
+                }
+            }}>
                 <Routes>
                     <Route path={"/"}
-                           element={<ContentContainer
-                               startPrice={startPrice}
-                           />}/>
+                           element={<ContentContainer/>}/>
                     <Route path="/content/*"
-                           element={<ContentContainer
-                               startPrice={startPrice}
-                           />}/>
+                           element={<ContentContainer/>}/>
                     <Route path="/cart/*"
-                           element={<CartContainer/>}/>
+                           element={<Cart/>}/>
 
                     <Route path="/item/*"
-                           element={<ItemContainer
-                               startPrice={startPrice}
-                           />}/>
+                           element={<ItemContainer/>}/>
                 </Routes>
             </div>
         </div>

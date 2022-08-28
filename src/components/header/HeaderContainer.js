@@ -7,16 +7,8 @@ import {switchPathCreator} from "../../redux/content_reducer";
 
 class HeaderContainer extends React.Component {
     state = {
-        isVisibleCurrSwitch: false,
-        isVisibleCart: false,
         headerUrl: "all"
     };
-    setIsVisibleCurrSwitch = (isVisible) => {
-        this.setState({ isVisibleCurrSwitch: isVisible });
-    }
-    setIsVisibleCart = (isVisible) => {
-        this.setState({ isVisibleCart: isVisible });
-    }
     splitHeaderUrl = (url) =>{
         this.setState({ headerUrl: url[1]});
     }
@@ -30,11 +22,11 @@ class HeaderContainer extends React.Component {
                     setVisible={this.props.setVisible}
                     isVisible={this.props.isVisible}
 
-                    isVisibleCurrSwitch={this.state.isVisibleCurrSwitch}
-                    setIsVisibleCurrSwitch={this.setIsVisibleCurrSwitch}
+                    isVisibleCurrSwitch={this.props.isVisibleCurrSwitch}
+                    setIsVisibleCurrSwitch={this.props.setIsVisibleCurrSwitch}
 
-                    isVisibleCart={this.state.isVisibleCart}
-                    setIsVisibleCart={this.setIsVisibleCart}
+                    isVisibleCart={this.props.isVisibleCart}
+                    setIsVisibleCart={this.props.setIsVisibleCart}
 
                     headerUrl={this.state.headerUrl}
                     splitHeaderUrl={this.splitHeaderUrl}

@@ -4,14 +4,12 @@ const GET_PRODUCTS_ARR = 'GET_PRODUCTS_ARR'
 const GET_PRICES_ARR = 'GET_PRICES_ARR'
 const GET_LOCATIONS = 'GET_LOCATIONS'
 const SWITCH_PATH = 'SWITCH_PATH'
-const SET_START_PRICE = 'SET_START_PRICE'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 let initialState = {
     usualArr: [],
     priceArr: [],
     locations: [],
-    startPrice: {},
     isFetching: true,
     path: ''
 }
@@ -26,13 +24,6 @@ export const content_reducer = (state = initialState, action) => {
             return {...state, locations: action.data}
         case SWITCH_PATH:
             return {...state, path: action.newPath}
-        case SET_START_PRICE:
-            state.usualArr.map((product) => {
-                if (product?.id === action?.productId) {
-                    return {...state, startPrice: product.prices?.[0]}
-                }
-            })
-            break;
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
     }
@@ -61,10 +52,6 @@ export const switchPathCreator = (newPath) => ({
     newPath
 })
 
-export const setStartPriceCreator = (productId) => ({
-    type: SET_START_PRICE,
-    productId
-})
 
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching})
 

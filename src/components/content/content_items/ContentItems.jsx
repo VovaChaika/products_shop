@@ -1,11 +1,11 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import styles from './Items.module.scss'
-import '../../App.module.scss'
-import {images} from "../../constants";
+import styles from './ContentItems.module.scss'
+import '../../../App.module.scss'
+import {images} from "../../../constants";
 
 
-const Items = (props) => {
+const ContentItems = (props) => {
     function changeCurrImage() {
         if (props.isVisible && props.product.gallery?.[1] !== undefined) {
             return props.product.gallery?.[1]
@@ -20,7 +20,6 @@ const Items = (props) => {
                  onMouseLeave={() => {
                      props.setIsVisible(false)
                  }}>
-                {props.state.startPrice.amount}
                 <NavLink className={styles.navLink} onMouseMove={() => {
                     props.setIsVisible(true)
                     if (props.isVisibleButton === false) {
@@ -77,4 +76,4 @@ const Items = (props) => {
     );
 };
 
-export default Items;
+export default ContentItems;

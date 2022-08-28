@@ -3,12 +3,9 @@ import styles from "./Header.module.scss"
 import {images} from "../../constants"
 import {NavLink} from "react-router-dom";
 import CartOverlayContainer from "../cart/cart_overlay/CartOverlayContainer";
-import CurrSwitchContainer from "./currency_switcher/CurrSwitchContainer";
+import CurrSwitchContainer from "../currency_switcher/CurrSwitchContainer";
 
 const Header = (props) => {
-    let a = window.location.pathname
-    let b = a.split('/content/')
-
     function changeVisibility() {
         if (props.isVisibleCurrSwitch === true || props.isVisibleCart === true) {
             props.setIsVisibleCurrSwitch(false)
@@ -18,13 +15,14 @@ const Header = (props) => {
     }
 
     return (
-        <div className={styles.header_grid}>
+        <div className={styles.header_grid} onClick={()=>{
+            props.setIsVisibleCurrSwitch(false)
+        }}>
                 <span onMouseMove={() => {
                     changeVisibility()
                 }}>
                      <span className={styles.categories}>
                          {
-
                              props.locations.map((location) => {
                                      return <NavLink
                                          className={location.name === props.headerUrl ? styles.activeUrl : styles.category}
@@ -55,12 +53,9 @@ const Header = (props) => {
                 setIsVisibleCurrSwitch={props.setIsVisibleCurrSwitch}
                 isVisibleCart={props.isVisibleCart}
                 setIsVisibleCart={props.setIsVisibleCart}
-
-                currencies={props.currencies}
             /></span>
 
             <span className={styles.cart}><CartOverlayContainer
-                currency={props.stateCurr}
                 setVisible={props.setVisible}
                 isVisible={props.isVisible}
 

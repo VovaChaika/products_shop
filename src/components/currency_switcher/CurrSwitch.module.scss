@@ -1,8 +1,10 @@
 .button{
     font-family: 'Raleway', sans-serif;
     font-weight: 500;
+    display: inline-block;
+    min-width: 40px;
     position: relative;
-    top: 5px;
+    top:2px;
     border: none;
     background: white;
     width: 30px;
@@ -17,13 +19,14 @@
     }
 }
 .button:hover{
+    top:3px;
     color: #5ECE7B;
     border-bottom: 2px solid #5ECE7B;
 }
 .position{
     z-index: 888;
-    position: fixed;
-    top: 55px;
+    position: absolute;
+    top: 65px;
     button{
         font-family: 'Raleway', sans-serif;
         font-weight: 500;

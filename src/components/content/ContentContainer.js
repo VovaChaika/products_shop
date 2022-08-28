@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import Content from "./Content";
-import {getProducts, setStartPriceCreator} from "../../redux/content_reducer";
+import {getProducts} from "../../redux/content_reducer";
 import {changeArrayCurrencyCreator} from "../../redux/currency_reducer";
 
 class ContentContainer extends React.Component {
@@ -64,9 +64,6 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        setStartPrice: (productId) => {
-            dispatch(setStartPriceCreator(productId))
-        },
         changeArrayCurrency: (currencyArr, name )=>{
             dispatch(changeArrayCurrencyCreator(currencyArr, name ))
         },

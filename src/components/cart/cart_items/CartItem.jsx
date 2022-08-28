@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./CartItem.module.scss"
-import {images} from "../../../../constants";
+import {images} from "../../../constants";
 
 const CartItem = (props) => {
     let prices
