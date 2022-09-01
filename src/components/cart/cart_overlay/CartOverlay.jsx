@@ -46,11 +46,11 @@ class CartOverlay extends Component{
                         <button className={styles.button} onClick={() => {
                             this.props.setIsVisibleCart(false)
                             this.props.setVisible(false)
+                            alert("Ordered!")
+                            this.props.deleteFromCart()
                         }
                         }>
-                            <NavLink to={'/cart'} className={styles.navbar}>
                                 check out
-                            </NavLink>
                         </button>
                     </div>
                 }

@@ -1,3 +1,6 @@
+.whiteColor {
+  border: 1px solid black;
+}
 .display {
   font-family: 'Raleway', sans-serif;
   display: grid;
@@ -9,7 +12,7 @@
             "imgs img button"
             "imgs img description";
   grid-template-columns:0.5fr 2fr 1fr;
-
+  padding-top: 70px;
   .mainImg {
     grid-area: img;
     object-fit: cover;
@@ -83,21 +86,18 @@
       color: white;
     }
 
+    .passiveColor {
+      margin-right: 8px;
+    }
     .whiteColor {
       border: 1px solid black;
       bottom: 1px;
     }
-
     .activeColor {
       margin-right: 8px;
       border: 1px solid #5ECE7B;
       bottom: 1px;
     }
-
-    .passiveColor {
-      margin-right: 8px;
-    }
-
     .passive {
       width: 63px;
       height: 45px;
@@ -132,11 +132,11 @@
   }
 
   .description {
-    margin-top: 40px;
+    display: inline-block;
     font-family: 'Roboto', sans-serif;
+    font-weight: 400;
     font-size: 16px;
     grid-area: description;
-    max-height: 97px;
     overflow: hidden;
   }
 

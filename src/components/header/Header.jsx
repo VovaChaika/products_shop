@@ -32,7 +32,9 @@ class Header extends Component {
                                              }
                                          }
                                          onMouseLeave={() => {
-                                             this.props.splitHeaderUrl(window.location.pathname.split('/content/'))
+                                             if (window.location.pathname.split('/content/').length>1){
+                                                 this.props.splitHeaderUrl(window.location.pathname.split('/content/'))
+                                             }
                                          }
                                          } to={`/content/${location.name}`}>{location.name}</NavLink>
                                  }

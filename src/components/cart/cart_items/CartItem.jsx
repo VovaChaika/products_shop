@@ -37,12 +37,16 @@ class CartItem extends Component{
                             }
                         })
                         return <div className={!this.props.isCartOverlay ? styles.product : styles.productOverlay}>
-                            <div className={styles.brand}>{product.brand}</div>
-                            <div className={styles.name}>{product.name}</div>
 
-                            <div className={styles.price}>{symbol} {price}</div>
+                            <div className={styles.info_block}>
+                                <div className={styles.brand}>{product.brand}</div>
+                                <div className={styles.name}>{product.name}</div>
+
+                                <div className={styles.price}>{symbol} {price}</div>
+                            </div>
 
 
+                            {/*//BUTTONS + - PRODUCT COUNT*/}
                             <div className={styles.counter}>
                                 <button className={styles.buttonCount} onClick={() => {
                                     this.props.increaseCount(product.identifier, true)
@@ -63,6 +67,7 @@ class CartItem extends Component{
                                 </button>
                             </div>
 
+                            {/*//ATTRIBUTES LOGIC*/}
                             <div className={styles.attributes}>
                                 {product.attributes?.map((attribute) => {
                                     return (<div>
@@ -74,8 +79,12 @@ class CartItem extends Component{
 
                                             })
                                             if (attribute.name === "Color") {
+                                                let a = items.value === '#FFFFFF' ? 'alert("ssyyyyka")' : ''
+                                                console.log(a)
                                                 return <button
-                                                    className={result.find(res => res.value === items.value) !== undefined ? styles.activeColor : styles.passiveColor}
+                                                    className={[result.find(res => res.value === items.value) !== undefined
+                                                        ? styles.activeColor : styles.passiveColor,
+                                                        items.value === '#FFFFFF' ? styles.whiteColor : ''].join(' ')}
                                                     style={{backgroundColor: items.value}}
                                                 ></button>
                                             } else {
@@ -95,6 +104,8 @@ class CartItem extends Component{
                                 })
                                 }
                             </div>
+
+                            {/*//IMAGE CAROUSEL*/}
                             {!this.props.doChange.includes(product.id) ? this.props.setIsChange(1, product.gallery.length, product.id, product.gallery) : ''}
 
                             {this.props.imgSrc.map((img, index) => {
@@ -103,6 +114,7 @@ class CartItem extends Component{
                                 }
                             })}
 
+                            {/*//BUTTON IMAGE SWITCH*/}
                             {product.gallery.length > 1 && !this.props.isCartOverlay ?
                                 <button className={styles.buttonImg2} onClick={() => {
                                     this.props.setIsChange(false, product.gallery.length, product.id, product.gallery)
@@ -113,11 +125,11 @@ class CartItem extends Component{
                                     this.props.setIsChange(true, product.gallery.length, product.id, product.gallery)
                                 }
                                 }><img src={images.arrowLeft}/></button> : ''}
-
-
                         </div>
                     })
                 }
+
+                {/*//COUNTERS*/}
                 <div className={!this.props.isCartOverlay ? styles.cartCounts : styles.cartCountsOverlay}>
                     {!this.props.isCartOverlay &&
                         <div>Tax 21%: <span>{prices?.currency.symbol} {tax.toFixed(2)}</span></div>
@@ -131,6 +143,8 @@ class CartItem extends Component{
                     }
                 </span></div>
                 </div>
+
+                {/*//BUTTON ORDER & EMPTY CART*/}
                 {!this.props.isCartOverlay &&
                     <button className={styles.button} onClick={() => {
                         alert("Ordered!")

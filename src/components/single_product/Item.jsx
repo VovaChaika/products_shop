@@ -61,6 +61,7 @@ class Item extends Component {
                                                 })
                                                 //color to show color not string
                                                 if (attribute.name === "Color") {
+
                                                     return <button
                                                         className={[chosenArr.value === items.value
                                                         && chosenArr.index === myIndex
