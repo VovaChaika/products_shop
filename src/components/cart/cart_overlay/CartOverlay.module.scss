@@ -80,6 +80,9 @@
     }
   }
 }
+.headerPosition{
+  margin-bottom: 30px;
+}
 .attrHeader{
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
@@ -92,10 +95,9 @@
 }
 .cart_items{
   background: white;
-  max-width: 405px;
-  max-height: 600px;
+  max-width: 325px;
+  max-height: 580px;
   overflow: auto;
-
 }
 
 

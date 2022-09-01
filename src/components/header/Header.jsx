@@ -5,9 +5,9 @@ import {NavLink} from "react-router-dom";
 import CartOverlayContainer from "../cart/cart_overlay/CartOverlayContainer";
 import CurrSwitchContainer from "../currency_switcher/CurrSwitchContainer";
 
-class Header extends Component{
+class Header extends Component {
     render() {
-        function changeVisibility() {
+        const changeVisibility = () => {
             if (this.props.isVisibleCurrSwitch === true || this.props.isVisibleCart === true) {
                 this.props.setIsVisibleCurrSwitch(false)
                 this.props.setIsVisibleCart(false)
@@ -16,10 +16,8 @@ class Header extends Component{
         }
 
         return (
-            <div className={styles.header_grid} onClick={()=>{
-                this.props.setIsVisibleCurrSwitch(false)
-            }}>
-                <span onMouseMove={() => {
+            <div className={styles.header_grid}>
+                <span onClick={() => {
                     changeVisibility()
                 }}>
                      <span className={styles.categories}>
@@ -44,7 +42,9 @@ class Header extends Component{
 
 
                 </span>
-                <img className={styles.logo} src={images.logo} alt=""/>
+                <img className={styles.logo} src={images.logo} alt="" onClick={() => {
+                    changeVisibility()
+                }}/>
 
                 <span className={styles.currency}><CurrSwitchContainer
                     setVisible={this.props.setVisible}

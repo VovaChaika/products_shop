@@ -8,7 +8,7 @@ class CartOverlay extends Component{
     render() {
         return (
             <>
-                <button className={styles.button} onMouseMove={() => {
+                <button className={styles.button} onClick={() => {
                     if (this.props.isVisibleCurrSwitch === true) {
                         this.props.setIsVisibleCurrSwitch(false)
                     }
@@ -27,12 +27,8 @@ class CartOverlay extends Component{
                 </button>
                 {this.props.isVisibleCart &&
 
-                    <div className={styles.position} onMouseLeave={() => {
-                        this.props.setIsVisibleCart(false)
-                        this.props.setVisible(false)
-                    }
-                    }>
-                        <div><span className={styles.attrHeader}>My Bag,</span> {this.props.state.productsCount === 1 ?
+                    <div className={styles.position}>
+                        <div className={styles.headerPosition}><span className={styles.attrHeader}>My Bag,</span> {this.props.state.productsCount === 1 ?
                             <span className={styles.spanHeader}>{this.props.state.productsCount} item</span> :
                             <span className={styles.spanHeader}>{this.props.state.productsCount} items</span>}</div>
                         <div className={styles.cart_items}>

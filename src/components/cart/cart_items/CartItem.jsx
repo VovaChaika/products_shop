@@ -54,7 +54,7 @@ class CartItem extends Component{
 
                                 <div className={styles.countText}>{product.count}</div>
 
-                                <button className={styles.buttonCount} onClick={() => {
+                                <button className={styles.buttonCountMinus} onClick={() => {
                                     this.props.increaseCount(product.identifier, false)
                                     this.props.changeTotalCost(pricesArr, false)
                                     this.props.handleClick()
@@ -125,7 +125,7 @@ class CartItem extends Component{
                     {!this.props.isCartOverlay &&
                         <div>Quantity: <span>{this.props.state.productsCount}</span></div>
                     }
-                    <div className={styles.total}>Total: <span>
+                    <div className={styles.total}>Total{!this.props.isCartOverlay ?':' : ''} <span>
                     {prices?.currency.symbol} {this.props.state.priceCount[prices?.currency.label]?.toFixed(2) ?
                         this.props.state.priceCount[prices?.currency.label]?.toFixed(2) : '0'
                     }

@@ -9,7 +9,13 @@
   padding-right: 100px;
   font-family: 'Raleway', sans-serif;
   font-weight: 400;
-  opacity: 0.22;
+  z-index: 19999;
+
+  background-color: #39374838;
+  img{
+    opacity: 0.42;
+  }
+
 }
 
 

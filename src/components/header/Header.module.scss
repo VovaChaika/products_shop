@@ -3,10 +3,13 @@
   grid-template-areas:
           "categories logo currency cart";
   grid-template-columns: 50% 40% 5% 5%;
-  padding-top: 20px;
+  grid-row-gap: 50px;
+  padding-top: 35px;
   height: 80px;
   padding-left: 100px;
   padding-right: 100px;
+  max-height: 78px;
+
 
 
 
@@ -33,7 +36,7 @@
 
       border-bottom: 2px solid #5ECE7B;
       padding:0 16px;
-      padding-bottom: 42px;
+      padding-bottom: 57px;
     }
     .category:hover{
       color: #5ECE7B;

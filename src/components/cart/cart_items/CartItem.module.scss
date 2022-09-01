@@ -1,4 +1,4 @@
-.product{
+.product {
   display: grid;
   font-family: 'Raleway', sans-serif;
   border-bottom: 2px solid #E5E5E5;
@@ -13,20 +13,23 @@
   max-height: 500px;
   padding-top: 20px;
 
-  .img{
+  .img {
     position: relative;
     margin: auto;
     width: 200px;
     height: 288px;
+    object-fit: cover;
     grid-area: img;
   }
-  .attrHeader{
+
+  .attrHeader {
     font-size: 18px;
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 700;
     margin-bottom: 5px;
   }
-  .buttonImg1{
+
+  .buttonImg1 {
     position: relative;
     width: 24px;
     height: 24px;
@@ -34,7 +37,8 @@
     border: none;
     left: 260px;
     bottom: 85px;
-    img{
+
+    img {
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -42,18 +46,21 @@
       height: 11px;
     }
   }
-  .buttonImg1:hover{
+
+  .buttonImg1:hover {
     background: black;
   }
-  .buttonImg2{
+
+  .buttonImg2 {
     position: relative;
     width: 24px;
     height: 24px;
     background: rgba(0, 0, 0, 0.73);
     border: none;
-    left: 1180px;
+    left: 1165px;
     bottom: 85px;
-    img{
+
+    img {
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -61,13 +68,24 @@
       height: 11px;
     }
   }
-  .buttonImg2:hover{
+
+  .buttonImg2:hover {
     background: black;
   }
 
-  .counter{
+  .counter {
     grid-area: counter;
-    .buttonCount{
+
+    .buttonCount {
+      border: 1px solid black;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      width: 45px;
+      height: 45px;
+      background: none;
+
+    }
+    .buttonCountMinus {
       border: 1px solid black;
       margin-top: 20px;
       margin-bottom: 40px;
@@ -75,37 +93,48 @@
       height: 45px;
       background: none;
     }
-    .countText{
+
+    .buttonCount:hover {
+      background-color: #8D8F9A;
+    }
+
+    .countText {
       display: block;
       font-size: 24px;
       margin-bottom: 75px;
       margin-top: 75px;
+      position: relative;
+      left: 15px;
     }
   }
-  .brand{
+
+  .brand {
     grid-area: brand;
     color: #1D1F22;
     font-size: 30px;
     font-weight: 600;
     align-content: start;
   }
-  .name{
+
+  .name {
     grid-area: name;
     font-size: 30px;
     font-weight: 400;
   }
-  .price{
+
+  .price {
     grid-area: price;
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 700;
     font-size: 24px;
     font-style: oblique;
   }
-  .attributes{
+
+  .attributes {
     grid-area: attributes;
     font-size: 24px;
 
-    button{
+    button {
       min-height: 32px;
       min-width: 32px;
       border: none;
@@ -113,7 +142,8 @@
       margin-bottom: 10px;
       box-shadow: 1px 8px 15px rgba(0.2, 0.2, 0.2, 0.2);
     }
-    .active{
+
+    .active {
       width: 63px;
       height: 45px;
       font-weight: 400;
@@ -121,14 +151,17 @@
       background-color: black;
       color: white;
     }
-    .activeColor{
+
+    .activeColor {
       margin-right: 8px;
       border: 2px solid #5ECE7B;
     }
-    .passiveColor{
+
+    .passiveColor {
       margin-right: 8px;
     }
-    .passive{
+
+    .passive {
       width: 63px;
       height: 45px;
       font-family: 'Source Sans Pro', sans-serif;
@@ -141,35 +174,47 @@
 
   }
 }
-.cartCounts{
+
+.cartCounts {
   margin-top: 30px;
   font-weight: 400;
   font-size: 24px;
-  span{
+
+  span {
     font-weight: 700;
   }
-  .total{
+
+  .total {
     font-weight: 500;
   }
-  div{
+
+  div {
     padding-bottom: 10px;
   }
 }
-.cartCountsOverlay{
+
+.cartCountsOverlay {
   margin-top: 30px;
   font-weight: 400;
   font-size: 16px;
-  span{
+
+  span {
+    padding-left: 150px;
     font-weight: 700;
+
   }
-  .total{
+
+  .total {
+    padding-left: 20px;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
   }
-  div{
-    padding-bottom: 10px;
+
+  div {
+    padding-bottom: 30px;
   }
 }
+
 .button {
   grid-area: button;
   text-transform: uppercase;
@@ -184,10 +229,12 @@
   background-color: #5ECE7B;
   border: none;
 }
-.button:hover{
+
+.button:hover {
   border: 2px solid white;
 }
-.productOverlay{
+
+.productOverlay {
   display: grid;
   font-family: 'Raleway', sans-serif;
   grid-template-areas:
@@ -195,26 +242,28 @@
           "name counter img"
           "price counter img"
           "attributes counter img";
-  grid-template-columns: 10fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
   max-height: 280px;
   max-width: 325px;
-  padding-top: 30px;
   padding-bottom: 30px;
-  .img{
+
+  .img {
     position: relative;
     margin: auto;
     width: 120px;
     height: 190px;
+    object-fit: cover;
     grid-area: img;
   }
-  .attrHeader{
+
+  .attrHeader {
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    margin-bottom: 5px;
   }
-  .buttonImg1{
+
+  .buttonImg1 {
     position: relative;
     width: 24px;
     height: 24px;
@@ -222,7 +271,8 @@
     border: none;
     left: 260px;
     bottom: 85px;
-    img{
+
+    img {
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -230,10 +280,12 @@
       height: 11px;
     }
   }
-  .buttonImg1:hover{
+
+  .buttonImg1:hover {
     background: black;
   }
-  .buttonImg2{
+
+  .buttonImg2 {
     position: relative;
     width: 24px;
     height: 24px;
@@ -241,7 +293,8 @@
     border: none;
     left: 1180px;
     bottom: 85px;
-    img{
+
+    img {
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -249,50 +302,76 @@
       height: 11px;
     }
   }
-  .buttonImg2:hover{
+
+  .buttonImg2:hover {
     background: black;
   }
 
-  .counter{
+  .counter {
     grid-area: counter;
-    .buttonCount{
+
+    .buttonCount {
       border: 1px solid black;
-      margin-top: 20px;
-      margin-bottom: 40px;
+      margin-right: 8px;
+      position: relative;
+      top: 13px;
       width: 24px;
       height: 24px;
       background: none;
     }
-    .countText{
+
+    .buttonCountMinus {
+      border: 1px solid black;
+      margin-right: 8px;
+      position: relative;
+      bottom: 13px;
+      width: 24px;
+      height: 24px;
+      background: none;
+    }
+
+    .buttonCount:hover {
+      background-color: #8D8F9A;
+    }
+
+    .countText {
       display: block;
+      position: relative;
+      left: 7px;
       font-size: 16px;
       margin-bottom: 75px;
       margin-top: 75px;
     }
   }
-  .brand{
+
+  .brand {
+    position: relative;
+    top:10px;
     grid-area: brand;
     font-size: 16px;
     font-weight: 300;
     align-content: start;
   }
-  .name{
+
+  .name {
     grid-area: name;
     font-size: 16px;
     font-weight: 300;
   }
-  .price{
+
+  .price {
     grid-area: price;
     font-family: 'Raleway', sans-serif;
     font-weight: 500;
     font-size: 16px;
     font-style: oblique;
   }
-  .attributes{
+
+  .attributes {
     grid-area: attributes;
     font-size: 24px;
 
-    button{
+    button {
       min-height: 16px;
       min-width: 16px;
       border: none;
@@ -300,7 +379,8 @@
       margin-bottom: 10px;
       box-shadow: 1px 8px 15px rgba(0.2, 0.2, 0.2, 0.2);
     }
-    .active{
+
+    .active {
       display: inline-block;
       min-width: 24px;
       height: 24px;
@@ -310,14 +390,17 @@
       background-color: black;
       color: white;
     }
-    .activeColor{
+
+    .activeColor {
       margin-right: 8px;
       border: 2px solid #5ECE7B;
     }
-    .passiveColor{
+
+    .passiveColor {
       margin-right: 8px;
     }
-    .passive{
+
+    .passive {
       display: inline-block;
       min-width: 24px;
       height: 24px;
@@ -330,19 +413,5 @@
     }
 
   }
-  .cartCounts{
-    margin-top: 30px;
-    font-weight: 400;
-    font-size: 40px;
-    span{
-      font-weight: 300;
-    }
-    .total{
-      font-family: 'Roboto', sans-serif;
-      font-weight: 500;
-    }
-    div{
-      padding-bottom: 10px;
-    }
-  }
+
 }
