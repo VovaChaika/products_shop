@@ -12,54 +12,69 @@
 
   .mainImg {
     grid-area: img;
-    width: 600px;
-    height: 500px;
+    object-fit: cover;
+    width: 610px;
+    height: 510px;
   }
-  .attrHeader{
+
+  .mainImg:hover {
+  }
+
+  .attrHeader {
     font-size: 18px;
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 700;
     margin-bottom: 5px;
   }
+
   .commonImg {
     width: 80px;
     height: 80px;
   }
-  .brand{
+
+  .brand {
     grid-area: brand;
     font-size: 30px;
     font-weight: 600;
   }
-  .name{
+
+  .name {
     position: relative;
     grid-area: name;
     font-size: 30px;
     font-weight: 400;
   }
-  .priceUSD{
+
+  .priceUSD {
     grid-area: price;
     font-size: 18px;
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 700;
     margin-bottom: 10px;
-    span{
+
+    span {
       font-size: 24px;
     }
   }
-  .attribute{
+
+  .attribute {
     grid-area: attributes;
-    button{
+
+    button {
       min-height: 32px;
       min-width: 32px;
       border: none;
       margin-right: 10px;
       margin-bottom: 10px;
-      box-shadow: 1px 8px 15px rgba(0.2, 0.2, 0.2, 0.2);
+      position: relative;
     }
-    button:hover{
+
+    button:hover {
       border: 1px solid #5ECE7B;
+      bottom: 1px;
     }
-    .active{
+
+    .active {
       width: 63px;
       height: 45px;
       font-weight: 400;
@@ -67,14 +82,23 @@
       background-color: black;
       color: white;
     }
-    .activeColor{
-      margin-right: 8px;
-      border: 2px solid #5ECE7B;
+
+    .whiteColor {
+      border: 1px solid black;
+      bottom: 1px;
     }
-    .passiveColor{
+
+    .activeColor {
+      margin-right: 8px;
+      border: 1px solid #5ECE7B;
+      bottom: 1px;
+    }
+
+    .passiveColor {
       margin-right: 8px;
     }
-    .passive{
+
+    .passive {
       width: 63px;
       height: 45px;
       font-family: 'Source Sans Pro', sans-serif;
@@ -85,6 +109,7 @@
       background-color: white;
     }
   }
+
   .button {
     grid-area: button;
     width: 290px;
@@ -96,14 +121,17 @@
     background-color: #5ECE7B;
     border: none;
   }
-  .button:disabled{
+
+  .button:disabled {
     background-color: grey;
     opacity: 0.22;
   }
-  .button:hover{
+
+  .button:hover {
     border: 2px solid white;
   }
-  .description{
+
+  .description {
     margin-top: 40px;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;

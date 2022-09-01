@@ -1,11 +1,11 @@
-import logo from '../assets/img/logo.png'
-import cart from '../assets/img/Empty Cart.png'
-import addIcon from '../assets/img/AddIcon.png'
-import arrowUp from '../assets/img/arrowUp.png'
-import arrowDown from '../assets/img/arrowDown.png'
-import blackCircle from '../assets/img/blackCircle.png'
-import arrowLeft from '../assets/img/arrowLeft.png'
-import arrowRight from '../assets/img/arrowRight.png'
+import logo from '../assets/img/logo.svg'
+import cart from '../assets/img/Empty Cart.svg'
+import addIcon from '../assets/img/AddIcon.svg'
+import arrowUp from '../assets/img/arrowUp.svg'
+import arrowDown from '../assets/img/arrowDown.svg'
+import blackCircle from '../assets/img/blackCircle.svg'
+import arrowLeft from '../assets/img/arrowLeft.svg'
+import arrowRight from '../assets/img/arrowRight.svg'
 
 export default {
   logo,

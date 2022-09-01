@@ -13,10 +13,15 @@ import {
 class ContentItemsContainer extends React.Component {
     state = {
         isVisible: false,
+        isButton: false,
     };
     setIsVisible = (isVisible) => {
         this.setState({ isVisible: isVisible });
     }
+    setIsButton = (isVisible) => {
+        this.setState({ isButton: isVisible });
+    }
+
 
     render() {
         return <>
@@ -33,6 +38,9 @@ class ContentItemsContainer extends React.Component {
 
                 setIsVisible={this.setIsVisible}
                 isVisible={this.state.isVisible}
+
+                setIsButton={this.setIsButton}
+                isButton={this.state.isButton}
 
                 setDefaultAttributes={this.props.setDefaultAttributes}
                 clearValues={this.props.clearValues}

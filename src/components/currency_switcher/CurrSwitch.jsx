@@ -1,45 +1,49 @@
-import React from 'react';
+import React, {Component} from 'react';
 import styles from "./CurrSwitch.module.scss"
 import {images} from "../../constants";
 
-const CurrSwitch = (props) => {
-    let arr = []
-    return (
-        <>
-            {props.isVisibleCurrSwitch &&
-                (<div className={styles.position} onMouseLeave={() => {
-                    props.setIsVisibleCurrSwitch(false)
-                }
-                }>
-                    {props.stateProduct?.usualArr?.map((product) => {
-                        Object.assign(product.prices, {id: product.id})
-                        arr.push(product.prices)
-                    })
+class CurrSwitch extends Component{
+    render() {
+        let arr = []
+        return (
+            <>
+                {this.props.isVisibleCurrSwitch &&
+                    (<div className={styles.position} onMouseLeave={() => {
+                        this.props.setIsVisibleCurrSwitch(false)
                     }
-                    {
-                        arr?.[0].map((label) => {
-                            return <div><button onClick={() => {
-                                props.changeArrayCurrency(arr, label.currency.label)
-                                props.changeCurrency(label.currency.symbol)
-                                props.setLabel(label.currency.label)
-                            }}>
-                                {label.currency.symbol} {label.currency.label}
-                            </button></div>
+                    }>
+                        {this.props.stateProduct?.usualArr?.map((product) => {
+                            Object.assign(product.prices, {id: product.id})
+                            arr.push(product.prices)
                         })
-                    }
-                </div>)
-            }
-            <button className={styles.button} onMouseMove={() => {
-                if (props.isVisibleCart === true) {
-                    props.setIsVisibleCart(false)
-                    props.setVisible(false)
+                        }
+                        {
+                            arr?.[0].map((label) => {
+                                return <div><button onClick={() => {
+                                    this.props.changeArrayCurrency(arr, label.currency.label)
+                                    this.props.changeCurrency(label.currency.symbol)
+                                    this.props.setLabel(label.currency.label)
+                                }}>
+                                    {label.currency.symbol} {label.currency.label}
+                                </button></div>
+                            })
+                        }
+                    </div>)
                 }
-                props.setIsVisibleCurrSwitch(true)
-            }}>
-                {props.state.currency}<img src={props.isVisibleCurrSwitch ? images.arrowUp : images.arrowDown} alt=""/>
-            </button>
-        </>
-    );
+                <button className={styles.button} onMouseMove={() => {
+                    if (this.props.isVisibleCart === true) {
+                        this.props.setIsVisibleCart(false)
+                        this.props.setVisible(false)
+                    }
+                    this.props.setIsVisibleCurrSwitch(true)
+                }}>
+                    {this.props.state.currency}<img src={this.props.isVisibleCurrSwitch ? images.arrowUp : images.arrowDown} alt=""/>
+                </button>
+            </>
+        );
+    }
+
+
 };
 
 export default CurrSwitch;

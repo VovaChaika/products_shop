@@ -15,12 +15,17 @@ class ItemContainer extends React.Component {
         this.props.clearValues()
     }
     state = {
-        mssg: ""
+        mssg: "",
+        mainImg: 0
+
     };
 
     handleClick = () => {
         this.setState({ mssg: "Hi there!" });
     };
+    setMainImg = (index) => {
+        this.setState({mainImg: index})
+    }
 
     render() {
         return <div>
@@ -35,6 +40,10 @@ class ItemContainer extends React.Component {
                 changeTotalCost={this.props.changeTotalCost}
 
                 handleClick={this.handleClick}
+                setMainImg={this.setMainImg}
+
+                mainImg={this.state.mainImg}
+
                 setDefaultAttributes={this.props.setDefaultAttributes}
             />
         </div>

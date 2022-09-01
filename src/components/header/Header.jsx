@@ -1,39 +1,40 @@
-import React from 'react';
+import React, {Component} from 'react';
 import styles from "./Header.module.scss"
 import {images} from "../../constants"
 import {NavLink} from "react-router-dom";
 import CartOverlayContainer from "../cart/cart_overlay/CartOverlayContainer";
 import CurrSwitchContainer from "../currency_switcher/CurrSwitchContainer";
 
-const Header = (props) => {
-    function changeVisibility() {
-        if (props.isVisibleCurrSwitch === true || props.isVisibleCart === true) {
-            props.setIsVisibleCurrSwitch(false)
-            props.setIsVisibleCart(false)
-            props.setVisible(false)
+class Header extends Component{
+    render() {
+        function changeVisibility() {
+            if (this.props.isVisibleCurrSwitch === true || this.props.isVisibleCart === true) {
+                this.props.setIsVisibleCurrSwitch(false)
+                this.props.setIsVisibleCart(false)
+                this.props.setVisible(false)
+            }
         }
-    }
 
-    return (
-        <div className={styles.header_grid} onClick={()=>{
-            props.setIsVisibleCurrSwitch(false)
-        }}>
+        return (
+            <div className={styles.header_grid} onClick={()=>{
+                this.props.setIsVisibleCurrSwitch(false)
+            }}>
                 <span onMouseMove={() => {
                     changeVisibility()
                 }}>
                      <span className={styles.categories}>
                          {
-                             props.locations.map((location) => {
+                             this.props.locations.map((location) => {
                                      return <NavLink
-                                         className={location.name === props.headerUrl ? styles.activeUrl : styles.category}
+                                         className={location.name === this.props.headerUrl ? styles.activeUrl : styles.category}
                                          onClick={
                                              () => {
-                                                 props.switchPath(location.name)
+                                                 this.props.switchPath(location.name)
 
                                              }
                                          }
                                          onMouseLeave={() => {
-                                             props.splitHeaderUrl(window.location.pathname.split('/content/'))
+                                             this.props.splitHeaderUrl(window.location.pathname.split('/content/'))
                                          }
                                          } to={`/content/${location.name}`}>{location.name}</NavLink>
                                  }
@@ -43,29 +44,32 @@ const Header = (props) => {
 
 
                 </span>
-            <img className={styles.logo} src={images.logo} alt=""/>
+                <img className={styles.logo} src={images.logo} alt=""/>
 
-            <span className={styles.currency}><CurrSwitchContainer
-                setVisible={props.setVisible}
-                isVisible={props.isVisible}
+                <span className={styles.currency}><CurrSwitchContainer
+                    setVisible={this.props.setVisible}
+                    isVisible={this.props.isVisible}
 
-                isVisibleCurrSwitch={props.isVisibleCurrSwitch}
-                setIsVisibleCurrSwitch={props.setIsVisibleCurrSwitch}
-                isVisibleCart={props.isVisibleCart}
-                setIsVisibleCart={props.setIsVisibleCart}
-            /></span>
+                    isVisibleCurrSwitch={this.props.isVisibleCurrSwitch}
+                    setIsVisibleCurrSwitch={this.props.setIsVisibleCurrSwitch}
+                    isVisibleCart={this.props.isVisibleCart}
+                    setIsVisibleCart={this.props.setIsVisibleCart}
+                /></span>
 
-            <span className={styles.cart}><CartOverlayContainer
-                setVisible={props.setVisible}
-                isVisible={props.isVisible}
+                <span className={styles.cart}><CartOverlayContainer
+                    setVisible={this.props.setVisible}
+                    isVisible={this.props.isVisible}
 
-                isVisibleCart={props.isVisibleCart}
-                setIsVisibleCart={props.setIsVisibleCart}
-                isVisibleCurrSwitch={props.isVisibleCurrSwitch}
-                setIsVisibleCurrSwitch={props.setIsVisibleCurrSwitch}
-            /></span>
-        </div>
-    );
+                    isVisibleCart={this.props.isVisibleCart}
+                    setIsVisibleCart={this.props.setIsVisibleCart}
+                    isVisibleCurrSwitch={this.props.isVisibleCurrSwitch}
+                    setIsVisibleCurrSwitch={this.props.setIsVisibleCurrSwitch}
+                /></span>
+            </div>
+        );
+    }
+
+
 };
 
 export default Header;
