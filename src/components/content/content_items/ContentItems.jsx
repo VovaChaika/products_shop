@@ -13,7 +13,6 @@ class ContentItems extends Component{
                 return this.props.product?.gallery?.[1]
             } else return this.props.product?.gallery?.[0]
         }
-
         let pricesArr
 
         return (
@@ -67,14 +66,8 @@ class ContentItems extends Component{
                                                      pricesArr = pricesAll
                                                  }
                                              })
-                                             this.props.setDefaultAttributes(this.props.product.attributes)
-                                             let localProduct = structuredClone(this.props.product)
-                                             this.props.addFullProduct(localProduct,
-                                                 Object.assign(localProduct, {count: 1}),
-                                                 Object.assign(localProduct, {chosenValues: this.props.stateCart.chosenValues}),
-                                                 Object.assign(localProduct, {identifier: this.props.stateCart.identifiers}))
+                                             this.props.getDefaultAttr(this.props.product.id)
                                              this.props.changeTotalCost(pricesArr, true)
-                                             this.props.clearValues()
                                          }
                                      }
                                  }src={images.addIcon}></img>

@@ -3,12 +3,18 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {
     increaseCountCreator,
-    changeTotalCostCreator, deleteFromCartCreator
+    changeTotalCostCreator, deleteFromCartCreator, clearCartProductsCreator
 } from "../../../redux/cart_reducer";
 import CartItem from "./CartItem";
+import {getCartItems, getDefaultAttrApi} from "../../../api/api";
 
 
 class CartItemContainer extends React.Component {
+    componentDidMount() {
+            this.props.clearCartProducts()
+            this.props.state.product?.map((product) => this.props.getCartItems(product));
+    };
+
     state = {
         mssg: "",
         isChange: 0,
@@ -52,35 +58,30 @@ class CartItemContainer extends React.Component {
     };
 
     render() {
-        let prices
-        this.props.state.product.map((searchCurr) => {
-            searchCurr.prices.map((curr) => {
-                if (curr.currency.symbol === this.props.stateCurr.currency) {
-                    prices = curr
-                }
-            })
-        })
-        return <>
-            <CartItem state={this.props.state}
-                      stateProduct={this.props.stateProduct}
-                      stateCurr={this.props.stateCurr}
+        if ( this.props.state.product2 !== undefined){
+            return <>
+                <CartItem state={this.props.state}
+                          stateProduct={this.props.stateProduct}
+                          stateCurr={this.props.stateCurr}
 
-                      increaseCount={this.props.increaseCount}
-                      handleClick={this.handleClick}
-                      changeTotalCost={this.props.changeTotalCost}
-                      deleteFromCart={this.props.deleteFromCart}
+                          increaseCount={this.props.increaseCount}
+                          handleClick={this.handleClick}
+                          changeTotalCost={this.props.changeTotalCost}
+                          deleteFromCart={this.props.deleteFromCart}
 
-                      imgSrc={this.state.imgSrc}
-                      productId={this.state.productId}
-                      doChange={this.state.doChange}
-                      isChange={this.state.isChange}
-                      imgIndex={this.state.imgIndex}
-                      setIsChange={this.setIsChange}
-                      prices={prices}
+                          imgSrc={this.state.imgSrc}
+                          productId={this.state.productId}
+                          doChange={this.state.doChange}
+                          isChange={this.state.isChange}
+                          imgIndex={this.state.imgIndex}
+                          setIsChange={this.setIsChange}
 
-                      isCartOverlay={this.props.isCartOverlay}
-            />
-        </>
+                          isCartOverlay={this.props.isCartOverlay}
+
+                          getCartItems={this.props.getCartItems}
+                />
+            </>
+        }
     }
 
 }
@@ -103,6 +104,12 @@ let mapDispatchToProps = (dispatch) => {
         },
         deleteFromCart: () => {
             dispatch(deleteFromCartCreator())
+        },
+        getCartItems: (id) => {
+            dispatch(getCartItems(id))
+        },
+        clearCartProducts: ()=>{
+            dispatch(clearCartProductsCreator())
         },
 
     }

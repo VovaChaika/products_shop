@@ -8,6 +8,7 @@ import {
     clearValuesCreator,
     setDefaultAttributesCreator
 } from "../../../redux/cart_reducer";
+import {getDefaultAttrApi} from "../../../api/api";
 
 
 class ContentItemsContainer extends React.Component {
@@ -46,6 +47,8 @@ class ContentItemsContainer extends React.Component {
                 clearValues={this.props.clearValues}
                 addFullProduct={this.props.addFullProduct}
                 changeTotalCost={this.props.changeTotalCost}
+
+                getDefaultAttr={this.props.getDefaultAttr}
             />
         </>
     }
@@ -70,6 +73,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         changeTotalCost: (price, plus) => {
             dispatch(changeTotalCostCreator(price, plus))
+        },
+        getDefaultAttr: (productId)=>{
+            dispatch(getDefaultAttrApi(productId))
         },
     }
 }

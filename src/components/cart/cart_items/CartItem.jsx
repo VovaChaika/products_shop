@@ -1,35 +1,43 @@
 import React, {Component} from 'react';
 import styles from "./CartItem.module.scss"
 import {images} from "../../../constants";
+import {getCartItems} from "../../../api/api";
 
 class CartItem extends Component{
     render() {
         let prices
-        this.props.state.product.map((searchCurr) => {
-            searchCurr.prices.map((curr) => {
+        this.props.state.product2.map((searchCurr) => {
+            searchCurr?.prices?.map((curr) => {
+                console.log(curr)
                 if (curr.currency.symbol === this.props.stateCurr.currency) {
                     prices = curr
                 }
             })
         })
+        console.log(prices)
         let pricesArr
         let tax = this.props.state.priceCount[prices?.currency.label] * 0.21 ?
             (this.props.state.priceCount[prices?.currency.label] * 0.21) : 0;
 
-
+        console.log( this.props.state.product2)
+        console.log( this.props.state.product)
         return (
             <>
                 {
-                    this.props.state.product?.map((product) => {
-                        let prices
-
-                        this.props.stateCurr.currencyArr?.map((price) => {
-                            if (price.id === product.id) {
-                                prices = price
-                            }
-                        })
+                    this.props.state.product2?.map((product, index) => {
+                        console.log(index)
+                        console.log(product)
+                        console.log( this.props.state.product[index]?.chosenValues)
+                        // let prices
+                        // // this.props.getCartItems(product.id)
+                        // this.props.stateCurr.currencyArr?.map((price) => {
+                        //     if (price.id === product.id) {
+                        //         prices = price
+                        //     }
+                        // })
                         let price = prices?.amount
                         let symbol = prices?.currency?.symbol
+                        console.log(price)
                         this.props.stateProduct?.priceArr?.map((pricesAll) => {
                             //here if comes an array
                             if (pricesAll?.id === product.id) {
@@ -76,11 +84,8 @@ class CartItem extends Component{
                                             let result = []
                                             product.chosenValues?.map((values) => {
                                                 result.push({value: values.value, index: values.index, name: values.name})
-
                                             })
                                             if (attribute.name === "Color") {
-                                                let a = items.value === '#FFFFFF' ? 'alert("ssyyyyka")' : ''
-                                                console.log(a)
                                                 return <button
                                                     className={[result.find(res => res.value === items.value) !== undefined
                                                         ? styles.activeColor : styles.passiveColor,

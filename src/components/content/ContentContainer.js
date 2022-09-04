@@ -2,12 +2,22 @@ import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import Content from "./Content";
-import {getProducts} from "../../redux/content_reducer";
+import {getProducts, refreshShortProductsCreator} from "../../redux/content_reducer";
 import {changeArrayCurrencyCreator} from "../../redux/currency_reducer";
+import {_productsIdArr, getProductsApi} from "../../api/api";
 
 class ContentContainer extends React.Component {
+    componentDidMount() {
+        //get short product for category page
+        this.props.refreshShortProducts()
+        _productsIdArr.map((productId)=>{
+            this.props.getProductsApi(productId)
+        })
+    }
+
     state = {
         isSetCurrency: 0,
+        //in stock
         isVisibleButton: false
     };
     handleCurrency = (arr) => {
@@ -27,7 +37,7 @@ class ContentContainer extends React.Component {
                 arr.push(product.prices)
             })
             this.handleCurrency(arr)
-            let filteredProducts = this.props.state.usualArr.filter((product) => {
+            let filteredProducts = this.props.state.allProductsShort.filter((product) => {
                     if (this.props.state.path !== "") {
                         if (this.props.state.path === "all") {
                             return product
@@ -35,7 +45,7 @@ class ContentContainer extends React.Component {
                     } else return product
                 }
             )
-        if (this.props.stateCurr.currencyArr.length !== 0){
+        if (this.props.stateCurr.currencyArr.length !== 0 ){
             return <>
                 <Content filteredProducts={filteredProducts}
 
@@ -70,6 +80,12 @@ let mapDispatchToProps = (dispatch) => {
         getProducts: () => {
             dispatch(getProducts())
         },
+        getProductsApi: (productId) => {
+            dispatch(getProductsApi(productId))
+        },
+        refreshShortProducts: () => {
+            dispatch(refreshShortProductsCreator())
+        }
     }
 }
 

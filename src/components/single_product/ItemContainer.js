@@ -5,15 +5,19 @@ import {compose} from "redux";
 import {
     addChosenValuesCreator,
     addFullProductCreator, changeTotalCostCreator,
-    clearValuesCreator, setDefaultAttributesCreator,
+    clearValuesCreator,
 } from "../../redux/cart_reducer";
 import Item from "./Item";
+import {getItemApi} from "../../api/api";
 
 
 class ItemContainer extends React.Component {
     componentDidMount() {
+        const detectId = window.location.pathname.split('/item/')
+        this.props.getItemApi(detectId[1])
         this.props.clearValues()
     }
+
     state = {
         mssg: "",
         mainImg: 0
@@ -28,25 +32,26 @@ class ItemContainer extends React.Component {
     }
 
     render() {
-        return <div>
-            <Item
-                state={this.props.state}
-                stateCurr={this.props.stateCurr}
-                stateCart={this.props.stateCart}
+        if (this.props.stateItem.currentItem.length !== 0){
+            return <div>
+                <Item
+                    state={this.props.state}
+                    stateCurr={this.props.stateCurr}
+                    stateCart={this.props.stateCart}
+                    product={this.props.stateItem.currentItem}
 
-                addFullProduct={this.props.addFullProduct}
-                addChosenValues={this.props.addChosenValues}
-                clearValues={this.props.clearValues}
-                changeTotalCost={this.props.changeTotalCost}
+                    addFullProduct={this.props.addFullProduct}
+                    addChosenValues={this.props.addChosenValues}
+                    clearValues={this.props.clearValues}
+                    changeTotalCost={this.props.changeTotalCost}
 
-                handleClick={this.handleClick}
-                setMainImg={this.setMainImg}
+                    handleClick={this.handleClick}
+                    setMainImg={this.setMainImg}
 
-                mainImg={this.state.mainImg}
-
-                setDefaultAttributes={this.props.setDefaultAttributes}
-            />
-        </div>
+                    mainImg={this.state.mainImg}
+                />
+            </div>
+        }
     }
 
 }
@@ -55,7 +60,8 @@ let mapStateToProps = (state) => {
     return {
         stateCurr: state.currency,
         stateCart: state.cart,
-        state: state.products
+        state: state.products,
+        stateItem: state.item
     }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -72,8 +78,8 @@ let mapDispatchToProps = (dispatch) => {
         changeTotalCost: (price, plus) => {
             dispatch(changeTotalCostCreator(price, plus))
         },
-        setDefaultAttributes: (attributes) => {
-            dispatch(setDefaultAttributesCreator(attributes))
+        getItemApi: (itemData) => {
+            dispatch(getItemApi(itemData))
         },
 
     }

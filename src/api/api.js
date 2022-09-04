@@ -1,3 +1,12 @@
+import {
+    addFullProductCreator,
+    addFullProductCreator2,
+    clearValuesCreator,
+    setDefaultAttributesCreator
+} from "../redux/cart_reducer";
+import {getItemCreator} from "../redux/item_reducer";
+import {getShortProducts, getShortProductsCreator} from "../redux/content_reducer";
+
 export let state = []
 
 export const _productsArr = [
@@ -221,16 +230,16 @@ query AirTag{
 ]
 export const testAPI = [
     {
-    GetProductsAPI:
-        fetch('http://localhost:4000/', {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: [JSON.stringify({
-                query: _productsArr[0]
-            })],
-        }),
+        GetProductsAPI:
+            fetch('http://localhost:4000/', {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: [JSON.stringify({
+                    query: _productsArr[0]
+                })],
+            }),
 
-},
+    },
     {
         GetProductsAPI:
             fetch('http://localhost:4000/', {
@@ -319,6 +328,162 @@ export const locationsAPI = {
         }),
     }),
 }
+
+export const getCartItems = (product) => {
+    return (dispatch) => {
+        fetch('http://localhost:4000/', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                query:
+                    `
+query AirTag{
+  product(id: "${product.id}") {
+    id
+    name
+    prices {
+      currency {
+        label
+        symbol
+      }
+      amount
+    }
+    attributes{
+    name
+      items{
+        value
+        displayValue
+      }
+    }
+    gallery
+    category
+    inStock
+    description
+    brand
+  }
+}
+`
+            }),
+        }).then(res => res.json()).then(data=>{
+            dispatch(addFullProductCreator2(data.data.product, product.chosenValues, product.count, product.identifier))
+        })
+    }
+}
+
+
+export const getItemApi = (productId) => {
+    console.log(productId)
+    return (dispatch) => {
+        fetch('http://localhost:4000/', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                query:
+                    `
+query AirTag{
+  product(id: "${productId}") {
+    id
+    name
+    prices {
+      currency {
+        label
+        symbol
+      }
+      amount
+    }
+    attributes{
+    name
+      items{
+        value
+        displayValue
+      }
+    }
+    gallery
+    category
+    inStock
+    description
+    brand
+  }
+}
+`
+            }),
+        }).then(res => res.json()).then(data=>{
+            console.log(data)
+            dispatch(getItemCreator(data.data.product))
+        })
+    }
+}
+
+export const getProductsApi = (productId) => {
+        return (dispatch) => {
+            fetch('http://localhost:4000/', {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    query:
+                        `
+query AddProducts{
+  product(id: "${productId}") {
+    id
+    name
+    gallery
+    category
+    inStock
+    brand
+  }
+}
+`
+                }),
+            }).then(res => res.json()).then(data=>{
+                console.log(data.data.product)
+                dispatch(getShortProductsCreator(data.data.product))
+            })
+        }
+
+}
+export const getDefaultAttrApi = (productId) => {
+    return (dispatch) => {
+        fetch('http://localhost:4000/', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                query:
+                    `
+query AddProducts{
+  product(id: "${productId}") {
+    attributes{
+    name
+      items{
+        value
+        displayValue
+      }
+    }
+  }
+}
+`
+            }),
+        }).then(res => res.json()).then(data=>{
+            console.log(data.data.product.attributes)
+            dispatch(setDefaultAttributesCreator(data.data.product.attributes))
+            let localProduct = {id: productId}
+            dispatch(addFullProductCreator(localProduct,
+                Object.assign(localProduct, {count: 1})))
+            dispatch(clearValuesCreator())
+        })
+    }
+
+}
+export const _productsIdArr = [
+    `huarache-x-stussy-le`,
+    `jacket-canada-goosee`,
+    `ps-5`,
+    `xbox-series-s`,
+    `apple-imac-2021`,
+    `apple-iphone-12-pro`,
+    `apple-airpods-pro`,
+    `apple-airtag`,
+]
+
 
 
 
