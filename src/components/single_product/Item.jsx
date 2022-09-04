@@ -20,8 +20,9 @@ class Item extends Component {
             }
         })
         let myIndex = 0
-        let price = prices?.amount
-        let symbol = prices?.currency?.symbol
+        const price = this.props.stateCurr.chosenPrices.filter((id)=>{
+            return id.id === this.props.product.id
+        })
 
         return <div className={styles.display}>
             <div className={styles.brand}>{this.props.product.brand}</div>
@@ -29,7 +30,8 @@ class Item extends Component {
 
             <div className={styles.priceUSD}>
                 <div>Price:</div>
-                <span>{symbol} {price}</span>
+                <span>{prices?.currency?.symbol
+                } {prices?.amount}</span>
             </div>
 
             <div className={styles.description} style={{overflowX: 'hidden'}}

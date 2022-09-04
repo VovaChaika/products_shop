@@ -1,4 +1,5 @@
 .button{
+    cursor:pointer;
     font-family: 'Raleway', sans-serif;
     font-weight: 500;
     display: inline-block;
@@ -26,7 +27,7 @@
 .position{
     z-index: 888;
     position: absolute;
-    top: 65px;
+    top: 75px;
     button{
         font-family: 'Raleway', sans-serif;
         font-weight: 500;

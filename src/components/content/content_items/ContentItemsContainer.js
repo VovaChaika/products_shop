@@ -25,17 +25,22 @@ class ContentItemsContainer extends React.Component {
 
 
     render() {
+        const price = this.props.stateCurr.chosenPrices.filter((price)=>{
+            return price.id === this.props.product.id
+        })
         return <>
             <ContentItems
                 product={this.props.product}
 
                 state={this.props.state}
                 stateCart={this.props.stateCart}
+                stateCurr={this.props.stateCurr}
 
                 isVisibleButton={this.props.isVisibleButton}
                 setIsVisibleButton={this.props.setIsVisibleButton}
 
                 priceValues={this.props.priceValues}
+                price={price[0]}
 
                 setIsVisible={this.setIsVisible}
                 isVisible={this.state.isVisible}
@@ -58,6 +63,7 @@ let mapStateToProps = (state) => {
     return {
         state: state.products,
         stateCart: state.cart,
+        stateCurr: state.currency
     }
 }
 let mapDispatchToProps = (dispatch) => {

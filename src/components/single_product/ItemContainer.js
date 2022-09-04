@@ -8,7 +8,7 @@ import {
     clearValuesCreator,
 } from "../../redux/cart_reducer";
 import Item from "./Item";
-import {getItemApi} from "../../api/api";
+import {getItemApi, getProductPriceApi} from "../../api/api";
 
 
 class ItemContainer extends React.Component {
@@ -16,12 +16,14 @@ class ItemContainer extends React.Component {
         const detectId = window.location.pathname.split('/item/')
         this.props.getItemApi(detectId[1])
         this.props.clearValues()
+        console.log(this.props.stateCurr.chosenLabel)
+        this.setPrice(this.props.stateCurr.chosenLabel)
     }
 
     state = {
         mssg: "",
-        mainImg: 0
-
+        mainImg: 0,
+        price: {}
     };
 
     handleClick = () => {
@@ -29,6 +31,14 @@ class ItemContainer extends React.Component {
     };
     setMainImg = (index) => {
         this.setState({mainImg: index})
+    }
+    setPrice = (label) => {
+        const price = this.props.product?.prices.filter((price)=>{
+            console.log(price.currency.label)
+            console.log(label)
+            return price.currency.label === label
+        })
+        this.setState({price: price?.[0]})
     }
 
     render() {
@@ -49,6 +59,8 @@ class ItemContainer extends React.Component {
                     setMainImg={this.setMainImg}
 
                     mainImg={this.state.mainImg}
+                    price={this.state.price}
+                    setPrice={this.setPrice}
                 />
             </div>
         }
@@ -80,6 +92,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         getItemApi: (itemData) => {
             dispatch(getItemApi(itemData))
+        },
+        getProductPriceApi: (productId) => {
+            dispatch(getProductPriceApi(productId))
         },
 
     }

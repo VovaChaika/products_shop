@@ -30,7 +30,6 @@ export const content_reducer = (state = initialState, action) => {
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
         case GET_PRODUCTS_SHORT:
-            console.log(state.allProductsShort)
             return {...state, allProductsShort: [...state.allProductsShort, action.shortProduct]}
         case REFRESH_PRODUCTS_SHORT:
             return {...state, allProductsShort: []}

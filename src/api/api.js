@@ -6,6 +6,13 @@ import {
 } from "../redux/cart_reducer";
 import {getItemCreator} from "../redux/item_reducer";
 import {getShortProducts, getShortProductsCreator} from "../redux/content_reducer";
+import {
+    setChosenPricesCreator,
+    setChosenValuesCreator,
+    setCurrenciesCreator,
+    setCurrentProductPriceCreator,
+    updateCurrentPriceCreator
+} from "../redux/currency_reducer";
 
 export let state = []
 
@@ -364,7 +371,7 @@ query AirTag{
 }
 `
             }),
-        }).then(res => res.json()).then(data=>{
+        }).then(res => res.json()).then(data => {
             dispatch(addFullProductCreator2(data.data.product, product.chosenValues, product.count, product.identifier))
         })
     }
@@ -407,7 +414,7 @@ query AirTag{
 }
 `
             }),
-        }).then(res => res.json()).then(data=>{
+        }).then(res => res.json()).then(data => {
             console.log(data)
             dispatch(getItemCreator(data.data.product))
         })
@@ -415,13 +422,13 @@ query AirTag{
 }
 
 export const getProductsApi = (productId) => {
-        return (dispatch) => {
-            fetch('http://localhost:4000/', {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    query:
-                        `
+    return (dispatch) => {
+        fetch('http://localhost:4000/', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                query:
+                    `
 query AddProducts{
   product(id: "${productId}") {
     id
@@ -433,12 +440,11 @@ query AddProducts{
   }
 }
 `
-                }),
-            }).then(res => res.json()).then(data=>{
-                console.log(data.data.product)
-                dispatch(getShortProductsCreator(data.data.product))
-            })
-        }
+            }),
+        }).then(res => res.json()).then(data => {
+            dispatch(getShortProductsCreator(data.data.product))
+        })
+    }
 
 }
 export const getDefaultAttrApi = (productId) => {
@@ -462,7 +468,7 @@ query AddProducts{
 }
 `
             }),
-        }).then(res => res.json()).then(data=>{
+        }).then(res => res.json()).then(data => {
             console.log(data.data.product.attributes)
             dispatch(setDefaultAttributesCreator(data.data.product.attributes))
             let localProduct = {id: productId}
@@ -472,6 +478,82 @@ query AddProducts{
         })
     }
 
+}
+export const getCurrenciesApi = () => {
+    return (dispatch) => {
+        fetch('http://localhost:4000/', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                query:
+                    `
+query currencies{
+  currencies{
+    label
+    symbol
+  }
+}
+`
+            }),
+        }).then(res => res.json()).then(data => {
+            dispatch(setCurrenciesCreator(data.data.currencies))
+            dispatch(setChosenValuesCreator(data.data.currencies[0]))
+            console.log(data.data.currencies)
+        })
+    }
+}
+
+export const getProductPriceApi = (productId) => {
+    return (dispatch) => {
+        fetch('http://localhost:4000/', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                query:
+                    `
+                query GetProdPrice{
+            product(id: "${productId}") {
+                prices {
+      currency {
+        label
+        symbol
+      }
+      amount
+    }
+            }
+        }
+        `
+            }),
+        }).then(res => res.json()).then(data => {
+            dispatch(setCurrentProductPriceCreator(data.data.product.prices, productId))
+        })
+    }
+}
+export const getPricesApi = (productId) => {
+    return (dispatch) => {
+        fetch('http://localhost:4000/', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                query:
+                    `
+                query GetProdPrice{
+            product(id: "${productId}") {
+                prices {
+      currency {
+        label
+        symbol
+      }
+      amount
+    }
+            }
+        }
+        `
+            }),
+        }).then(res => res.json()).then(data => {
+            dispatch(setChosenPricesCreator(data.data.product.prices, productId))
+        })
+    }
 }
 export const _productsIdArr = [
     `huarache-x-stussy-le`,

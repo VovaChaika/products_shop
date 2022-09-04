@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styles from "./CurrSwitch.module.scss"
 import {images} from "../../constants";
+import {_productsIdArr} from "../../api/api";
 
 class CurrSwitch extends Component{
     render() {
@@ -15,14 +16,22 @@ class CurrSwitch extends Component{
                         })
                         }
                         {
-                            arr?.[0].map((label) => {
+                            this.props.state.currencies?.map((currency) => {
                                 return <div><button onClick={() => {
                                     this.props.setIsVisibleCurrSwitch(false)
-                                    this.props.changeArrayCurrency(arr, label.currency.label)
-                                    this.props.changeCurrency(label.currency.symbol)
-                                    this.props.setLabel(label.currency.label)
+                                    this.props.changeArrayCurrency(arr, currency.label)
+                                    this.props.changeCurrency(currency.symbol)
+                                    this.props.setLabel(currency.label)
+
+                                    //newOnclick
+                                    this.props.setChosenValues(currency)
+                                    this.props.updateCurrentPrice()
+                                    _productsIdArr.map((productId)=>{
+                                        console.log( this.props.stateProduct.allProductsShort)
+                                        this.props.getPrices(productId)
+                                    })
                                 }}>
-                                    {label.currency.symbol} {label.currency.label}
+                                    {currency.symbol} {currency.label}
                                 </button></div>
                             })
                         }
@@ -36,7 +45,7 @@ class CurrSwitch extends Component{
                     this.props.setIsVisibleCurrSwitch(true)
                     console.log(this.props.isVisibleCurrSwitch)
                 }}>
-                    {this.props.state.currency}<img src={this.props.isVisibleCurrSwitch ? images.arrowUp : images.arrowDown} alt=""/>
+                    {this.props.state.chosenSymbol}<img src={this.props.isVisibleCurrSwitch ? images.arrowUp : images.arrowDown} alt=""/>
                 </button>
             </>
         );

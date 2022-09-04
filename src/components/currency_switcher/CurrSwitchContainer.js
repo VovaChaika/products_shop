@@ -4,9 +4,10 @@ import {compose} from "redux";
 
 import {
     changeArrayCurrencyCreator,
-    changeCurrencyCreator, setLabelCreator
+    changeCurrencyCreator, setChosenValuesCreator, setLabelCreator, updateCurrentPriceCreator
 } from "../../redux/currency_reducer";
 import CurrSwitch from "./CurrSwitch";
+import {_productsIdArr, getPricesApi} from "../../api/api";
 
 
 class CurrSwitchContainer extends React.Component {
@@ -30,6 +31,12 @@ class CurrSwitchContainer extends React.Component {
                         changeArrayCurrency={this.props.changeArrayCurrency}
                         changeCurrency={this.props.changeCurrency}
                         setLabel={this.props.setLabel}
+
+
+                        //new
+                        setChosenValues={this.props.setChosenValues}
+                        getPrices={this.props.getPrices}
+                        updateCurrentPrice={this.props.updateCurrentPrice}
             />
         </>
     }
@@ -53,6 +60,15 @@ let mapDispatchToProps = (dispatch) => {
         setLabel: (label) => {
             dispatch(setLabelCreator(label))
         },
+        setChosenValues: (chosenValues) => {
+            dispatch(setChosenValuesCreator(chosenValues))
+        },
+        getPrices: (productId) => {
+            dispatch(getPricesApi(productId))
+        },
+        updateCurrentPrice: () => {
+            dispatch(updateCurrentPriceCreator())
+        }
     }
 }
 

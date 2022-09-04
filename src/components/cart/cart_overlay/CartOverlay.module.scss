@@ -3,6 +3,7 @@
   background: white;
   width: 30px;
   height: 30px;
+  cursor:pointer;
   img{
     height: 20px;
     width: 20px;
@@ -31,6 +32,7 @@
 .position{
   position: fixed;
   display: block;
+  top: 121px;
   z-index: 999999;
   right: 100px;
   text-decoration: none;
@@ -48,8 +50,12 @@
     text-decoration: none;
     text-transform: uppercase;
     color: white;
+    cursor:pointer;
   }
   .bag{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 140px;
     height: 50px;
     font-family: 'Raleway', sans-serif;
@@ -60,12 +66,14 @@
     border: 1px solid black;
     margin-right: 12px;
     margin-left: 12px;
+    cursor:pointer;
+    text-decoration: none;
 
-    .navbar{
-      display: block;
+    span{
       text-decoration: none;
       text-transform: uppercase;
       color: black;
+
     }
   }
   .button:hover{
@@ -73,10 +81,12 @@
   }
   .bag:hover{
     background-color: black;
-    .navbar{
+    span{
       color: white;
+      border-color: black;
     }
   }
+
 }
 .headerPosition{
   margin-bottom: 30px;

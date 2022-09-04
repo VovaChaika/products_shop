@@ -11,11 +11,11 @@ import AppContainer from "./AppContainer";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
         <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
+            {/*<PersistGate loading={null} persistor={persistor}>*/}
                 <BrowserRouter>
                     <AppContainer/>
                 </BrowserRouter>
-            </PersistGate>
+            {/*</PersistGate>*/}
         </Provider>
 );
 

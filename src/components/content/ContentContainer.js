@@ -3,15 +3,17 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import Content from "./Content";
 import {getProducts, refreshShortProductsCreator} from "../../redux/content_reducer";
-import {changeArrayCurrencyCreator} from "../../redux/currency_reducer";
-import {_productsIdArr, getProductsApi} from "../../api/api";
+import {changeArrayCurrencyCreator, updateCurrentPriceCreator} from "../../redux/currency_reducer";
+import {_productsIdArr, getProductPriceApi, getProductsApi} from "../../api/api";
 
 class ContentContainer extends React.Component {
     componentDidMount() {
         //get short product for category page
         this.props.refreshShortProducts()
+        this.props.updateCurrentPrice()
         _productsIdArr.map((productId)=>{
             this.props.getProductsApi(productId)
+            // this.props.getProductPriceApi(productId)
         })
     }
 
@@ -30,7 +32,6 @@ class ContentContainer extends React.Component {
         this.setState({ isVisibleButton: isVisible });
     }
     render() {
-
             let arr = []
             this.props.state?.usualArr?.map((product) => {
                 Object.assign(product.prices, {id: product.id})
@@ -57,6 +58,8 @@ class ContentContainer extends React.Component {
 
                          setIsVisibleButton={this.setIsVisibleButton}
                          isVisibleButton={this.state.isVisibleButton}
+
+                         getProductPrice={this.props.getProductPriceApi}
                 />
             </>
         }
@@ -85,6 +88,12 @@ let mapDispatchToProps = (dispatch) => {
         },
         refreshShortProducts: () => {
             dispatch(refreshShortProductsCreator())
+        },
+        getProductPriceApi: (productId, currentLabel) => {
+            dispatch(getProductPriceApi(productId, currentLabel))
+        },
+        updateCurrentPrice: ( ) => {
+            dispatch(updateCurrentPriceCreator( ))
         }
     }
 }

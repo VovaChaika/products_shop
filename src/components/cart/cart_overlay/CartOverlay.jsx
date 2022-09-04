@@ -12,8 +12,15 @@ class CartOverlay extends Component{
                     if (this.props.isVisibleCurrSwitch === true) {
                         this.props.setIsVisibleCurrSwitch(false)
                     }
-                    this.props.setIsVisibleCart(true)
-                    this.props.setVisible(true)
+                    if (this.props.isVisibleCart === true){
+                        this.props.setIsVisibleCart(false)
+                        this.props.setVisible(false)
+                    }
+                    else {
+                        this.props.setIsVisibleCart(true)
+                        this.props.setVisible(true)
+                    }
+
                 }}
 
                 >
@@ -34,15 +41,13 @@ class CartOverlay extends Component{
                         <div className={styles.cart_items}>
                             <CartItemContainer isCartOverlay={true}/>
                         </div>
-                        <button className={styles.bag}>
-                            <NavLink to={'/cart'} className={styles.navbar} onClick={() => {
-                                this.props.setIsVisibleCart(false)
-                                this.props.setVisible(false)
-                            }
-                            }>
-                                view bag
-                            </NavLink>
-                        </button>
+                        <NavLink to={'/cart'} className={styles.bag} onClick={()=>{
+                            this.props.setIsVisibleCart(false)
+                            this.props.setVisible(false)
+                        }
+                        }>
+                                <span>view bag</span>
+                        </NavLink>
                         <button className={styles.button} onClick={() => {
                             this.props.setIsVisibleCart(false)
                             this.props.setVisible(false)

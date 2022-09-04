@@ -21,7 +21,7 @@ let reducers = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, reducers)
 
-let store = createStore(persistedReducer , applyMiddleware(thunkMiddleware))
+let store = createStore(reducers , applyMiddleware(thunkMiddleware))
 
 export const persistor = persistStore(store)
 export default store

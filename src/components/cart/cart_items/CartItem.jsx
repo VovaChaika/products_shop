@@ -35,9 +35,8 @@ class CartItem extends Component{
                         //         prices = price
                         //     }
                         // })
-                        let price = prices?.amount
-                        let symbol = prices?.currency?.symbol
-                        console.log(price)
+                        let price = prices.amount
+                        let symbol = prices.currency.symbol
                         this.props.stateProduct?.priceArr?.map((pricesAll) => {
                             //here if comes an array
                             if (pricesAll?.id === product.id) {

@@ -3,12 +3,20 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import App from "./App";
 import {getLocations, getProducts} from "./redux/content_reducer";
+import {_productsIdArr, getCurrenciesApi, getPricesApi} from "./api/api";
+import {updateCurrentPriceCreator} from "./redux/currency_reducer";
 
 class AppContainer extends React.Component {
 
     componentDidMount() {
         this.props.getProducts()
         this.props.getLocations()
+        this.props.getCurrencies()
+        //temp
+        this.props.updateCurrentPrice()
+        _productsIdArr.map((productId)=>{
+            this.props.getPrices(productId)
+        })
     }
     state = {
         isVisible: false,
@@ -59,6 +67,16 @@ let mapDispatchToProps = (dispatch) => {
         getLocations: () => {
             dispatch(getLocations())
         },
+        getCurrencies: () => {
+            dispatch(getCurrenciesApi())
+        },
+        getPrices: (productId) => {
+            dispatch(getPricesApi(productId))
+        },
+        updateCurrentPrice: () => {
+            dispatch(updateCurrentPriceCreator())
+        }
+
     }
 }
 
