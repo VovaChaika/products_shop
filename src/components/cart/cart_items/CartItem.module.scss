@@ -229,7 +229,11 @@
 
 .button {
   grid-area: button;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-transform: uppercase;
+  text-decoration: none;
   width: 280px;
   height: 50px;
   margin-bottom: 10px;
@@ -239,7 +243,6 @@
   font-size: 16px;
   color: white;
   background-color: #5ECE7B;
-  border: none;
 }
 
 .button:hover {
@@ -352,6 +355,9 @@
     }
 
     .buttonCount:hover {
+      background-color: #8D8F9A;
+    }
+    .buttonCountMinus:hover {
       background-color: #8D8F9A;
     }
 

@@ -16,14 +16,11 @@ class ItemContainer extends React.Component {
         const detectId = window.location.pathname.split('/item/')
         this.props.getItemApi(detectId[1])
         this.props.clearValues()
-        console.log(this.props.stateCurr.chosenLabel)
-        this.setPrice(this.props.stateCurr.chosenLabel)
     }
 
     state = {
         mssg: "",
         mainImg: 0,
-        price: {}
     };
 
     handleClick = () => {
@@ -32,17 +29,13 @@ class ItemContainer extends React.Component {
     setMainImg = (index) => {
         this.setState({mainImg: index})
     }
-    setPrice = (label) => {
-        const price = this.props.product?.prices.filter((price)=>{
-            console.log(price.currency.label)
-            console.log(label)
-            return price.currency.label === label
-        })
-        this.setState({price: price?.[0]})
-    }
+
 
     render() {
         if (this.props.stateItem.currentItem.length !== 0){
+            const price = this.props.stateItem.currentItem.prices.filter((price)=>{
+                return price.currency.label === this.props.stateCurr.chosenLabel
+            })
             return <div>
                 <Item
                     state={this.props.state}
@@ -59,8 +52,7 @@ class ItemContainer extends React.Component {
                     setMainImg={this.setMainImg}
 
                     mainImg={this.state.mainImg}
-                    price={this.state.price}
-                    setPrice={this.setPrice}
+                    price={price[0]}
                 />
             </div>
         }

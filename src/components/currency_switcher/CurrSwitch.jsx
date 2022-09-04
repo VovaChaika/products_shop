@@ -42,8 +42,12 @@ class CurrSwitch extends Component{
                         this.props.setIsVisibleCart(false)
                         this.props.setVisible(false)
                     }
-                    this.props.setIsVisibleCurrSwitch(true)
-                    console.log(this.props.isVisibleCurrSwitch)
+                    if (this.props.isVisibleCurrSwitch === true){
+                        this.props.setIsVisibleCurrSwitch(false)
+                    }
+                    else{
+                        this.props.setIsVisibleCurrSwitch(true)
+                    }
                 }}>
                     {this.props.state.chosenSymbol}<img src={this.props.isVisibleCurrSwitch ? images.arrowUp : images.arrowDown} alt=""/>
                 </button>

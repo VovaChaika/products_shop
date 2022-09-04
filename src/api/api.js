@@ -5,13 +5,12 @@ import {
     setDefaultAttributesCreator
 } from "../redux/cart_reducer";
 import {getItemCreator} from "../redux/item_reducer";
-import {getShortProducts, getShortProductsCreator} from "../redux/content_reducer";
+import {getShortProductsCreator} from "../redux/content_reducer";
 import {
     setChosenPricesCreator,
     setChosenValuesCreator,
     setCurrenciesCreator,
     setCurrentProductPriceCreator,
-    updateCurrentPriceCreator
 } from "../redux/currency_reducer";
 
 export let state = []
@@ -387,7 +386,7 @@ export const getItemApi = (productId) => {
             body: JSON.stringify({
                 query:
                     `
-query AirTag{
+query GetItemApi{
   product(id: "${productId}") {
     id
     name
@@ -437,6 +436,13 @@ query AddProducts{
     category
     inStock
     brand
+    prices {
+      currency {
+        label
+        symbol
+      }
+      amount
+    }
   }
 }
 `
@@ -497,8 +503,6 @@ query currencies{
             }),
         }).then(res => res.json()).then(data => {
             dispatch(setCurrenciesCreator(data.data.currencies))
-            dispatch(setChosenValuesCreator(data.data.currencies[0]))
-            console.log(data.data.currencies)
         })
     }
 }

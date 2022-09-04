@@ -3,35 +3,36 @@ import styles from "./Item.module.scss";
 
 class Item extends Component {
     render() {
-        let a = window.location.pathname
-        let b = a.split('/item/')
+        //OLD PRICE CREATOR
+        // let a = window.location.pathname
+        // let b = a.split('/item/')
 
-        let prices
-        this.props.stateCurr.currencyArr?.map((price) => {
-            if (price.id === b[1]) {
-                prices = price
-            }
-        })
-        let pricesArr
-        this.props.state.priceArr.map((pricesAll) => {
-            //here if comes an array
-            if (pricesAll?.id === b[1]) {
-                pricesArr = pricesAll
-            }
-        })
+        // let prices
+        // this.props.stateCurr.currencyArr?.map((price) => {
+        //     if (price.id === b[1]) {
+        //         prices = price
+        //     }
+        // })
+        // let pricesArr
+        // this.props.state.priceArr.map((pricesAll) => {
+        //     //here if comes an array
+        //     if (pricesAll?.id === b[1]) {
+        //         pricesArr = pricesAll
+        //     }
+        // })
         let myIndex = 0
-        const price = this.props.stateCurr.chosenPrices.filter((id)=>{
-            return id.id === this.props.product.id
-        })
 
         return <div className={styles.display}>
             <div className={styles.brand}>{this.props.product.brand}</div>
             <div className={styles.name}>{this.props.product.name}</div>
 
             <div className={styles.priceUSD}>
+                {/*<div>Price:</div>*/}
+                {/*<span>{prices?.currency?.symbol*/}
+                {/*} {prices?.amount}</span>*/}
                 <div>Price:</div>
-                <span>{prices?.currency?.symbol
-                } {prices?.amount}</span>
+                <span>{this.props.price?.currency?.symbol
+                } {this.props.price?.amount}</span>
             </div>
 
             <div className={styles.description} style={{overflowX: 'hidden'}}
@@ -116,7 +117,7 @@ class Item extends Component {
                             Object.assign(localProduct, {count: 1}),
                             Object.assign(localProduct, {chosenValues: this.props.stateCart.chosenValues}),
                             Object.assign(localProduct, {identifier: this.props.stateCart.identifiers}))
-                        this.props.changeTotalCost(pricesArr, true)
+                        this.props.changeTotalCost(this.props.product.prices, true)
                         this.props.clearValues()
                     }
                     }>{this.props.product.inStock ? 'ADD TO CART' : 'OUT OF STOCK'}

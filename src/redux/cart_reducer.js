@@ -14,7 +14,8 @@ let initialState = {
     chosenValues: [],
     identifiers: 0,
     productsCount: 0,
-    priceCount: {USD: 0, GBP: 0, JPY: 0, AUD: 0, RUB: 0},
+    priceCount: {},
+    priceCount2: {},
 }
 
 export const cart_reducer = (state = initialState, action) => {
@@ -140,73 +141,24 @@ export const cart_reducer = (state = initialState, action) => {
 
         //save price after product add
         case TOTAL_COST_CHANGE:
+            console.log(action.price)
             action.price?.map((currency) => {
-                console.log(currency
-                )
-                if (action.plus === false) {
-                    switch (currency.currency?.label) {
-                        case "USD":
-                            if (state.priceCount.USD < currency.amount) {
-                                state.priceCount.USD = 0
-                                break
-                            }
-                            state.priceCount.USD -= currency.amount;
-                            break
-                        case "GBP":
-                            if (state.priceCount.GBP < currency.amount) {
-                                state.priceCount.GBP = 0
-                                break
-                            }
-                            state.priceCount.GBP -= currency.amount;
-                            break
-                        case "JPY":
-                            if (state.priceCount.JPY < currency.amount) {
-                                state.priceCount.JPY = 0
-                                break
-                            }
-                            state.priceCount.JPY -= currency.amount;
-                            break
-                        case "AUD":
-                            if (state.priceCount.AUD < currency.amount) {
-                                state.priceCount.AUD = 0
-                                break
-                            }
-                            state.priceCount.AUD -= currency.amount;
-                            break
-                        case "RUB":
-                            if (state.priceCount.RUB < currency.amount) {
-                                state.priceCount.RUB = 0
-                                break
-                            }
-                            state.priceCount.RUB -= currency.amount;
-                            break
-                        default :
-                            if (state.priceCount.USD < action.price?.[0]) {
-                                state.priceCount.USD = 0
-                                break
-                            }
-                            state.priceCount.USD -= action.price?.[0]
-                    }
-                } else switch (currency.currency?.label) {
-                    case "USD":
-                        state.priceCount.USD += currency.amount;
-                        break
-                    case "GBP":
-                        state.priceCount.GBP += currency.amount;
-                        break
-                    case "JPY":
-                        state.priceCount.JPY += currency.amount;
-                        break
-                    case "AUD":
-                        state.priceCount.AUD += currency.amount;
-                        break
-                    case "RUB":
-                        state.priceCount.RUB += currency.amount;
-                        break
-                    default :
-                        state.priceCount.USD += action.price?.[0]
+                if (!state.priceCount.hasOwnProperty(currency.currency?.label)){
+                    state.priceCount[currency.currency?.label] = 0
+                    console.log(state.priceCount)
                 }
-
+                if (action.plus === false) {
+                    console.log(state.priceCount[currency.currency?.label])
+                    console.log(currency.amount*2)
+                    if (state.priceCount[currency.currency?.label]*2 <= currency.amount) {
+                        state.priceCount[currency.currency?.label] = 0
+                    }
+                    state.priceCount[currency.currency?.label] -= currency.amount
+                }
+                else {
+                    console.log(state.priceCount)
+                    state.priceCount[currency.currency?.label] += currency.amount
+                }
             })
             break
         case DELETE_FROM_CART:

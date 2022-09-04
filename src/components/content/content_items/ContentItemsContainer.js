@@ -25,9 +25,9 @@ class ContentItemsContainer extends React.Component {
 
 
     render() {
-        const price = this.props.stateCurr.chosenPrices.filter((price)=>{
-            return price.id === this.props.product.id
-        })
+        const price = this.props.product.prices.filter((price)=>{
+                return price.currency.label === this.props.stateCurr.chosenLabel
+            })
         return <>
             <ContentItems
                 product={this.props.product}

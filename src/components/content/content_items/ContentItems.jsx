@@ -39,10 +39,10 @@ class ContentItems extends Component {
                             </div>
 
                             <div className={styles.price}>{
-                                this.props.priceValues.currency.symbol
+                                this.props.price?.currency?.symbol
                             }
                                 {
-                                    this.props.priceValues.amount
+                                    this.props.price?.amount
                                 }
                             </div>
                             {this.props.isVisible && this.props.isVisibleButton &&
@@ -64,8 +64,9 @@ class ContentItems extends Component {
                                                          pricesArr = pricesAll
                                                      }
                                                  })
+
                                                  this.props.getDefaultAttr(this.props.product.id)
-                                                 this.props.changeTotalCost(pricesArr, true)
+                                                 this.props.changeTotalCost(this.props.product.prices, true)
                                              }
                                          }
                                      } src={images.addIcon}></img>

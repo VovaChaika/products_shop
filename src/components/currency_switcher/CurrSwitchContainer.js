@@ -7,7 +7,7 @@ import {
     changeCurrencyCreator, setChosenValuesCreator, setLabelCreator, updateCurrentPriceCreator
 } from "../../redux/currency_reducer";
 import CurrSwitch from "./CurrSwitch";
-import {_productsIdArr, getPricesApi} from "../../api/api";
+import {getPricesApi} from "../../api/api";
 
 
 class CurrSwitchContainer extends React.Component {

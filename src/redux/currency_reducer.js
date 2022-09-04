@@ -16,8 +16,8 @@ let initialState = {
     currencies: [],
     singleItemPrice: {},
     chosenPrices: [],
-    chosenLabel: '',
-    chosenSymbol: ''
+    chosenLabel: 'USD',
+    chosenSymbol: '$'
 }
 
 export const currency_reducer = (state = initialState, action) => {
