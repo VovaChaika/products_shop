@@ -6,7 +6,7 @@ import {
     changeTotalCostCreator, deleteFromCartCreator, clearCartProductsCreator
 } from "../../../redux/cart_reducer";
 import CartItem from "./CartItem";
-import {getCartItems, getDefaultAttrApi} from "../../../api/api";
+import {getCartItems} from "../../../api/api";
 
 
 class CartItemContainer extends React.Component {
@@ -16,17 +16,11 @@ class CartItemContainer extends React.Component {
     };
 
     state = {
-        mssg: "",
-        isChange: 0,
         doChange: [],
         imgIndex: 0,
         imgSrc: [],
-        productId: 'huarache-x-stussy-le',
     };
 
-    handleClick = () => {
-        this.setState({mssg: "Hi there!"});
-    };
     setIsChange = (increase, length, product, imgSrc) => {
         if (increase === true) {
             if (this.state.imgIndex !== length - 1) {
@@ -58,27 +52,20 @@ class CartItemContainer extends React.Component {
     };
 
     render() {
-        if ( this.props.state.product2 !== undefined){
+        if ( this.props.state.productFinal !== undefined){
             return <>
                 <CartItem state={this.props.state}
-                          stateProduct={this.props.stateProduct}
                           stateCurr={this.props.stateCurr}
 
                           increaseCount={this.props.increaseCount}
-                          handleClick={this.handleClick}
                           changeTotalCost={this.props.changeTotalCost}
                           deleteFromCart={this.props.deleteFromCart}
 
                           imgSrc={this.state.imgSrc}
-                          productId={this.state.productId}
                           doChange={this.state.doChange}
-                          isChange={this.state.isChange}
-                          imgIndex={this.state.imgIndex}
                           setIsChange={this.setIsChange}
 
                           isCartOverlay={this.props.isCartOverlay}
-
-                          getCartItems={this.props.getCartItems}
                 />
             </>
         }
@@ -91,7 +78,6 @@ let mapStateToProps = (state) => {
     return {
         state: state.cart,
         stateCurr: state.currency,
-        stateProduct: state.products
     }
 }
 let mapDispatchToProps = (dispatch) => {

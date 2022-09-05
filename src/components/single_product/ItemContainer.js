@@ -8,7 +8,7 @@ import {
     clearValuesCreator,
 } from "../../redux/cart_reducer";
 import Item from "./Item";
-import {getItemApi, getProductPriceApi} from "../../api/api";
+import {getItemApi} from "../../api/api";
 
 
 class ItemContainer extends React.Component {
@@ -38,8 +38,6 @@ class ItemContainer extends React.Component {
             })
             return <div>
                 <Item
-                    state={this.props.state}
-                    stateCurr={this.props.stateCurr}
                     stateCart={this.props.stateCart}
                     product={this.props.stateItem.currentItem}
 
@@ -50,8 +48,8 @@ class ItemContainer extends React.Component {
 
                     handleClick={this.handleClick}
                     setMainImg={this.setMainImg}
-
                     mainImg={this.state.mainImg}
+
                     price={price[0]}
                 />
             </div>
@@ -64,7 +62,6 @@ let mapStateToProps = (state) => {
     return {
         stateCurr: state.currency,
         stateCart: state.cart,
-        state: state.products,
         stateItem: state.item
     }
 }
@@ -84,9 +81,6 @@ let mapDispatchToProps = (dispatch) => {
         },
         getItemApi: (itemData) => {
             dispatch(getItemApi(itemData))
-        },
-        getProductPriceApi: (productId) => {
-            dispatch(getProductPriceApi(productId))
         },
 
     }

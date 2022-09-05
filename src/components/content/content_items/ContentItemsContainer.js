@@ -2,12 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import ContentItems from "./ContentItems";
-import {
-    addFullProductCreator,
-    changeTotalCostCreator,
-    clearValuesCreator,
-    setDefaultAttributesCreator
-} from "../../../redux/cart_reducer";
+import {changeTotalCostCreator} from "../../../redux/cart_reducer";
 import {getDefaultAttrApi} from "../../../api/api";
 
 
@@ -17,29 +12,24 @@ class ContentItemsContainer extends React.Component {
         isButton: false,
     };
     setIsVisible = (isVisible) => {
-        this.setState({ isVisible: isVisible });
+        this.setState({isVisible: isVisible});
     }
     setIsButton = (isVisible) => {
-        this.setState({ isButton: isVisible });
+        this.setState({isButton: isVisible});
     }
 
 
     render() {
-        const price = this.props.product.prices.filter((price)=>{
-                return price.currency.label === this.props.stateCurr.chosenLabel
-            })
+        const price = this.props.product.prices.filter((price) => {
+            return price.currency.label === this.props.chosenLabel
+        })
         return <>
             <ContentItems
                 product={this.props.product}
 
-                state={this.props.state}
-                stateCart={this.props.stateCart}
-                stateCurr={this.props.stateCurr}
-
                 isVisibleButton={this.props.isVisibleButton}
                 setIsVisibleButton={this.props.setIsVisibleButton}
 
-                priceValues={this.props.priceValues}
                 price={price[0]}
 
                 setIsVisible={this.setIsVisible}
@@ -48,9 +38,6 @@ class ContentItemsContainer extends React.Component {
                 setIsButton={this.setIsButton}
                 isButton={this.state.isButton}
 
-                setDefaultAttributes={this.props.setDefaultAttributes}
-                clearValues={this.props.clearValues}
-                addFullProduct={this.props.addFullProduct}
                 changeTotalCost={this.props.changeTotalCost}
 
                 getDefaultAttr={this.props.getDefaultAttr}
@@ -61,26 +48,15 @@ class ContentItemsContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        state: state.products,
-        stateCart: state.cart,
-        stateCurr: state.currency
+        chosenLabel: state.currency.chosenLabel
     }
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        setDefaultAttributes: (attributes) => {
-            dispatch(setDefaultAttributesCreator(attributes))
-        },
-        clearValues: () => {
-            dispatch(clearValuesCreator())
-        },
-        addFullProduct: (product) => {
-            dispatch(addFullProductCreator(product))
-        },
         changeTotalCost: (price, plus) => {
             dispatch(changeTotalCostCreator(price, plus))
         },
-        getDefaultAttr: (productId)=>{
+        getDefaultAttr: (productId) => {
             dispatch(getDefaultAttrApi(productId))
         },
     }

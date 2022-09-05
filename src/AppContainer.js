@@ -2,21 +2,14 @@ import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import App from "./App";
-import {getLocations, getProducts} from "./redux/content_reducer";
-import {_productsIdArr, getCurrenciesApi, getPricesApi} from "./api/api";
-import {updateCurrentPriceCreator} from "./redux/currency_reducer";
+import {getLocations} from "./redux/content_reducer";
+import {getCurrenciesApi} from "./api/api";
 
 class AppContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getProducts()
         this.props.getLocations()
         this.props.getCurrencies()
-        //temp
-        this.props.updateCurrentPrice()
-        _productsIdArr.map((productId)=>{
-            this.props.getPrices(productId)
-        })
     }
     state = {
         isVisible: false,
@@ -34,12 +27,8 @@ class AppContainer extends React.Component {
     }
 
     render() {
-
-        if (this.props.state.isFetching===false){
             return <>
-                <App state={this.props.state}
-
-                     setIsVisible={this.setIsVisible}
+                <App setIsVisible={this.setIsVisible}
                      isVisible={this.state.isVisible}
 
                      isVisibleCurrSwitch={this.state.isVisibleCurrSwitch}
@@ -49,34 +38,22 @@ class AppContainer extends React.Component {
                      setIsVisibleCart={this.setIsVisibleCart}
                 />
             </>
-        }
     }
 
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = () => {
     return {
-        state: state.products,
     }
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        getProducts: () => {
-            dispatch(getProducts())
-        },
         getLocations: () => {
             dispatch(getLocations())
         },
         getCurrencies: () => {
             dispatch(getCurrenciesApi())
         },
-        getPrices: (productId) => {
-            dispatch(getPricesApi(productId))
-        },
-        updateCurrentPrice: () => {
-            dispatch(updateCurrentPriceCreator())
-        }
-
     }
 }
 

@@ -1,5 +1,5 @@
 const ADD_FULL_PRODUCT = "ADD_FULL_PRODUCT"
-const ADD_FULL_PRODUCT2 = "ADD_FULL_PRODUCT2"
+const ADD_PRODUCT_FINAL = "ADD_PRODUCT_FINAL"
 const ADD_CHOSEN_VALUES = "ADD_CHOSEN_VALUES"
 const CLEAR_VALUES = "CLEAR_VALUES"
 const CHANGE_COUNT_BY_ID = "CHANGE_COUNT_BY_ID"
@@ -10,12 +10,11 @@ const CLEAR_PRODUCTS = 'CLEAR_PRODUCTS'
 
 let initialState = {
     product: [],
-    product2: [],
+    productFinal: [],
     chosenValues: [],
     identifiers: 0,
     productsCount: 0,
     priceCount: {},
-    priceCount2: {},
 }
 
 export const cart_reducer = (state = initialState, action) => {
@@ -43,14 +42,14 @@ export const cart_reducer = (state = initialState, action) => {
                 return {...state, product: [...state.product, action.product], identifiers: state.identifiers + 1}
             }
             break;
-        case ADD_FULL_PRODUCT2:
+        case ADD_PRODUCT_FINAL:
             let addProduct = structuredClone(action.product)
             Object.assign(addProduct, {count: action.count})
             Object.assign(addProduct, {chosenValues: action.chosenValues})
             Object.assign(addProduct, {identifier: action.identifier})
-            return {...state, product2: [...state.product2, addProduct]}
+            return {...state, productFinal: [...state.productFinal, addProduct]}
         case CLEAR_PRODUCTS:
-            return {...state, product2: []}
+            return {...state, productFinal: []}
         case CLEAR_VALUES:
             return {...state, chosenValues: []}
         case ADD_CHOSEN_VALUES:
@@ -79,7 +78,6 @@ export const cart_reducer = (state = initialState, action) => {
             }
             break
         case SET_DEFAULT_ATTRIBUTES:
-            console.log(state.chosenValues)
             if (state.chosenValues.length === 0) {
                 let allAttrArr = []
                 action.attributes.map((allAttributes) => {
@@ -96,7 +94,6 @@ export const cart_reducer = (state = initialState, action) => {
                     allAttrArr.push(attr)
                 })
                 action.attributes.map((allAttributes) => {
-                    console.log(allAttributes)
                     state.chosenValues.map((attr) => {
                         if (attr.name !== allAttributes.name) {
                             let chosenValue = {
@@ -112,20 +109,20 @@ export const cart_reducer = (state = initialState, action) => {
             return {...state}
         case CHANGE_COUNT_BY_ID:
             let saveProductPlace = 0
-            state.product2?.map((product) => {
+            state.productFinal?.map((product) => {
                 if (product.identifier === action.identifier) {
                     if (action.increase === true) {
                         state.productsCount = state.productsCount + 2
-                        return {...state, product2: [...state.product2, state.product2[saveProductPlace].count += 1],
+                        return {...state, productFinal: [...state.productFinal, state.productFinal[saveProductPlace].count += 1],
                             product: [...state.product, state.product[saveProductPlace].count += 1]}
                     } else if (action.increase === false) {
                         if (product.count === 1) {
-                            state.product2.splice(saveProductPlace, 1)
+                            state.productFinal.splice(saveProductPlace, 1)
                             state.product.splice(saveProductPlace, 1)
 
 
                         } else {
-                            return {...state, product2: [...state.product2, state.product2[saveProductPlace].count -= 1],
+                            return {...state, productFinal: [...state.productFinal, state.productFinal[saveProductPlace].count -= 1],
                                 product: [...state.product, state.product[saveProductPlace].count -= 1]}
                         }
 
@@ -141,22 +138,17 @@ export const cart_reducer = (state = initialState, action) => {
 
         //save price after product add
         case TOTAL_COST_CHANGE:
-            console.log(action.price)
             action.price?.map((currency) => {
                 if (!state.priceCount.hasOwnProperty(currency.currency?.label)){
                     state.priceCount[currency.currency?.label] = 0
-                    console.log(state.priceCount)
                 }
                 if (action.plus === false) {
-                    console.log(state.priceCount[currency.currency?.label])
-                    console.log(currency.amount*2)
                     if (state.priceCount[currency.currency?.label]*2 <= currency.amount) {
                         state.priceCount[currency.currency?.label] = 0
                     }
                     state.priceCount[currency.currency?.label] -= currency.amount
                 }
                 else {
-                    console.log(state.priceCount)
                     state.priceCount[currency.currency?.label] += currency.amount
                 }
             })
@@ -179,7 +171,7 @@ export const addFullProductCreator = (product) => {
     return {type: ADD_FULL_PRODUCT, product}
 }
 export const addFullProductCreator2 = (product, chosenValues, count, identifier) => {
-    return {type: ADD_FULL_PRODUCT2, product, chosenValues, count, identifier}
+    return {type: ADD_PRODUCT_FINAL, product, chosenValues, count, identifier}
 }
 export const clearCartProductsCreator = () => {
     return {type: CLEAR_PRODUCTS}

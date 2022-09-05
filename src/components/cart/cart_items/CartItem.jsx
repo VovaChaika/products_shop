@@ -1,50 +1,19 @@
 import React, {Component} from 'react';
 import styles from "./CartItem.module.scss"
 import {images} from "../../../constants";
-import {getCartItems} from "../../../api/api";
 import {NavLink} from "react-router-dom";
 
 class CartItem extends Component {
     render() {
-        // let prices
-        // this.props.state.product2.map((searchCurr) => {
-        //     searchCurr?.prices?.map((curr) => {
-        //         console.log(curr)
-        //         if (curr.currency.label === this.props.stateCurr.chosenLabel) {
-        //             prices = curr
-        //         }
-        //     })
-        // })
-        let pricesArr
-
         let totalCount = this.props.state.priceCount[this.props.stateCurr.chosenLabel]
-
-        let tax = totalCount * 0.21 ?
-            (totalCount * 0.21): 0;
-
+        let tax = totalCount * 0.21 ? (totalCount * 0.21) : 0;
         return (
             <>
                 {
-                    this.props.state.product2?.map((product, index) => {
+                    this.props.state.productFinal?.map((product, index) => {
                         const price = product.prices.filter((price) => {
                             return price.currency.label === this.props.stateCurr.chosenLabel
                         })
-
-                        // let prices
-                        // // this.props.getCartItems(product.id)
-                        // this.props.stateCurr.currencyArr?.map((price) => {
-                        //     if (price.id === product.id) {
-                        //         prices = price
-                        //     }
-                        // })
-                        // this.props.stateProduct?.priceArr?.map((pricesAll) => {
-                        //     //here if comes an array
-                        //     if (pricesAll?.id === product.id) {
-                        //         pricesArr = pricesAll
-                        //     }
-                        // })
-                        // console.log(pricesArr)
-                        // console.log(product.prices)
                         return <div className={!this.props.isCartOverlay ? styles.product : styles.productOverlay}>
 
                             <div className={styles.info_block}>
@@ -59,7 +28,6 @@ class CartItem extends Component {
                                 <button className={styles.buttonCount} onClick={() => {
                                     this.props.increaseCount(product.identifier, true)
                                     this.props.changeTotalCost(product.prices, true)
-                                    this.props.handleClick()
                                 }
                                 }>+
                                 </button>
@@ -69,7 +37,6 @@ class CartItem extends Component {
                                 <button className={styles.buttonCountMinus} onClick={() => {
                                     this.props.increaseCount(product.identifier, false)
                                     this.props.changeTotalCost(product.prices, false)
-                                    this.props.handleClick()
                                 }
                                 }>-
                                 </button>
@@ -154,25 +121,19 @@ class CartItem extends Component {
 
                 {/*//BUTTON ORDER & EMPTY CART*/}
                 {!this.props.isCartOverlay &&
-                    <NavLink to={'/content/all'} className={styles.button} onClick={()=>{
+                    <NavLink to={'/content/all'} className={styles.button} onClick={() => {
                         alert("Ordered!")
                         this.props.deleteFromCart()
                     }
                     }>
                         <span>Order</span>
                     </NavLink>
-                    // <button className={styles.button} onClick={() => {
-                    //     alert("Ordered!")
-                    //     this.props.deleteFromCart()
-                    //     this.props.handleClick()
-                    // }
-                    // }>Order</button>
                 }
 
 
             </>
-        );
+        )
     }
-};
+}
 
 export default CartItem;

@@ -14,8 +14,7 @@ class HeaderContainer extends React.Component {
     }
     render() {
         return <>
-            <Header stateCurr={this.props.stateCurr}
-                    locations={this.props.state}
+            <Header locations={this.props.locations}
 
                     switchPath={this.props.switchPath}
 
@@ -37,8 +36,7 @@ class HeaderContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        stateCurr: state.currency,
-        state: state.products.locations
+        locations: state.products.locations
     }
 }
 let mapDispatchToProps = (dispatch) => {

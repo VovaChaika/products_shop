@@ -3,33 +3,12 @@ import styles from "./Item.module.scss";
 
 class Item extends Component {
     render() {
-        //OLD PRICE CREATOR
-        // let a = window.location.pathname
-        // let b = a.split('/item/')
-
-        // let prices
-        // this.props.stateCurr.currencyArr?.map((price) => {
-        //     if (price.id === b[1]) {
-        //         prices = price
-        //     }
-        // })
-        // let pricesArr
-        // this.props.state.priceArr.map((pricesAll) => {
-        //     //here if comes an array
-        //     if (pricesAll?.id === b[1]) {
-        //         pricesArr = pricesAll
-        //     }
-        // })
         let myIndex = 0
-
         return <div className={styles.display}>
             <div className={styles.brand}>{this.props.product.brand}</div>
             <div className={styles.name}>{this.props.product.name}</div>
 
             <div className={styles.priceUSD}>
-                {/*<div>Price:</div>*/}
-                {/*<span>{prices?.currency?.symbol*/}
-                {/*} {prices?.amount}</span>*/}
                 <div>Price:</div>
                 <span>{this.props.price?.currency?.symbol
                 } {this.props.price?.amount}</span>
@@ -46,7 +25,7 @@ class Item extends Component {
                         <div>
                             <div className={styles.attrHeader}>{attribute.name}:</div>
                             {
-                                attribute.items.map((items) => {
+                                attribute.items.map((items,index) => {
                                     myIndex = myIndex + 1
                                     const newIndex = myIndex
                                     let chosenArr = {}
