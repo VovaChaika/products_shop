@@ -7,17 +7,19 @@ import CartItemContainer from "../cart_items/CartItemContainer";
 class CartOverlay extends Component{
     render() {
         return (
-            <>
+            <div>
                 <button className={styles.button} onClick={() => {
                     if (this.props.isVisibleCurrSwitch === true) {
                         this.props.setIsVisibleCurrSwitch(false)
                     }
                     if (this.props.isVisibleCart === true){
+                        document.querySelector("#myBody").style.backgroundColor="white"
                         this.props.setIsVisibleCart(false)
                         this.props.setVisible(false)
                     }
                     else {
                         this.props.setIsVisibleCart(true)
+                        document.querySelector("#myBody").style.backgroundColor="#39374838"
                         this.props.setVisible(true)
                     }
 
@@ -29,7 +31,7 @@ class CartOverlay extends Component{
                     {this.props.state.productsCount === 0 ? '' :
                         <img className={styles.circleImg} src={images.blackCircle} alt=""/>}
                     <span
-                        className={styles.numberCount}>{this.props.state.productsCount === 0 ? '' : this.props.state.productsCount}</span>
+                        className={this.props.state.productsCount > 9 ? styles.numberCountMore : styles.numberCount}>{this.props.state.productsCount === 0 ? '' : this.props.state.productsCount}</span>
 
                 </button>
                 {this.props.isVisibleCart &&
@@ -42,6 +44,7 @@ class CartOverlay extends Component{
                             <CartItemContainer isCartOverlay={true}/>
                         </div>
                         <NavLink to={'/cart'} className={styles.bag} onClick={()=>{
+                            document.querySelector("#myBody").style.backgroundColor="white"
                             this.props.setIsVisibleCart(false)
                             this.props.setVisible(false)
                         }
@@ -49,6 +52,7 @@ class CartOverlay extends Component{
                                 <span>view bag</span>
                         </NavLink>
                         <button className={styles.button} onClick={() => {
+                            document.querySelector("#myBody").style.backgroundColor="white"
                             this.props.setIsVisibleCart(false)
                             this.props.setVisible(false)
                             alert("Ordered!")
@@ -59,7 +63,7 @@ class CartOverlay extends Component{
                         </button>
                     </div>
                 }
-            </>
+            </div>
 
         );
     }

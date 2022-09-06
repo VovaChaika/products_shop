@@ -1,105 +1,45 @@
 import React, {Component} from 'react';
 import styles from "./Item.module.scss";
+import Attributes from "./item_parts/Attributes";
 
 class Item extends Component {
     render() {
-        let myIndex = 0
         return <div className={styles.display}>
             <div className={styles.brand}>{this.props.product.brand}</div>
             <div className={styles.name}>{this.props.product.name}</div>
 
             <div className={styles.priceUSD}>
                 <div>Price:</div>
-                <span>{this.props.price?.currency?.symbol
-                } {this.props.price?.amount}</span>
+                <span>{this.props.price?.currency?.symbol} {this.props.price?.amount}</span>
             </div>
 
             <div className={styles.description} style={{overflowX: 'hidden'}}
                  dangerouslySetInnerHTML={{__html: this.props.product.description}}
             />
 
+            <Attributes attributes={this.props.product?.attributes}
+                        chosenValues={this.props.stateCart.chosenValues}
+                        handleClick={this.props.handleClick}
+                        addChosenValues={this.props.addChosenValues}
 
-            <div className={styles.attribute}>
-                {this.props.product?.attributes.map((attribute) => {
-                    return (
-                        <div>
-                            <div className={styles.attrHeader}>{attribute.name}:</div>
-                            {
-                                attribute.items.map((items,index) => {
-                                    myIndex = myIndex + 1
-                                    const newIndex = myIndex
-                                    let chosenArr = {}
-                                    this.props.stateCart.chosenValues.map((value) => {
-                                        if (value.name === attribute.name
-                                            && value.index === newIndex
-                                            && value.value === items.value) {
-                                            chosenArr = value
-                                        }
-                                    })
-                                    //color to show color not string
-                                    if (attribute.name === "Color") {
-
-                                        return <button
-                                            className={[chosenArr.value === items.value
-                                            && chosenArr.index === myIndex
-                                            && chosenArr.name === attribute.name
-                                                ? styles.activeColor : styles.passiveColor, items.value === '#FFFFFF' ? styles.whiteColor : ''].join(' ')}
-                                            style={{
-                                                backgroundColor: items.value
-                                            }}
-                                            onClick={() => {
-                                                this.props.handleClick()
-                                                this.props.addChosenValues(attribute.name, items.value, newIndex)
-                                            }
-                                            }
-                                        ></button>
-                                    } else {
-                                        //other
-                                        return <button key={items.value}
-
-                                                       className={chosenArr.value === items.value
-                                                       && chosenArr.index === myIndex
-                                                       && chosenArr.name === attribute.name
-                                                           ? styles.active : styles.passive}
-                                                       onClick={() => {
-                                                           this.props.handleClick()
-                                                           this.props.addChosenValues(attribute.name, items.value, newIndex)
-                                                       }
-                                                       }
-
-                                        >{items.value}</button>
-                                    }
-
-
-                                })}</div>)
-                })
+            />
+            {this.props.product.gallery.map((currImg, index) => {
+                if (this.props.mainImg === index) {
+                    return <div className={styles.mainImgContainer}><img src={currImg}/></div>
+                } else {
+                    return <div className={styles.commonImgContainer}><img src={currImg} onClick={() => {
+                        this.props.setMainImg(index)
+                    }}/></div>
                 }
-            </div>
-
-            {
-                this.props.product.gallery.map((currImg, index) => {
-                    if (this.props.mainImg === index) {
-                        return <img className={styles.mainImg} src={currImg}/>
-                    } else {
-                        return <img className={styles.commonImg} src={currImg} onClick={() => {
-                            this.props.setMainImg(index)
-                        }
-                        }/>
-                    }
-                })
-            }
+            })}
             <button className={styles.button}
                     disabled={!this.props.product.inStock || this.props.stateCart.chosenValues.length !== this.props.product?.attributes.length}
                     onClick={() => {
                         let localProduct = {id: this.props.product.id}
-                        this.props.addFullProduct(localProduct,
-                            Object.assign(localProduct, {count: 1}),
-                            Object.assign(localProduct, {chosenValues: this.props.stateCart.chosenValues}),
-                            Object.assign(localProduct, {identifier: this.props.stateCart.identifiers}))
+                        this.props.addFullProduct(localProduct, Object.assign(localProduct, {count: 1}), Object.assign(localProduct, {chosenValues: this.props.stateCart.chosenValues}), Object.assign(localProduct, {identifier: this.props.stateCart.identifiers}))
                         this.props.changeTotalCost(this.props.product.prices, true)
                         this.props.clearValues()
-                    }
-                    }>{this.props.product.inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
+                    }}>{this.props.product.inStock ? 'add to cart' : 'out of stock'}
             </button>
         </div>
     }

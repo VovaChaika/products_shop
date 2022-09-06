@@ -3,11 +3,15 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import Header from "../header/Header";
 import {switchPathCreator} from "../../redux/content_reducer";
+import {getAllProductsApi} from "../../api/api";
 
 
 class HeaderContainer extends React.Component {
+    componentDidMount() {
+    }
+
     state = {
-        headerUrl: "all"
+        headerUrl: window.location.pathname.split('/content/')[1]
     };
     splitHeaderUrl = (url) =>{
         this.setState({ headerUrl: url[1]});
@@ -29,6 +33,8 @@ class HeaderContainer extends React.Component {
 
                     headerUrl={this.state.headerUrl}
                     splitHeaderUrl={this.splitHeaderUrl}
+
+                    getAllProducts={this.props.getAllProducts}
             />
         </>
     }
@@ -43,6 +49,9 @@ let mapDispatchToProps = (dispatch) => {
     return {
         switchPath: (newPath) => {
             dispatch(switchPathCreator(newPath))
+        },
+        getAllProducts: (category) => {
+            dispatch(getAllProductsApi(category))
         },
     }
 }

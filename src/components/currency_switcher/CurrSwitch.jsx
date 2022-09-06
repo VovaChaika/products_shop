@@ -23,6 +23,7 @@ class CurrSwitch extends Component{
                 }
                 <button className={styles.button} onClick={() => {
                     if (this.props.isVisibleCart === true) {
+                        document.querySelector("#myBody").style.backgroundColor="white"
                         this.props.setIsVisibleCart(false)
                         this.props.setVisible(false)
                     }

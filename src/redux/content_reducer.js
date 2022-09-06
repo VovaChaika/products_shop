@@ -20,7 +20,7 @@ export const content_reducer = (state = initialState, action) => {
         case SWITCH_PATH:
             return {...state, path: action.newPath}
         case GET_PRODUCTS_SHORT:
-            return {...state, allProductsShort: [...state.allProductsShort, action.shortProduct]}
+            return {...state, allProductsShort: action.shortProduct}
         case REFRESH_PRODUCTS_SHORT:
             return {...state, allProductsShort: []}
     }

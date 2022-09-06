@@ -13,12 +13,18 @@
   padding-top: 20px;
   padding-bottom: 20px;
 
-  .img {
-    position: relative;
+  .imgContainer {
     width: 200px;
     height: 288px;
-    object-fit: cover;
     grid-area: img;
+    align-self: center;
+    display: flex;
+    justify-content:center;
+    img{
+      width: 100%;
+      height: auto;
+      margin: auto;
+    }
   }
 
   .attrHeader {
@@ -79,31 +85,38 @@
 
   .counter {
     grid-area: counter;
-    margin: auto;
+    display: grid;
+    align-items: center;
+    margin-right: 24px;
+
     .buttonCount {
       border: 1px solid black;
+      margin-top: 5px;
       width: 45px;
       height: 45px;
       background: none;
-
-    }
-    .buttonCountMinus {
-      border: 1px solid black;
-      width: 45px;
-      height: 45px;
-      background: none;
+      align-self: start;
     }
 
     .buttonCount:hover {
+      background-color: #8D8F9A;
+    }
+    .buttonCountMinus:hover {
       background-color: #8D8F9A;
     }
 
     .countText {
       display: block;
       font-size: 24px;
-      margin-bottom: 85px;
-      margin-top: 85px;
       margin-left: 15px;
+    }
+    .buttonCountMinus {
+      border: 1px solid black;
+      margin-bottom: 5px;
+      width: 45px;
+      height: 45px;
+      background: none;
+      align-self: end;
     }
   }
   .info_block{
@@ -251,6 +264,7 @@
 
 .productOverlay {
   display: grid;
+
   font-family: 'Raleway', sans-serif;
   grid-template-areas:
           "brand counter img"
@@ -259,30 +273,34 @@
           "attributes counter img";
   grid-column-gap: 8px;
   grid-row-gap: 8px;
-  padding-bottom: 30px;
+  padding-bottom: 40px;
 
   .info_block{
     display: inline-block;
-    position: relative;
-    top: 15px;
     width: 140px;
   }
   .whiteColor {
     border: 1px solid black;
     bottom: 1px;
   }
-  .img {
-    position: relative;
-    margin: auto;
+  .imgContainer {
+    align-self: center;
+    display: flex;
+    justify-content:center;
     width: 120px;
     height: 190px;
-    object-fit: cover;
     grid-area: img;
+    img{
+      width: 100%;
+      height: auto;
+      margin: auto;
+    }
   }
 
   .attrHeader {
     position: relative;
     font-size: 14px;
+    padding-top: 8px;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
   }
@@ -333,25 +351,24 @@
 
   .counter {
     grid-area: counter;
+    display: grid;
+    align-items: center;
+    margin-right: 8px;
 
     .buttonCount {
       border: 1px solid black;
-      margin-right: 8px;
-      position: relative;
-      top: 13px;
       width: 24px;
       height: 24px;
       background: none;
+      align-self: start;
     }
 
     .buttonCountMinus {
       border: 1px solid black;
-      margin-right: 8px;
-      position: relative;
-      bottom: 13px;
       width: 24px;
       height: 24px;
       background: none;
+      align-self: end;
     }
 
     .buttonCount:hover {
@@ -366,8 +383,6 @@
       position: relative;
       left: 7px;
       font-size: 16px;
-      margin-bottom: 75px;
-      margin-top: 75px;
     }
   }
 
@@ -397,14 +412,19 @@
   .attributes {
     grid-area: attributes;
     font-size: 24px;
+    display: grid;
 
     button {
       min-height: 16px;
       min-width: 16px;
       border: none;
       margin-right: 10px;
-      margin-bottom: 12px;
       position: relative;
+      padding-left: 2px;
+      padding-right: 2px;
+      span{
+        text-align: center;
+      }
     }
 
     .active {

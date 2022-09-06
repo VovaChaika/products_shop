@@ -9,6 +9,7 @@ class Header extends Component {
     render() {
         const changeVisibility = () => {
             if (this.props.isVisibleCurrSwitch === true || this.props.isVisibleCart === true) {
+                document.querySelector("#myBody").style.backgroundColor="white"
                 this.props.setIsVisibleCurrSwitch(false)
                 this.props.setIsVisibleCart(false)
                 this.props.setVisible(false)
@@ -27,8 +28,7 @@ class Header extends Component {
                                          className={location.name === this.props.headerUrl ? styles.activeUrl : styles.category}
                                          onClick={
                                              () => {
-                                                 this.props.switchPath(location.name)
-
+                                                 this.props.getAllProducts(location.name)
                                              }
                                          }
                                          onMouseLeave={() => {

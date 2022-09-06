@@ -101,35 +101,36 @@ export const getItemApi = (productId) => {
     }
 }
 
-export const getProductsApi = (productId) => {
+export const getAllProductsApi = (category) => {
     return (dispatch) => {
         fetch('http://localhost:4000/', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 query:
-                    `
-                    query AddProducts{
-                      product(id: "${productId}") {
-                        id
-                        name
-                        gallery
-                        category
-                        inStock
-                        brand
-                        prices {
-                          currency {
-                            label
-                            symbol
-                          }
-                          amount
-                        }
-                      }
-                    }
-                    `
+                  `
+                  query getProducts {
+  category(input: { title: "${category}" }) {
+    products {
+      id
+      name
+      gallery
+      category
+      inStock
+      brand
+      prices {
+        currency {
+          label
+          symbol
+        }
+        amount
+      }
+    }
+  }
+}`
             }),
         }).then(res => res.json()).then(data => {
-            dispatch(getShortProductsCreator(data.data.product))
+            dispatch(getShortProductsCreator(data.data.category.products))
         })
     }
 
@@ -188,16 +189,6 @@ export const getCurrenciesApi = () => {
     }
 }
 
-export const _productsIdArr = [
-    `huarache-x-stussy-le`,
-    `jacket-canada-goosee`,
-    `ps-5`,
-    `xbox-series-s`,
-    `apple-imac-2021`,
-    `apple-iphone-12-pro`,
-    `apple-airpods-pro`,
-    `apple-airtag`,
-]
 
 
 

@@ -9,7 +9,7 @@ import Cart from "./components/cart/Cart";
 class App extends Component {
     render() {
         return (
-            <div>
+            <div >
                 <HeaderContainer setVisible={this.props.setIsVisible}
                                  isVisible={this.props.isVisible}
 
@@ -22,6 +22,7 @@ class App extends Component {
 
                 <div className={this.props.isVisible ? styles.AppDisable : styles.App} onClick={() => {
                     if (this.props.isVisibleCurrSwitch === true || this.props.isVisibleCart === true) {
+                        document.querySelector("#myBody").style.backgroundColor="white"
                         this.props.setIsVisibleCurrSwitch(false)
                         this.props.setIsVisibleCart(false)
                         this.props.setIsVisible(false)

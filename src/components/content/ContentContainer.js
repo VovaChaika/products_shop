@@ -2,37 +2,25 @@ import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import Content from "./Content";
-import {refreshShortProductsCreator} from "../../redux/content_reducer";
-import {_productsIdArr, getProductsApi} from "../../api/api";
+import {getAllProductsApi} from "../../api/api";
 
 class ContentContainer extends React.Component {
     componentDidMount() {
-        //get short product for category page
-        this.props.refreshShortProducts()
-        _productsIdArr.map((productId) => {
-            this.props.getProducts(productId)
-        })
+        let path = window.location.pathname.split('/content/')
+        this.props.getAllProducts(path[1] ? path[1] : "all")
     }
 
     state = {
         //in stock
-        isVisibleButton: false
+        isVisibleButton: false,
     };
     setIsVisibleButton = (isVisible) => {
         this.setState({isVisibleButton: isVisible});
     }
 
     render() {
-        let filteredProducts = this.props.state.allProductsShort.filter((product) => {
-                if (this.props.state.path !== "") {
-                    if (this.props.state.path === "all") {
-                        return product
-                    } else return product.category === this.props.state.path
-                } else return product
-            }
-        )
         return <>
-            <Content filteredProducts={filteredProducts}
+            <Content filteredProducts={this.props.state.allProductsShort}
 
                      state={this.props.state}
                      stateCurr={this.props.stateCurr}
@@ -41,10 +29,7 @@ class ContentContainer extends React.Component {
                      isVisibleButton={this.state.isVisibleButton}
             />
         </>
-
-
     }
-
 }
 
 let mapStateToProps = (state) => {
@@ -56,12 +41,9 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        getProducts: (productId) => {
-            dispatch(getProductsApi(productId))
+        getAllProducts: (category) => {
+            dispatch(getAllProductsApi(category))
         },
-        refreshShortProducts: () => {
-            dispatch(refreshShortProductsCreator())
-        }
     }
 }
 
