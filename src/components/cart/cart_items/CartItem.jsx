@@ -9,7 +9,7 @@ class CartItem extends Component {
         let totalCount = this.props.state.priceCount[this.props.stateCurr.chosenLabel]
         let tax = totalCount * 0.21 ? (totalCount * 0.21) : 0;
         return (<>
-                {this.props.state.productFinal?.map((product, index) => {
+                {this.props.state.productFinal?.map((product, indexMain) => {
                     const price = product.prices.filter((price) => {
                         return price.currency.label === this.props.stateCurr.chosenLabel
                     })
@@ -45,9 +45,10 @@ class CartItem extends Component {
                         />
 
                         {/*//IMAGE CAROUSEL*/}
-                        {!this.props.doChange.includes(product.id) ? this.props.setIsChange(1, product.gallery.length, product.id, product.gallery) : ''}
+                        {!this.props.doChange.includes(product.id+indexMain) ?
+                            this.props.setIsChange(1, product.gallery.length, product.id+indexMain, product.gallery, indexMain) : ''}
                         {this.props.imgSrc.map((img, index) => {
-                            if (img.id === product.id) {
+                            if (img.id === product.id+indexMain) {
                                 return <div className={styles.imgContainer}>
                                     <img id='image' src={this.props.imgSrc[index].src}/>
                                 </div>
@@ -57,11 +58,11 @@ class CartItem extends Component {
                         {/*//BUTTON IMAGE SWITCH*/}
                         {product.gallery.length > 1 && !this.props.isCartOverlay ?
                             <button className={styles.buttonImg2} onClick={() => {
-                                this.props.setIsChange(false, product.gallery.length, product.id, product.gallery)
+                                this.props.setIsChange(false, product.gallery.length, product.id+indexMain, product.gallery, indexMain)
                             }}><img src={images.arrowRight}/></button> : ''}
                         {product.gallery.length > 1 && !this.props.isCartOverlay ?
                             <button className={styles.buttonImg1} onClick={() => {
-                                this.props.setIsChange(true, product.gallery.length, product.id, product.gallery)
+                                this.props.setIsChange(true, product.gallery.length, product.id+indexMain, product.gallery, indexMain)
                             }}><img src={images.arrowLeft}/></button> : ''}
                     </div>
                 })}

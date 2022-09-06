@@ -19,20 +19,25 @@ class CartItemContainer extends React.Component {
         doChange: [],
         imgIndex: 0,
         imgSrc: [],
+        counterImg:[]
     };
 
-    setIsChange = (increase, length, product, imgSrc) => {
+    setIsChange = (increase, length, product, imgSrc, indexMain) => {
         if (increase === true) {
             if (this.state.imgIndex !== length - 1) {
+                this.state.counterImg[indexMain] = this.state.counterImg[indexMain]+1
                 this.setState({imgIndex: this.state.imgIndex + 1});
             } else {
+                this.state.counterImg[indexMain] = 0
                 this.setState({imgIndex: 0});
             }
         } else if (increase === false) {
-            if (this.state.imgIndex === 0) {
+            if (this.state.imgIndex === 0 || this.state.counterImg[indexMain] === 0) {
                 this.setState({imgIndex: length - 1});
+                this.state.counterImg[indexMain] = length - 1
             } else {
                 this.setState({imgIndex: this.state.imgIndex - 1});
+                this.state.counterImg[indexMain] = this.state.counterImg[indexMain]-1
             }
 
         } else {
@@ -43,11 +48,12 @@ class CartItemContainer extends React.Component {
         this.state.imgSrc.map((searchId, index) => {
             if (searchId.id === product) {
                 shouldAdd = 1
-                this.state.imgSrc[index].src = imgSrc[this.state.imgIndex]
+                this.state.imgSrc[index].src = imgSrc[this.state.counterImg[indexMain]]
             }
         })
         if (shouldAdd === 0) {
             this.setState({imgSrc: [...this.state.imgSrc, {src: imgSrc[this.state.imgIndex], id: product}]})
+            this.setState({counterImg: [...this.state.counterImg, 0]})
         }
     };
 
@@ -97,7 +103,6 @@ let mapDispatchToProps = (dispatch) => {
         clearCartProducts: ()=>{
             dispatch(clearCartProductsCreator())
         },
-
     }
 }
 
