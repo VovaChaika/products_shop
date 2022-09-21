@@ -7,7 +7,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm install`
-### `npm build`
 ### `npm start`
 
 Project should be opened with no backend in it
